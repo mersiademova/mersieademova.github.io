@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    RFID Access Control System — Electric Lock Version | Mersie Ademova
+  </title>
+
+  <meta
+    name="description"
+    content="Case study of an RFID access-control system using Arduino UNO, RC522, DS3231 RTC, a relay module, and an electric lock."
+  >
+
+  <meta
+    name="keywords"
+    content="RFID, Arduino UNO, RC522, DS3231, relay module, electric lock, access control, embedded systems, SPI, I2C"
+  >
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+
+  <link
+    href="https://fonts.gstatic.com"
+    rel="preconnect"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Vendor CSS Files -->
+  <link
+    href="assets/vendor/bootstrap/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="assets/vendor/aos/aos.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="assets/vendor/swiper/swiper-bundle.min.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="assets/vendor/glightbox/css/glightbox.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Custom Case Study CSS -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .case-study-block {
+      scroll-margin-top: 120px;
+    }
+
+    .portfolio-info ul li {
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .portfolio-info ul li strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--heading-color);
+    }
+
+    .case-study-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 11px 24px;
+      border: 2px solid var(--accent-color);
+      border-radius: 4px;
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .case-study-btn i {
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .case-study-btn:hover {
+      background-color: transparent;
+      color: var(--accent-color);
+    }
+
+    .case-study-btn:hover i {
+      transform: translateY(3px);
+    }
+
+    .case-study-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto 55px;
+      padding: 18px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 8px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 30px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .case-study-nav a {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 15px;
+      border-radius: 4px;
+      color: var(--default-color);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .case-study-nav a:hover {
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+    }
+
+    .study-section {
+      padding: 70px 0;
+    }
+
+    .study-section:nth-of-type(even) {
+      background-color:
+        color-mix(in srgb, var(--background-color), var(--accent-color) 2%);
+    }
+
+    .study-heading {
+      position: relative;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .study-heading::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 55px;
+      height: 3px;
+      background-color: var(--accent-color);
+      content: "";
+    }
+
+    .study-subheading {
+      margin-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 21px;
+      font-weight: 600;
+    }
+
+    .study-text {
+      color: var(--default-color);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .study-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-box {
+      height: 100%;
+      padding: 30px;
+      border-left: 4px solid var(--accent-color);
+      border-radius: 6px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 30px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .highlight-box i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background-color:
+        color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color);
+      font-size: 22px;
+    }
+
+    .highlight-box h4 {
+      margin-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    .component-card,
+    .feature-card,
+    .protocol-card,
+    .decision-card,
+    .test-card,
+    .resource-card {
+      height: 100%;
+      border-radius: 7px;
+      background-color: var(--surface-color);
+    }
+
+    .component-card,
+    .feature-card,
+    .protocol-card {
+      padding: 28px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 89%);
+      transition: 0.3s ease;
+    }
+
+    .component-card:hover,
+    .feature-card:hover,
+    .protocol-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px
+        color-mix(in srgb, var(--default-color), transparent 91%);
+    }
+
+    .component-card i,
+    .feature-card i,
+    .protocol-card i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 18px;
+      border-radius: 6px;
+      background-color:
+        color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color);
+      font-size: 24px;
+    }
+
+    .component-card h4,
+    .feature-card h4,
+    .protocol-card h4 {
+      margin-bottom: 12px;
+      color: var(--heading-color);
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    .component-card p,
+    .feature-card p,
+    .protocol-card p {
+      margin-bottom: 0;
+      line-height: 1.75;
+    }
+
+    .component-tag {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background-color:
+        color-mix(in srgb, var(--accent-color), transparent 90%);
+      color: var(--accent-color);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .architecture-layers {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      gap: 14px;
+      margin-top: 35px;
+    }
+
+    .architecture-layer {
+      padding: 24px 18px;
+      border-top: 4px solid var(--accent-color);
+      border-radius: 6px;
+      background-color: var(--surface-color);
+      text-align: center;
+      box-shadow: 0 8px 25px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .architecture-layer i {
+      margin-bottom: 13px;
+      color: var(--accent-color);
+      font-size: 28px;
+    }
+
+    .architecture-layer h4 {
+      margin-bottom: 9px;
+      color: var(--heading-color);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .architecture-layer p {
+      margin-bottom: 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .workflow-step {
+      min-height: 195px;
+      padding: 28px 22px 22px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 7px;
+      background-color: var(--surface-color);
+    }
+
+    .workflow-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 17px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      font-weight: 700;
+    }
+
+    .workflow-step h4 {
+      margin-bottom: 10px;
+      color: var(--heading-color);
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .workflow-step p {
+      margin-bottom: 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .system-table {
+      overflow: hidden;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 8px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 28px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .system-table table {
+      margin-bottom: 0;
+    }
+
+    .system-table thead th {
+      padding: 18px;
+      background-color: var(--heading-color);
+      color: var(--contrast-color);
+      font-size: 14px;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+
+    .system-table tbody td {
+      padding: 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      vertical-align: top;
+    }
+
+    .system-table tbody tr:not(:last-child) td {
+      border-bottom: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 90%);
+    }
+
+    .decision-card,
+    .test-card {
+      padding: 26px;
+      border-left: 4px solid var(--accent-color);
+      box-shadow: 0 8px 26px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .decision-card h4,
+    .test-card h4 {
+      margin-bottom: 12px;
+      color: var(--heading-color);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .decision-card p,
+    .test-card p {
+      margin-bottom: 0;
+      line-height: 1.75;
+    }
+
+    .strength-list,
+    .limitations-list,
+    .future-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .strength-list li,
+    .limitations-list li,
+    .future-list li {
+      position: relative;
+      margin-bottom: 13px;
+      padding-left: 28px;
+      line-height: 1.7;
+    }
+
+    .strength-list li::before {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      color: var(--accent-color);
+      font-family: "bootstrap-icons";
+      content: "\F26A";
+    }
+
+    .limitations-list li::before {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      color: var(--accent-color);
+      font-family: "bootstrap-icons";
+      content: "\F33A";
+    }
+
+    .future-list li::before {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      color: var(--accent-color);
+      font-family: "bootstrap-icons";
+      content: "\F138";
+    }
+
+    .resource-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+    }
+
+    .resource-card i {
+      flex-shrink: 0;
+      color: var(--accent-color);
+      font-size: 27px;
+    }
+
+    .resource-card h4 {
+      margin-bottom: 7px;
+      color: var(--heading-color);
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .resource-card p {
+      margin-bottom: 0;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .closing-statement {
+      padding: 42px;
+      border-radius: 8px;
+      background-color: var(--heading-color);
+      color: var(--contrast-color);
+      text-align: center;
+    }
+
+    .closing-statement i {
+      margin-bottom: 18px;
+      color: var(--accent-color);
+      font-size: 36px;
+    }
+
+    .closing-statement p {
+      max-width: 930px;
+      margin: 0 auto;
+      color: var(--contrast-color);
+      font-family: var(--heading-font);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 1199px) {
+      .architecture-layers {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .workflow-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .study-section {
+        padding: 50px 0;
+      }
+
+      .study-heading {
+        font-size: 25px;
+      }
+
+      .case-study-nav {
+        justify-content: flex-start;
+      }
+
+      .case-study-nav a {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+
+      .architecture-layers,
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .system-table {
+        overflow-x: auto;
+      }
+
+      .closing-statement {
+        padding: 30px 22px;
+      }
+
+      .closing-statement p {
+        font-size: 18px;
+      }
+    }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: Kelly
+  * Template URL:
+    https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="portfolio-details-page">
+
+  <!-- Header -->
+  <header
+    id="header"
+    class="header d-flex align-items-center light-background sticky-top"
+  >
+    <div
+      class="container-fluid position-relative d-flex align-items-center justify-content-between"
+    >
+
+      <a
+        href="index.html"
+        class="logo d-flex align-items-center me-auto me-xl-0"
+      >
+        <!-- Optional logo -->
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html">What I Do</a></li>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+
+          <li class="dropdown">
+            <a href="#">
+              <span>Writings</span>
+              <i class="bi bi-chevron-down toggle-dropdown"></i>
+            </a>
+
+            <ul>
+              <li><a href="writings/mk.pdf">Academic Papers</a></li>
+            </ul>
+          </li>
+
+          <li><a href="contact.html">Contact</a></li>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </ul>
+
+        
+      </nav>
+
+      <div class="header-social-links">
+
+        <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+
+      </div>
+
+    </div>
+  </header>
+  <!-- /Header -->
+
+
+  <main class="main">
+
+    <!-- Portfolio Overview -->
+    <section
+      id="portfolio-details"
+      class="portfolio-details section"
+    >
+
+      <div
+        class="container section-title"
+        data-aos="fade-up"
+      >
+        <h2>RFID Access Control System — Electric Lock Version</h2>
+
+        <p>
+          Arduino UNO · RC522 RFID · DS3231 RTC ·
+          5V Relay Module · Electric Lock · SPI · I²C
+        </p>
+      </div>
+
+    <!-- Case Study Navigation -->
+    <section
+      id="case-study"
+      class="section case-study-block"
+    >
+
+      <div
+        class="container section-title"
+        data-aos="fade-up"
+      >
+        <h2>Case Study</h2>
+
+        <p>
+          From RFID identification and simulated movement to time-aware
+          control of a physical electric locking mechanism.
+        </p>
+      </div>
+
+      <div
+        class="container"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+
+        <nav
+          class="case-study-nav"
+          aria-label="Case study navigation"
+        >
+          <a href="#problem">Problem</a>
+          <a href="#objective">Objective</a>
+          <a href="#evolution">Evolution</a>
+          <a href="#components">Components</a>
+          <a href="#power">Power</a>
+          <a href="#communication">Communication</a>
+          <a href="#rtc">RTC</a>
+          <a href="#relay">Relay</a>
+          <a href="#authorization">Authorization</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#testing">Testing</a>
+          <a href="#outcome">Outcome</a>
+          <a href="#documentation">Documentation</a>
+        </nav>
+
+      </div>
+    </section>
+    <!-- /Case Study Navigation -->
+
+
+    <!-- Problem -->
+    <section
+      id="problem"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">The Access-Control Problem</h2>
+
+            <p class="study-text">
+              An access-control system must identify a credential, determine
+              whether access is authorized, control a physical entry
+              mechanism, provide feedback, and return to a secure state after
+              the access interval expires.
+            </p>
+
+            <p class="study-text">
+              A servo motor is useful for validating the control sequence,
+              but it remains a low-power simulation of a lock. A more
+              realistic system requires an electrical switching stage and a
+              separately powered locking mechanism.
+            </p>
+
+            <p class="study-text">
+              The upgraded design therefore introduces a relay-controlled
+              electric lock and a real-time clock. These components move the
+              project from simple actuator movement toward a time-aware
+              embedded access-control architecture.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-lightbulb"></i>
+
+              <h4>Engineering Motivation</h4>
+
+              <p>
+                The second version preserves the validated RFID and
+                authorization logic while replacing the simulated actuator
+                with a switching circuit that can control a real electric
+                lock.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Problem -->
+
+
+    <!-- Objective -->
+    <section
+      id="objective"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Upgrade Objective</h2>
+
+            <p class="study-text">
+              The objective was to extend the RFID prototype into a system
+              capable of controlling an electric lock through a relay module
+              and associating each access attempt with an accurate date and
+              time.
+            </p>
+
+            <p class="study-text">
+              The system was designed to initialize all connected modules,
+              read an RFID credential, obtain the current timestamp, evaluate
+              authorization, switch the lock circuit, preserve the secure
+              default state, and produce understandable status output.
+            </p>
+
+            <p class="study-text">
+              The upgrade combines RFID communication, real-time clock
+              integration, relay control, external-load switching, timing
+              logic, embedded state management, and access-event analysis.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-bullseye"></i>
+
+              <h4>System Scope</h4>
+
+              <p>
+                The project focuses on local RFID authorization, physical lock
+                control, timestamped system output, and automatic return to a
+                locked state. Permanent database logging and network-based
+                administration remain outside the current version.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Objective -->
+
+
+    <!-- Evolution -->
+    <section
+      id="evolution"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">
+              Evolution from the Servo Prototype
+            </h2>
+
+            <p class="study-text">
+              The first version validated the essential access-control cycle:
+              card detection, UID reading, authorization, actuator response,
+              status feedback, and automatic reset.
+            </p>
+
+            <p class="study-text">
+              The second version retains that logical foundation but changes
+              the actuation and timing layers. Servo-angle control is
+              replaced by relay switching, and a DS3231 module adds an
+              independent source of date and time.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="system-table mt-4"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <table class="table">
+            <thead>
+              <tr>
+                <th>System Aspect</th>
+                <th>Servo Prototype</th>
+                <th>Electric Lock Version</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><strong>Actuator</strong></td>
+                <td>Servo SG90</td>
+                <td>Electric locking mechanism</td>
+              </tr>
+
+              <tr>
+                <td><strong>Control Method</strong></td>
+                <td>PWM-based angular movement</td>
+                <td>Digital relay switching</td>
+              </tr>
+
+              <tr>
+                <td><strong>Load Type</strong></td>
+                <td>Low-power actuator</td>
+                <td>Separately powered electrical load</td>
+              </tr>
+
+              <tr>
+                <td><strong>Timekeeping</strong></td>
+                <td>Delay-based operation only</td>
+                <td>Independent date and time through DS3231</td>
+              </tr>
+
+              <tr>
+                <td><strong>Output Meaning</strong></td>
+                <td>Access decision and servo state</td>
+                <td>Access decision, timestamp, relay state, and lock state</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+    <!-- /Evolution -->
+
+
+    <!-- Components -->
+    <section
+      id="components"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Hardware Components</h2>
+
+            <p class="study-text">
+              Each component has a separate responsibility within the
+              complete access-control chain.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+          >
+            <div class="component-card">
+              <span class="component-tag">Controller</span>
+
+              <i class="bi bi-cpu"></i>
+
+              <h4>Arduino UNO</h4>
+
+              <p>
+                Executes the authorization logic, coordinates SPI and I²C
+                communication, controls the relay input, manages timing, and
+                generates status output.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="component-card">
+              <span class="component-tag">Identification</span>
+
+              <i class="bi bi-credit-card-2-front"></i>
+
+              <h4>RC522 RFID Reader</h4>
+
+              <p>
+                Detects compatible RFID cards and tags, reads the UID, and
+                sends the identifier to the controller through SPI.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="component-card">
+              <span class="component-tag">Timekeeping</span>
+
+              <i class="bi bi-clock-history"></i>
+
+              <h4>DS3231 RTC</h4>
+
+              <p>
+                Maintains accurate date and time independently of the main
+                program cycle and retains timekeeping through its backup
+                battery.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="component-card">
+              <span class="component-tag">Switching</span>
+
+              <i class="bi bi-toggle-on"></i>
+
+              <h4>5V Relay Module</h4>
+
+              <p>
+                Converts a low-power digital control signal into switching
+                action on the separate electric-lock circuit.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="component-card">
+              <span class="component-tag">Actuator</span>
+
+              <i class="bi bi-lock"></i>
+
+              <h4>Electric Lock</h4>
+
+              <p>
+                Represents the physical access mechanism whose locked or
+                unlocked state is controlled through the relay contacts.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <div class="component-card">
+              <span class="component-tag">Power</span>
+
+              <i class="bi bi-lightning-charge"></i>
+
+              <h4>Power-Supply Stage</h4>
+
+              <p>
+                Provides the voltage and current required by the controller,
+                logic modules, and electric lock without forcing the Arduino
+                output pin to power the load directly.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Components -->
+
+
+    <!-- Power -->
+    <section
+      id="power"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">
+              Power and Electrical Separation
+            </h2>
+
+            <p class="study-text">
+              The electric lock is not powered from an Arduino digital pin.
+              The controller supplies only the logic signal required by the
+              relay module.
+            </p>
+
+            <p class="study-text">
+              The relay contacts switch the external lock circuit, allowing
+              the load to use a power supply selected for the electrical
+              requirements of the lock.
+            </p>
+
+            <p class="study-text">
+              This separation protects the low-power control logic from the
+              higher current demanded by the physical actuator and makes the
+              system architecture suitable for a real locking device.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-exclamation-triangle"></i>
+
+              <h4>Electrical Constraint</h4>
+
+              <p>
+                The relay contact rating, lock voltage, lock current, power
+                supply, wiring, and default locked state must be compatible.
+                These values are determined by the selected physical lock
+                rather than by the Arduino alone.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div
+          class="system-table mt-5"
+          data-aos="fade-up"
+        >
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Connection Group</th>
+                <th>Interface</th>
+                <th>Design Requirement</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><strong>RC522 → Arduino UNO</strong></td>
+                <td>SPI: SDA/SS D10, SCK D13, MOSI D11, MISO D12, RST D9</td>
+                <td>
+                  RC522 logic and power must remain at the required 3.3V
+                  level.
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong>DS3231 → Arduino UNO</strong></td>
+                <td>I²C: SDA A4, SCL A5 on Arduino UNO</td>
+                <td>
+                  Module supply must follow the specification of the RTC
+                  breakout board in use.
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong>Relay Control → Arduino UNO</strong></td>
+                <td>Configured digital output connected to relay input</td>
+                <td>
+                  Relay logic polarity must be confirmed because some modules
+                  are active LOW.
+                </td>
+              </tr>
+
+              <tr>
+                <td><strong>Relay Contacts → Electric Lock</strong></td>
+                <td>COM with NO or NC according to the required default state</td>
+                <td>
+                  The load circuit uses an external power supply appropriate
+                  for the electric lock.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+    <!-- /Power -->
+
+
+    <!-- Communication -->
+    <section
+      id="communication"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Communication Protocols</h2>
+
+            <p class="study-text">
+              The system combines two communication buses and one digital
+              control interface without mixing their responsibilities.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-lg-4"
+            data-aos="fade-up"
+          >
+            <div class="protocol-card">
+              <i class="bi bi-diagram-3"></i>
+
+              <h4>SPI — RFID Communication</h4>
+
+              <p>
+                The RC522 exchanges card-identification data with the Arduino
+                through the SPI bus. Dedicated chip-select and reset lines
+                allow the controller to initialize and address the reader.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="protocol-card">
+              <i class="bi bi-arrow-left-right"></i>
+
+              <h4>I²C — RTC Communication</h4>
+
+              <p>
+                The DS3231 uses shared SDA and SCL lines to provide date and
+                time information with minimal additional wiring.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="protocol-card">
+              <i class="bi bi-toggle2-on"></i>
+
+              <h4>Digital Output — Relay Control</h4>
+
+              <p>
+                A configured output pin changes the relay input state. The
+                software must account for whether the selected relay module
+                uses active-HIGH or active-LOW logic.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Communication -->
+
+
+    <!-- RTC -->
+    <section
+      id="rtc"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">RTC Timekeeping</h2>
+
+            <p class="study-text">
+              The DS3231 introduces an independent time reference into the
+              access-control process. The controller reads the current date
+              and time when an RFID credential is processed.
+            </p>
+
+            <p class="study-text">
+              The timestamp can be included in Serial Monitor output or
+              forwarded to a future logging module. In the current design,
+              the RTC provides time-aware event output but does not by itself
+              create permanent access records.
+            </p>
+
+            <p class="study-text">
+              The backup battery allows the RTC to preserve time even when
+              the main system is disconnected, avoiding the need to reset the
+              clock after every power interruption.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-calendar-check"></i>
+
+              <h4>Timestamped Event Structure</h4>
+
+              <p>
+                Date and time · scanned UID · authorization result · relay
+                state · lock state.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /RTC -->
+
+
+    <!-- Relay and Lock -->
+    <section
+      id="relay"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div
+            class="col-lg-6"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Relay Control</h2>
+
+            <p class="study-text">
+              The relay module acts as the switching interface between the
+              controller and the lock circuit. The Arduino changes only the
+              relay input state; the relay contacts determine whether current
+              reaches the lock.
+            </p>
+
+            <p class="study-text">
+              The control logic defines a secure initial relay state during
+              startup, activates the relay only after successful
+              authorization, keeps it active for a defined interval, and then
+              returns it to the locked state.
+            </p>
+
+            <p class="study-text">
+              Active-HIGH and active-LOW relay modules require opposite logic
+              levels. The software state names should therefore describe the
+              physical result—locked or unlocked—rather than relying only on
+              HIGH and LOW.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <h2 class="study-heading">Electric Lock Operation</h2>
+
+            <p class="study-text">
+              The physical behavior depends on the selected lock type and on
+              whether the relay uses normally open or normally closed
+              contacts.
+            </p>
+
+            <p class="study-text">
+              The design must explicitly define the default state during
+              normal operation and during power loss. A fail-secure lock
+              remains locked without power, while a fail-safe lock releases
+              when power is removed.
+            </p>
+
+            <p class="study-text">
+              The prototype therefore treats lock behavior as a system-level
+              property that combines hardware selection, relay wiring,
+              control polarity, timing, and safety requirements.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Relay and Lock -->
+
+
+    <!-- Authorization -->
+    <section
+      id="authorization"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Authorization Logic</h2>
+
+            <p class="study-text">
+              After detecting a card, the system reads and formats its UID.
+              The identifier is compared with the locally defined list of
+              authorized credentials.
+            </p>
+
+            <p class="study-text">
+              A valid credential produces an access-granted event, relay
+              activation, temporary unlocking, and automatic relocking.
+              An unknown or invalid credential produces an access-denied
+              event while the relay remains in the secure state.
+            </p>
+
+            <p class="study-text">
+              The access decision and the current timestamp are shown
+              together so that identification and timekeeping remain part of
+              the same operational event.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-shield-lock"></i>
+
+              <h4>Secure Default Behavior</h4>
+
+              <p>
+                Initialization, invalid cards, communication errors, and the
+                end of every access interval must all return the system to a
+                known locked state.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Authorization -->
+
+
+    <!-- Architecture -->
+    <section
+      id="architecture"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">System Architecture</h2>
+
+            <p class="study-text">
+              The system is organized as a sequence of specialized layers
+              that move from identification to physical access control.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="architecture-layers"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+
+          <div class="architecture-layer">
+            <i class="bi bi-credit-card-2-front"></i>
+
+            <h4>Identification Layer</h4>
+
+            <p>
+              RC522 card detection and UID acquisition through SPI.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-clock"></i>
+
+            <h4>Time Layer</h4>
+
+            <p>
+              DS3231 date and time acquisition through I²C.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-shield-check"></i>
+
+            <h4>Decision Layer</h4>
+
+            <p>
+              UID comparison, access decision, and event-state generation.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-toggle-on"></i>
+
+            <h4>Switching Layer</h4>
+
+            <p>
+              Relay control, timing interval, and secure reset.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-lock-fill"></i>
+
+            <h4>Physical Layer</h4>
+
+            <p>
+              Externally powered electric locking mechanism.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Architecture -->
+
+
+    <!-- Workflow -->
+    <section
+      id="workflow"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Operational Workflow</h2>
+
+            <p class="study-text">
+              Each access attempt follows a controlled sequence from hardware
+              initialization to secure reset.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="workflow-grid"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+
+          <div class="workflow-step">
+            <span class="workflow-number">1</span>
+
+            <h4>Initialize Hardware</h4>
+
+            <p>
+              SPI, RC522, I²C, DS3231, relay output, and Serial Monitor are
+              initialized.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">2</span>
+
+            <h4>Set Locked State</h4>
+
+            <p>
+              The relay is placed in the predefined secure state before card
+              scanning begins.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">3</span>
+
+            <h4>Detect RFID Card</h4>
+
+            <p>
+              The RC522 waits for a compatible card and begins UID reading.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">4</span>
+
+            <h4>Read Timestamp</h4>
+
+            <p>
+              The current date and time are obtained from the DS3231 module.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">5</span>
+
+            <h4>Evaluate UID</h4>
+
+            <p>
+              The scanned identifier is compared with authorized values.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">6</span>
+
+            <h4>Control the Relay</h4>
+
+            <p>
+              Valid access activates the lock-control circuit; invalid access
+              leaves it unchanged.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">7</span>
+
+            <h4>Display Event Status</h4>
+
+            <p>
+              Timestamp, UID, access decision, and system state are reported.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">8</span>
+
+            <h4>Relock and Reset</h4>
+
+            <p>
+              The relay returns to the secure state and the RFID reader is
+              prepared for the next card.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Workflow -->
+
+
+    <!-- Testing -->
+    <section
+      id="testing"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Testing Scenarios</h2>
+
+            <p class="study-text">
+              Testing focuses on the complete interaction between
+              identification, timekeeping, switching, and physical lock
+              behavior.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+          >
+            <div class="test-card">
+              <h4>Authorized Card</h4>
+
+              <p>
+                The UID is accepted, the current timestamp is read, the relay
+                changes state, the lock is released for the defined interval,
+                and the system automatically relocks.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="test-card">
+              <h4>Unauthorized or Unknown Card</h4>
+
+              <p>
+                The UID is displayed with an access-denied result while the
+                relay and electric lock remain in the secure state.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="test-card">
+              <h4>Automatic Relocking</h4>
+
+              <p>
+                The relay is verified to return to the locked state after the
+                configured access interval.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="test-card">
+              <h4>RTC Persistence</h4>
+
+              <p>
+                Date and time are checked before and after interruption of
+                the main system power to confirm backup timekeeping.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="test-card">
+              <h4>Power Interruption</h4>
+
+              <p>
+                Relay and lock behavior are examined during shutdown and
+                restart to verify the selected fail-safe or fail-secure
+                design.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <div class="test-card">
+              <h4>Repeated Access Attempts</h4>
+
+              <p>
+                Consecutive valid and invalid scans are used to evaluate
+                stability, card reset, timing, and relay-state recovery.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="test-card">
+              <h4>RTC Communication Failure</h4>
+
+              <p>
+                The system response is evaluated when time data is
+                unavailable, ensuring that a clock failure does not produce
+                uncontrolled relay activation.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="350"
+          >
+            <div class="test-card">
+              <h4>Relay Polarity Verification</h4>
+
+              <p>
+                Startup and active states are checked against the selected
+                relay module to prevent unintended unlocking caused by
+                reversed HIGH/LOW assumptions.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Testing -->
+
+
+    <!-- Engineering Decisions -->
+    <section
+      id="engineering-decisions"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Key Engineering Decisions</h2>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+          >
+            <div class="decision-card">
+              <h4>Relay Instead of Direct Load Control</h4>
+
+              <p>
+                The controller never powers the electric lock directly.
+                Switching is delegated to a relay stage designed for a
+                separate load circuit.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="decision-card">
+              <h4>Independent Time Source</h4>
+
+              <p>
+                The DS3231 provides stable date and time without depending on
+                the Arduino program runtime or repeated manual clock setup.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="decision-card">
+              <h4>Secure Startup State</h4>
+
+              <p>
+                Relay initialization occurs before normal scanning so that
+                startup does not temporarily place the lock in an undefined
+                state.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="decision-card">
+              <h4>Physical-State Naming</h4>
+
+              <p>
+                The design describes locked and unlocked states explicitly,
+                avoiding ambiguity caused by different relay polarities and
+                contact configurations.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Engineering Decisions -->
+
+
+    <!-- Outcome -->
+    <section
+      id="outcome"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Results and Evaluation</h2>
+
+            <p class="study-text">
+              The upgraded system defines a complete access-control chain
+              from RFID credential detection to relay-controlled operation of
+              an electric lock.
+            </p>
+
+            <p class="study-text">
+              The DS3231 adds a reliable temporal dimension, allowing access
+              decisions to be presented as timestamped system events rather
+              than isolated UID comparisons.
+            </p>
+
+            <p class="study-text">
+              The project also exposes the engineering differences between
+              controlling a low-power servo and controlling a separately
+              powered lock circuit: relay polarity, contact selection, power
+              requirements, secure default state, and power-loss behavior
+              become central design decisions.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-stars"></i>
+
+              <h4>System Value</h4>
+
+              <p>
+                The second version connects identification, authorization,
+                timekeeping, electrical switching, and physical access
+                control within one embedded-system architecture.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row gy-4 mt-4">
+
+          <div
+            class="col-lg-6"
+            data-aos="fade-up"
+          >
+            <h3 class="study-subheading">Project Strengths</h3>
+
+            <ul class="strength-list">
+              <li>
+                Preserves the validated RFID authorization workflow.
+              </li>
+
+              <li>
+                Replaces simulated movement with physical lock control.
+              </li>
+
+              <li>
+                Separates low-power logic from the lock load circuit.
+              </li>
+
+              <li>
+                Adds independent RTC-based timekeeping.
+              </li>
+
+              <li>
+                Supports timestamped access-event output.
+              </li>
+
+              <li>
+                Defines secure initialization and automatic relocking.
+              </li>
+
+              <li>
+                Integrates SPI, I²C, and digital switching in one system.
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="col-lg-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <h3 class="study-subheading">Current Limitations</h3>
+
+            <ul class="limitations-list">
+              <li>
+                Authorized UIDs are locally defined rather than managed
+                through a database.
+              </li>
+
+              <li>
+                Timestamped events are not permanently stored in the current
+                design.
+              </li>
+
+              <li>
+                Lock behavior depends on the selected electric-lock type and
+                power configuration.
+              </li>
+
+              <li>
+                The current version does not include network administration
+                or remote access management.
+              </li>
+
+              <li>
+                Advanced protection against cloned RFID credentials is
+                outside the prototype scope.
+              </li>
+
+              <li>
+                Long delay-based unlocking can temporarily block other
+                program tasks unless replaced with non-blocking timing.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Outcome -->
+
+
+    <!-- Future Development -->
+    <section
+      id="future-development"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Future Development</h2>
+
+            <p class="study-text">
+              The electric-lock architecture provides a basis for a more
+              complete access-control platform.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <ul class="future-list">
+              <li>
+                EEPROM, SD-card, or database storage of access events.
+              </li>
+
+              <li>
+                Non-blocking unlock timing based on the system clock.
+              </li>
+
+              <li>
+                Buzzer, LED, or display feedback.
+              </li>
+
+              <li>
+                Card enrollment and removal through an administrator mode.
+              </li>
+
+              <li>
+                Door-position sensor and lock-state verification.
+              </li>
+
+              <li>
+                PIN plus RFID multi-factor access.
+              </li>
+
+              <li>
+                ESP8266 or ESP32 connectivity for remote monitoring.
+              </li>
+
+              <li>
+                Web dashboard and centralized credential management.
+              </li>
+
+              <li>
+                Backup-power monitoring and controlled shutdown behavior.
+              </li>
+
+              <li>
+                Enclosure, cable protection, and production-level electrical
+                safety.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Future Development -->
+
+
+    <!-- Documentation -->
+    <section
+      id="documentation"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">
+              Documentation and Project Materials
+            </h2>
+
+            <p class="study-text">
+              The project can be supported by hardware, software, testing,
+              and architectural materials that explain the complete system
+              behavior.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+          >
+            <div class="resource-card">
+              <i class="bi bi-file-earmark-text"></i>
+
+              <div>
+                <h4>Seminar Paper</h4>
+
+                <p>
+                  System motivation, component descriptions, architecture,
+                  workflow, testing scenarios, and evaluation.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="resource-card">
+              <i class="bi bi-diagram-3"></i>
+
+              <div>
+                <h4>System Architecture</h4>
+
+                <p>
+                  Identification, timekeeping, decision, switching, power,
+                  and physical-lock layers.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="resource-card">
+              <i class="bi bi-lightning-charge"></i>
+
+              <div>
+                <h4>Connection Documentation</h4>
+
+                <p>
+                  SPI and I²C connections, relay input, contact usage, and
+                  external lock-supply logic.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="resource-card">
+              <i class="bi bi-file-earmark-code"></i>
+
+              <div>
+                <h4>Program Documentation</h4>
+
+                <p>
+                  Initialization, UID handling, RTC reading, relay control,
+                  timing, output, and secure reset.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="resource-card">
+              <i class="bi bi-images"></i>
+
+              <div>
+                <h4>Project Screenshots</h4>
+
+                <p>
+                  Hardware arrangement, component integration, Serial Monitor
+                  events, and locking tests.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <div class="resource-card">
+              <i class="bi bi-clipboard2-check"></i>
+
+              <div>
+                <h4>Test Scenarios</h4>
+
+                <p>
+                  Authorized, unauthorized, timing, RTC, power-loss,
+                  repeated-scan, and relay-polarity cases.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Documentation -->
+
+
+    <!-- Closing Statement -->
+    <section class="study-section">
+      <div
+        class="container"
+        data-aos="fade-up"
+      >
+        <div class="closing-statement">
+          <i class="bi bi-quote"></i>
+
+          <p>
+            This system extends RFID authorization beyond a simulated
+            actuator by introducing independent timekeeping, controlled
+            electrical switching, and a physical locking mechanism within a
+            unified embedded access-control architecture.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- /Closing Statement -->
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer
+    id="footer"
+    class="footer light-background"
+  >
+    <div class="container">
+
+      <div class="copyright text-center">
+        <p>
+          © <span id="current-year"></span>
+
+          <strong class="px-1 sitename">
+            Mersie Ademova
+          </strong>
+
+          <span>All Rights Reserved.</span>
+        </p>
+      </div>
+
+      <div class="social-links d-flex justify-content-center">
+<a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+<a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+<a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+<a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+<a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+      </div>
+
+      <div class="credits text-center">
+        Designed by
+
+        <a
+          href="https://bootstrapmade.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          BootstrapMade
+        </a>
+
+        · Distributed by
+
+        <a
+          href="https://themewagon.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ThemeWagon
+        </a>
+      </div>
+
+    </div>
+  </footer>
+  <!-- /Footer -->
+
+
+  <!-- Scroll Top -->
+  <a
+    href="#"
+    id="scroll-top"
+    class="scroll-top d-flex align-items-center justify-content-center"
+    aria-label="Scroll to top"
+  >
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Current Year -->
+  <script>
+    const yearElement = document.getElementById("current-year");
+
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+  </script>
+
+</body>
+
+</html>

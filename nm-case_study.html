@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Numerical Methods Solver for Linear Systems | Mersie Ademova</title>
+  <meta name="description" content="Case study of a Python desktop application for solving systems of linear equations using Gaussian elimination, Jacobi, and Gauss-Seidel methods.">
+  <meta name="keywords" content="Python, numerical methods, Gaussian elimination, Jacobi, Gauss-Seidel, linear algebra, convergence analysis">
+
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .case-study-block { scroll-margin-top: 120px; }
+    .portfolio-info ul li { margin-bottom: 12px; line-height: 1.6; }
+    .portfolio-info ul li strong { display: block; margin-bottom: 2px; color: var(--heading-color); }
+
+    .case-study-btn {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
+      padding: 11px 24px; border: 2px solid var(--accent-color); border-radius: 4px;
+      background: var(--accent-color); color: var(--contrast-color); font-weight: 600;
+      text-decoration: none; transition: .3s ease;
+    }
+    .case-study-btn:hover { background: transparent; color: var(--accent-color); }
+
+    .case-study-nav {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+      margin-bottom: 55px; padding: 18px; border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 8px; background: var(--surface-color);
+      box-shadow: 0 8px 30px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+    .case-study-nav a {
+      padding: 8px 15px; border-radius: 4px; color: var(--default-color);
+      font-size: 14px; font-weight: 500; text-decoration: none; transition: .3s ease;
+    }
+    .case-study-nav a:hover { background: var(--accent-color); color: var(--contrast-color); }
+
+    .study-section { padding: 70px 0; }
+    .study-heading {
+      position: relative; margin-bottom: 24px; padding-bottom: 14px;
+      color: var(--heading-color); font-size: 30px; font-weight: 700;
+    }
+    .study-heading::after {
+      content: ""; position: absolute; left: 0; bottom: 0; width: 55px; height: 3px;
+      background: var(--accent-color);
+    }
+    .study-subheading { margin-bottom: 14px; color: var(--heading-color); font-size: 21px; font-weight: 600; }
+    .study-text { font-size: 16px; line-height: 1.85; }
+
+    .highlight-box, .content-card, .method-card, .feature-card, .test-card, .resource-card {
+      height: 100%; padding: 28px; border-radius: 7px; background: var(--surface-color);
+      border: 1px solid color-mix(in srgb, var(--default-color), transparent 89%);
+      box-shadow: 0 8px 26px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+    .highlight-box { border-left: 4px solid var(--accent-color); }
+    .highlight-box i, .method-card i, .feature-card i {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; margin-bottom: 18px; border-radius: 6px;
+      background: color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color); font-size: 23px;
+    }
+    .highlight-box h4, .method-card h4, .feature-card h4, .test-card h4, .resource-card h4 {
+      margin-bottom: 12px; color: var(--heading-color); font-size: 19px; font-weight: 600;
+    }
+    .highlight-box p, .method-card p, .feature-card p, .test-card p, .resource-card p { margin: 0; line-height: 1.75; }
+    .method-type {
+      display: inline-block; margin-bottom: 14px; padding: 5px 10px; border-radius: 20px;
+      background: color-mix(in srgb, var(--accent-color), transparent 90%);
+      color: var(--accent-color); font-size: 12px; font-weight: 600; text-transform: uppercase;
+    }
+
+    .architecture-grid, .workflow-grid { display: grid; gap: 18px; margin-top: 35px; }
+    .architecture-grid { grid-template-columns: repeat(4, 1fr); }
+    .workflow-grid { grid-template-columns: repeat(4, 1fr); }
+    .architecture-item, .workflow-step {
+      padding: 24px 20px; border-radius: 7px; background: var(--surface-color);
+      border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+    }
+    .architecture-item { text-align: center; border-top: 4px solid var(--accent-color); }
+    .architecture-item i { display: block; margin-bottom: 12px; color: var(--accent-color); font-size: 28px; }
+    .architecture-item h4, .workflow-step h4 { color: var(--heading-color); font-size: 17px; font-weight: 600; }
+    .architecture-item p, .workflow-step p { margin: 0; font-size: 14px; line-height: 1.7; }
+    .workflow-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; margin-bottom: 16px; border-radius: 50%;
+      background: var(--accent-color); color: var(--contrast-color); font-weight: 700;
+    }
+
+    .comparison-table { overflow-x: auto; border-radius: 8px; box-shadow: 0 8px 28px color-mix(in srgb, var(--default-color), transparent 94%); }
+    .comparison-table table { margin-bottom: 0; }
+    .comparison-table thead th { padding: 18px; background: var(--heading-color); color: var(--contrast-color); }
+    .comparison-table tbody td { padding: 18px; vertical-align: top; line-height: 1.6; }
+
+    .clean-list { margin: 0; padding: 0; list-style: none; }
+    .clean-list li { position: relative; margin-bottom: 13px; padding-left: 28px; line-height: 1.7; }
+    .clean-list li::before {
+      content: "\F26A"; position: absolute; left: 0; top: 2px;
+      color: var(--accent-color); font-family: "bootstrap-icons";
+    }
+
+    .resource-card { display: flex; align-items: flex-start; gap: 16px; }
+    .resource-card i { flex-shrink: 0; color: var(--accent-color); font-size: 27px; }
+
+    .closing-statement {
+      padding: 42px; border-radius: 8px; background: var(--heading-color);
+      color: var(--contrast-color); text-align: center;
+    }
+    .closing-statement i { margin-bottom: 18px; color: var(--accent-color); font-size: 36px; }
+    .closing-statement p {
+      max-width: 930px; margin: 0 auto; color: var(--contrast-color);
+      font-family: var(--heading-font); font-size: 21px; font-weight: 500; line-height: 1.65;
+    }
+
+    @media (max-width: 1199px) {
+      .architecture-grid, .workflow-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 767px) {
+      .study-section { padding: 50px 0; }
+      .study-heading { font-size: 25px; }
+      .case-study-nav { justify-content: flex-start; }
+      .case-study-nav a { flex: 1 1 auto; text-align: center; }
+      .architecture-grid, .workflow-grid { grid-template-columns: 1fr; }
+      .closing-statement { padding: 30px 22px; }
+      .closing-statement p { font-size: 18px; }
+    }
+  </style>
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0"></a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html">What I Do</a></li>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+          <li class="dropdown">
+            <a href="#"><span>Writings</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="writings/nm.pdf">Academic Papers</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html">Contact</a></li>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </ul>
+        
+      </nav>
+
+      <div class="header-social-links">
+        
+         <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+         <a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+         <a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+         <a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+         <a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+        
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <section id="portfolio-details" class="portfolio-details section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Numerical Methods Solver for Linear Systems</h2>
+        <p>Python · Numerical Analysis · Linear Algebra · Iterative Algorithms · Data Visualization</p>
+      </div>
+    <section id="case-study" class="section case-study-block">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Case Study</h2>
+        <p>From mathematical theory to a structured, interactive, and measurable computational environment.</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <nav class="case-study-nav" aria-label="Case study navigation">
+          <a href="#problem">Problem</a>
+          <a href="#objective">Objective</a>
+          <a href="#methods">Methods</a>
+          <a href="#features">System</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#convergence">Convergence</a>
+          <a href="#comparison">Comparison</a>
+          <a href="#testing">Testing</a>
+          <a href="#outcome">Outcome</a>
+          <a href="#documentation">Documentation</a>
+        </nav>
+      </div>
+    </section>
+
+    <section id="problem" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4 align-items-stretch">
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">The Mathematical Problem</h2>
+            <p class="study-text">
+              Systems of linear equations appear in engineering, computation, modeling, optimization, simulation,
+              and data analysis. Small systems can often be solved manually, but larger or repeatedly evaluated
+              systems require reliable numerical methods and a clear way to inspect the computational process.
+            </p>
+            <p class="study-text">
+              Direct and iterative methods solve the same class of problems in fundamentally different ways.
+              Gaussian elimination transforms the system into an equivalent form and obtains a solution through
+              elimination and substitution, while Jacobi and Gauss–Seidel generate successive approximations until
+              a stopping criterion is satisfied.
+            </p>
+            <p class="study-text">
+              The practical challenge is not only to calculate a final solution, but also to validate the input,
+              detect unsuitable conditions, observe convergence, track numerical error, and present intermediate
+              results in a form that can be understood and compared.
+            </p>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box">
+              <i class="bi bi-lightbulb"></i>
+              <h4>Project Motivation</h4>
+              <p>
+                The project transforms three numerical methods from isolated theoretical procedures into one
+                interactive environment where the user can enter a system, choose a method, follow every
+                computational step, and evaluate the behavior of the solution process.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="objective" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">Project Objective</h2>
+            <p class="study-text">
+              The objective was to develop a desktop application that implements direct and iterative methods for
+              solving linear systems while preserving the mathematical logic behind each method.
+            </p>
+            <p class="study-text">
+              The application supports structured input, parameter configuration, diagonal-dominance validation,
+              step-by-step iteration tracking, error calculation, convergence monitoring, and graphical visualization.
+            </p>
+            <p class="study-text">
+              The project combines numerical computation, software design, user-interface development,
+              algorithmic validation, and experimental comparison within one system.
+            </p>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box">
+              <i class="bi bi-bullseye"></i>
+              <h4>Core Design Principle</h4>
+              <p>
+                The application does not hide the numerical process behind a single result. It exposes intermediate
+                values, iteration counts, errors, and convergence behavior so the user can understand how the result
+                was obtained.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="methods" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Implemented Numerical Methods</h2>
+            <p class="study-text">
+              The project implements one direct method and two iterative methods, allowing different computational
+              strategies to be studied within the same application.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+          <div class="col-lg-4" data-aos="fade-up">
+            <div class="method-card">
+              <span class="method-type">Direct Method</span>
+              <i class="bi bi-diagram-3"></i>
+              <h4>Gaussian Elimination</h4>
+              <p>
+                Transforms the coefficient matrix into upper triangular form and determines the unknown variables
+                through backward substitution. Partial pivoting improves stability and avoids division by zero or
+                extremely small pivot values.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="method-card">
+              <span class="method-type">Iterative Method</span>
+              <i class="bi bi-arrow-repeat"></i>
+              <h4>Jacobi Method</h4>
+              <p>
+                Generates a new approximation using only values from the previous iteration. The method provides a
+                clear independent update structure and allows the full convergence process to be recorded.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="method-card">
+              <span class="method-type">Iterative Method</span>
+              <i class="bi bi-arrow-left-right"></i>
+              <h4>Gauss–Seidel Method</h4>
+              <p>
+                Updates each variable immediately and uses the newest available values during the same iteration.
+                For suitable systems, this often produces faster convergence than the Jacobi method.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Core Functionalities</h2>
+            <p class="study-text">
+              The application connects mathematical input, algorithm execution, validation, numerical analysis,
+              and graphical presentation in one structured workflow.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="feature-card">
+              <i class="bi bi-grid-3x3-gap"></i>
+              <h4>Dynamic System Input</h4>
+              <p>The user selects the number of equations and enters coefficients and constants through a generated interface.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+            <div class="feature-card">
+              <i class="bi bi-sliders"></i>
+              <h4>Numerical Configuration</h4>
+              <p>Iterative methods support configurable tolerance, maximum iteration count, and initial approximations.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-card">
+              <i class="bi bi-shield-check"></i>
+              <h4>Input Validation</h4>
+              <p>Incomplete, non-numeric, and invalid input is detected before numerical execution begins.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+            <div class="feature-card">
+              <i class="bi bi-check2-square"></i>
+              <h4>Diagonal-Dominance Check</h4>
+              <p>The coefficient matrix is analyzed and the user is warned when iterative convergence may be uncertain.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-card">
+              <i class="bi bi-table"></i>
+              <h4>Iteration Table</h4>
+              <p>Each iterative step is preserved with variable values and calculated error for transparent analysis.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+            <div class="feature-card">
+              <i class="bi bi-graph-down"></i>
+              <h4>Convergence Visualization</h4>
+              <p>Graphs show how approximations and numerical error evolve across iterations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Application Architecture</h2>
+            <p class="study-text">
+              The system separates user interaction, numerical validation, algorithm execution, and result presentation
+              into distinct logical components.
+            </p>
+          </div>
+        </div>
+
+        <div class="architecture-grid" data-aos="fade-up" data-aos-delay="100">
+          <div class="architecture-item">
+            <i class="bi bi-window"></i>
+            <h4>Presentation Layer</h4>
+            <p>Graphical interface, dynamic input fields, controls, tables, and result panels.</p>
+          </div>
+          <div class="architecture-item">
+            <i class="bi bi-shield-check"></i>
+            <h4>Validation Layer</h4>
+            <p>Input checks, matrix validation, pivot checks, and convergence warnings.</p>
+          </div>
+          <div class="architecture-item">
+            <i class="bi bi-cpu"></i>
+            <h4>Numerical Layer</h4>
+            <p>Gaussian elimination, Jacobi, Gauss–Seidel, error calculation, and stopping criteria.</p>
+          </div>
+          <div class="architecture-item">
+            <i class="bi bi-bar-chart-line"></i>
+            <h4>Visualization Layer</h4>
+            <p>Iteration tables, final solutions, error values, and convergence graphs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Application Workflow</h2>
+            <p class="study-text">The user moves from system definition to numerical evaluation through a clear sequence.</p>
+          </div>
+        </div>
+
+        <div class="workflow-grid" data-aos="fade-up" data-aos-delay="100">
+          <div class="workflow-step"><span class="workflow-number">1</span><h4>Select System Size</h4><p>Define the number of equations and unknown variables.</p></div>
+          <div class="workflow-step"><span class="workflow-number">2</span><h4>Enter Coefficients</h4><p>Enter matrix coefficients and constant terms.</p></div>
+          <div class="workflow-step"><span class="workflow-number">3</span><h4>Choose a Method</h4><p>Select Gaussian elimination, Jacobi, or Gauss–Seidel.</p></div>
+          <div class="workflow-step"><span class="workflow-number">4</span><h4>Configure Parameters</h4><p>Set tolerance, maximum iterations, and starting values for iterative methods.</p></div>
+          <div class="workflow-step"><span class="workflow-number">5</span><h4>Validate the System</h4><p>Check input correctness, pivot conditions, and diagonal dominance.</p></div>
+          <div class="workflow-step"><span class="workflow-number">6</span><h4>Execute the Algorithm</h4><p>Run the selected method and preserve intermediate results.</p></div>
+          <div class="workflow-step"><span class="workflow-number">7</span><h4>Inspect Results</h4><p>Review the solution, iteration count, errors, and intermediate values.</p></div>
+          <div class="workflow-step"><span class="workflow-number">8</span><h4>Analyze Convergence</h4><p>Use the graph to observe numerical behavior and compare methods.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="convergence" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4 align-items-stretch">
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">Convergence and Error Analysis</h2>
+            <p class="study-text">
+              Iterative methods generate a sequence of approximations whose behavior must be evaluated through a
+              stopping condition. The application calculates the difference between successive approximations and
+              stops when the selected tolerance is satisfied or the maximum number of iterations is reached.
+            </p>
+            <p class="study-text">
+              The iteration table and graph show whether values stabilize, whether error decreases, how many iterations
+              are required, and whether the selected method converges for the given system.
+            </p>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box">
+              <i class="bi bi-activity"></i>
+              <h4>Why Convergence Must Be Visible</h4>
+              <p>
+                A final numerical value alone does not show whether the iterative process behaved reliably.
+                Preserving the approximation sequence makes the method testable, explainable, and comparable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comparison" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Method Comparison</h2>
+            <p class="study-text">
+              The implemented methods solve the same class of problems but differ in computational strategy,
+              convergence requirements, and the type of information they expose.
+            </p>
+          </div>
+        </div>
+
+        <div class="comparison-table mt-4" data-aos="fade-up" data-aos-delay="100">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Method</th><th>Type</th><th>Main Principle</th><th>Strength</th><th>Limitation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Gaussian Elimination</strong></td>
+                <td>Direct</td>
+                <td>Matrix transformation followed by backward substitution.</td>
+                <td>Produces a solution in a finite sequence for a valid non-singular system.</td>
+                <td>Requires careful pivot handling and may accumulate floating-point error.</td>
+              </tr>
+              <tr>
+                <td><strong>Jacobi</strong></td>
+                <td>Iterative</td>
+                <td>Every new value is calculated from the previous iteration.</td>
+                <td>Clear independent update structure and transparent iteration behavior.</td>
+                <td>May converge slowly or fail to converge for unsuitable systems.</td>
+              </tr>
+              <tr>
+                <td><strong>Gauss–Seidel</strong></td>
+                <td>Iterative</td>
+                <td>New values are used immediately within the same iteration.</td>
+                <td>Often converges faster than Jacobi for suitable systems.</td>
+                <td>Convergence is not guaranteed for every coefficient matrix.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="testing" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Testing and Validation</h2>
+            <p class="study-text">
+              The application was tested with systems selected to examine correctness, stability, convergence behavior,
+              and error handling.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+          <div class="col-md-6" data-aos="fade-up"><div class="test-card"><h4>Valid Non-Singular Systems</h4><p>Systems with known solutions verify Gaussian elimination and iterative convergence.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50"><div class="test-card"><h4>Diagonally Dominant Systems</h4><p>Suitable matrices compare Jacobi and Gauss–Seidel convergence speed and iteration count.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="test-card"><h4>Non-Dominant Systems</h4><p>Unsuitable matrices test warning behavior and demonstrate that convergence cannot be assumed.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150"><div class="test-card"><h4>Invalid and Edge Input</h4><p>Empty fields, non-numeric values, zero pivots, strict tolerances, and low iteration limits test robustness.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="outcome" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">Project Outcome</h2>
+            <p class="study-text">
+              The result is a functional desktop application that solves systems of linear equations using three
+              numerical methods and presents both final and intermediate computational results.
+            </p>
+            <p class="study-text">
+              The project demonstrates how mathematical theory can be translated into modular algorithms, a usable
+              interface, transparent validation, measurable error analysis, and visual interpretation.
+            </p>
+            <p class="study-text">
+              Instead of reducing numerical methods to formulas, the application presents them as observable
+              computational processes whose behavior can be tested and compared.
+            </p>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box">
+              <i class="bi bi-stars"></i>
+              <h4>Why This Project Matters</h4>
+              <p>
+                The project combines algorithm implementation, numerical reasoning, interface design, validation,
+                visualization, and technical explanation within one coherent system.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-4">
+          <div class="col-lg-6" data-aos="fade-up">
+            <h3 class="study-subheading">Project Strengths</h3>
+            <ul class="clean-list">
+              <li>Implements direct and iterative solution strategies.</li>
+              <li>Preserves intermediate computational results.</li>
+              <li>Uses partial pivoting for improved numerical stability.</li>
+              <li>Checks diagonal-dominance conditions.</li>
+              <li>Supports configurable tolerance and iteration limits.</li>
+              <li>Visualizes convergence and error behavior.</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="study-subheading">Current Limitations</h3>
+            <ul class="clean-list">
+              <li>The application is intended for relatively small educational and experimental systems.</li>
+              <li>Iterative convergence depends on coefficient-matrix properties.</li>
+              <li>Floating-point arithmetic may introduce rounding error.</li>
+              <li>The current version focuses on three methods.</li>
+              <li>Large-scale performance benchmarking is outside the current scope.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="future-development" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5" data-aos="fade-up">
+            <h2 class="study-heading">Future Development</h2>
+            <p class="study-text">
+              The current application provides a stable base for extending the numerical laboratory with additional
+              methods, larger systems, and broader analytical capabilities.
+            </p>
+          </div>
+
+          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+            <ul class="clean-list">
+              <li>LU decomposition and Cholesky decomposition.</li>
+              <li>Successive over-relaxation and conjugate-gradient methods.</li>
+              <li>Automatic row reordering to improve diagonal dominance.</li>
+              <li>Residual-vector calculation and alternative error measures.</li>
+              <li>Import and export through CSV or spreadsheet files.</li>
+              <li>Performance comparison for larger systems.</li>
+              <li>Sparse-matrix support.</li>
+              <li>Additional graphs for residuals, speed, and method comparison.</li>
+              <li>Automatic recommendation of a suitable method.</li>
+              <li>Web-based or browser-accessible version.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="documentation" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Documentation and Project Materials</h2>
+            <p class="study-text">
+              The project can be supported by technical, mathematical, and visual materials explaining the methods,
+              implementation, testing process, and application behavior.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+          <div class="col-md-6 col-lg-4" data-aos="fade-up"><div class="resource-card"><i class="bi bi-file-earmark-text"></i><div><h4>Project Report</h4><p>Academic explanation of the problem, methods, testing, and results.</p></div></div></div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50"><div class="resource-card"><i class="bi bi-file-earmark-code"></i><div><h4>Technical Documentation</h4><p>Application structure, functions, validation logic, interface, and graphs.</p></div></div></div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100"><div class="resource-card"><i class="bi bi-journal-code"></i><div><h4>Source Code</h4><p>Python implementation of all methods, interface, and result analysis.</p></div></div></div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150"><div class="resource-card"><i class="bi bi-images"></i><div><h4>Application Screenshots</h4><p>Input forms, iteration tables, results, and convergence views.</p></div></div></div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200"><div class="resource-card"><i class="bi bi-play-btn"></i><div><h4>Video Demonstration</h4><p>A future walkthrough of method selection, execution, and interpretation.</p></div></div></div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250"><div class="resource-card"><i class="bi bi-github"></i><div><h4>GitHub Repository</h4><p>Add the public repository link after preparing the final README and screenshots.</p></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="study-section">
+      <div class="container" data-aos="fade-up">
+        <div class="closing-statement">
+          <i class="bi bi-quote"></i>
+          <p>
+            This project transforms numerical methods from static formulas into observable computational processes
+            that can be executed, measured, compared, visualized, and understood.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer light-background">
+    <div class="container">
+      <div class="copyright text-center">
+        <p>© <span id="current-year"></span> <strong class="px-1 sitename">Mersie Ademova</strong> <span>All Rights Reserved.</span></p>
+      </div>
+
+      <div class="social-links d-flex justify-content-center">
+       
+       <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+<a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+<a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+<a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+<a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+       
+      </div>
+
+      <div class="credits text-center">
+        Designed by <a href="https://bootstrapmade.com/" target="_blank" rel="noopener noreferrer">BootstrapMade</a>
+        · Distributed by <a href="https://themewagon.com/" target="_blank" rel="noopener noreferrer">ThemeWagon</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to top"><i class="bi bi-arrow-up-short"></i></a>
+  <div id="preloader"></div>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    const yearElement = document.getElementById("current-year");
+    if (yearElement) yearElement.textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

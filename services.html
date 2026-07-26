@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>What I Do | Mersie Ademova</title>
+
+  <meta
+    name="description"
+    content="Software engineering, application development, systems analysis, data and algorithms, applied research, and technical writing by Mersie Ademova."
+  >
+
+  <meta
+    name="keywords"
+    content="software engineering, application development, systems analysis, requirements engineering, algorithms, databases, applied research, technical writing, Mersie Ademova"
+  >
+
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .capabilities-intro {
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .profile-line {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 18px;
+      margin-top: 20px;
+      color: color-mix(in srgb, var(--default-color), transparent 18%);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.35px;
+      text-transform: uppercase;
+    }
+
+    .profile-line span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .profile-line i {
+      color: var(--accent-color);
+      font-size: 14px;
+    }
+
+    .capabilities-grid {
+      border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 84%);
+    }
+
+    .capability-item {
+      display: grid;
+      grid-template-columns: 74px minmax(0, 1fr);
+      gap: 24px;
+      min-height: 100%;
+      padding: 38px 10px 40px 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 84%);
+    }
+
+    .capability-column:nth-child(odd) .capability-item {
+      padding-right: 34px;
+      border-right: 1px solid color-mix(in srgb, var(--default-color), transparent 84%);
+    }
+
+    .capability-column:nth-child(even) .capability-item {
+      padding-left: 34px;
+    }
+
+    .capability-index {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .capability-number {
+      color: color-mix(in srgb, var(--accent-color), transparent 20%);
+      font-family: var(--heading-font);
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .capability-icon {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border: 1px solid color-mix(in srgb, var(--accent-color), transparent 62%);
+      border-radius: 50%;
+      color: var(--accent-color);
+    }
+
+    .capability-icon i {
+      font-size: 19px;
+    }
+
+    .capability-category {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--accent-color);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+    }
+
+    .capability-item h3 {
+      margin-bottom: 13px;
+      color: var(--heading-color);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .capability-item p {
+      margin-bottom: 18px;
+      color: var(--default-color);
+      font-size: 15px;
+      line-height: 1.78;
+    }
+
+    .capability-skills {
+      margin: 0;
+      color: color-mix(in srgb, var(--default-color), transparent 14%);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.15px;
+      line-height: 1.7;
+    }
+
+    .capability-skills span + span::before {
+      content: "·";
+      margin: 0 8px;
+      color: var(--accent-color);
+    }
+
+    .capabilities-cta {
+      margin-top: 58px;
+      padding: 38px 40px;
+      border-top: 3px solid var(--accent-color);
+      background:
+        linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--accent-color), transparent 94%),
+          var(--surface-color)
+        );
+      text-align: center;
+    }
+
+    .capabilities-cta h3 {
+      margin-bottom: 11px;
+      color: var(--heading-color);
+      font-size: 23px;
+      font-weight: 700;
+    }
+
+    .capabilities-cta p {
+      max-width: 760px;
+      margin: 0 auto 24px;
+      line-height: 1.75;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .capability-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 164px;
+      padding: 11px 18px;
+      border: 2px solid var(--accent-color);
+      border-radius: 4px;
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .capability-btn:hover {
+      background-color: transparent;
+      color: var(--accent-color);
+    }
+
+    .capability-btn.secondary {
+      background-color: transparent;
+      color: var(--accent-color);
+    }
+
+    .capability-btn.secondary:hover {
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+    }
+
+    @media (max-width: 991px) {
+      .capability-column:nth-child(odd) .capability-item {
+        padding-right: 0;
+        border-right: 0;
+      }
+
+      .capability-column:nth-child(even) .capability-item {
+        padding-left: 0;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .capability-item {
+        grid-template-columns: 56px minmax(0, 1fr);
+        gap: 16px;
+        padding-top: 30px;
+        padding-bottom: 32px;
+      }
+
+      .capability-number {
+        font-size: 28px;
+      }
+
+      .capability-icon {
+        width: 38px;
+        height: 38px;
+      }
+
+      .capability-item h3 {
+        font-size: 20px;
+      }
+
+      .capabilities-cta {
+        padding: 30px 22px;
+      }
+
+      .cta-actions {
+        flex-direction: column;
+      }
+
+      .capability-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body class="services-page">
+
+  <header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0" aria-label="Go to home page"></a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html" class="active">What I Do</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="additional_writings.html">Additional Writings</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div class="header-social-links">
+        <a href="https://github.com/mersiademova" class="github" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/mersie-ademova-752634277/" class="linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:ademovamersie@gmail.com" class="email" aria-label="Email"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.facebook.com/mersi.luciana" class="facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/mersiademova/" class="instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section id="what-i-do" class="services section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>What I Do</h2>
+
+        <div class="capabilities-intro">
+          <p>
+            I combine software engineering, systems thinking, applied research,
+            and technical communication to transform complex ideas into
+            structured, practical, and understandable digital solutions.
+          </p>
+
+          <div class="profile-line" aria-label="Professional profile">
+            <span><i class="bi bi-cpu"></i> Engineer</span>
+            <span><i class="bi bi-code-slash"></i> Software Developer</span>
+            <span><i class="bi bi-search"></i> Researcher</span>
+            <span><i class="bi bi-journal-text"></i> Technical Author</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row g-0 capabilities-grid">
+
+          <div class="col-lg-6 capability-column" data-aos="fade-up">
+            <article class="capability-item">
+              <div class="capability-index" aria-hidden="true">
+                <span class="capability-number">01</span>
+                <span class="capability-icon"><i class="bi bi-code-square"></i></span>
+              </div>
+              <div>
+                <span class="capability-category">Engineering</span>
+                <h3>Software Engineering</h3>
+                <p>
+                  Designing maintainable software solutions through clear
+                  architecture, modular components, structured development,
+                  and attention to reliability, usability, and long-term evolution.
+                </p>
+                <p class="capability-skills">
+                  <span>Architecture</span><span>Modularity</span><span>Reliability</span>
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-6 capability-column" data-aos="fade-up" data-aos-delay="100">
+            <article class="capability-item">
+              <div class="capability-index" aria-hidden="true">
+                <span class="capability-number">02</span>
+                <span class="capability-icon"><i class="bi bi-window-stack"></i></span>
+              </div>
+              <div>
+                <span class="capability-category">Development</span>
+                <h3>Application Development</h3>
+                <p>
+                  Developing practical desktop, web, and data-driven applications
+                  that transform technical requirements into functional and
+                  accessible user experiences.
+                </p>
+                <p class="capability-skills">
+                  <span>Desktop</span><span>Web</span><span>Data-driven Systems</span>
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-6 capability-column" data-aos="fade-up" data-aos-delay="100">
+            <article class="capability-item">
+              <div class="capability-index" aria-hidden="true">
+                <span class="capability-number">03</span>
+                <span class="capability-icon"><i class="bi bi-diagram-3"></i></span>
+              </div>
+              <div>
+                <span class="capability-category">Systems Thinking</span>
+                <h3>Systems Analysis &amp; Requirements Engineering</h3>
+                <p>
+                  Defining system scope, user roles, workflows, functional and
+                  non-functional requirements, interfaces, constraints, and
+                  expected behavior before implementation begins.
+                </p>
+                <p class="capability-skills">
+                  <span>User Roles</span><span>Workflows</span><span>SRS</span>
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-6 capability-column" data-aos="fade-up" data-aos-delay="200">
+            <article class="capability-item">
+              <div class="capability-index" aria-hidden="true">
+                <span class="capability-number">04</span>
+                <span class="capability-icon"><i class="bi bi-database-gear"></i></span>
+              </div>
+              <div>
+                <span class="capability-category">Computation</span>
+                <h3>Data, Algorithms &amp; Decision Systems</h3>
+                <p>
+                  Applying databases, algorithms, numerical methods, information
+                  theory, optimization, and decision-support models to structured
+                  computational and engineering problems.
+                </p>
+                <p class="capability-skills">
+                  <span>Databases</span><span>Algorithms</span><span>Optimization</span>
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-6 capability-column" data-aos="fade-up" data-aos-delay="100">
+            <article class="capability-item">
+              <div class="capability-index" aria-hidden="true">
+                <span class="capability-number">05</span>
+                <span class="capability-icon"><i class="bi bi-search"></i></span>
+              </div>
+              <div>
+                <span class="capability-category">Research</span>
+                <h3>Applied Research</h3>
+                <p>
+                  Exploring computing and engineering topics through structured
+                  research, technical comparison, experimentation, mathematical
+                  analysis, and evaluation of real-world applications.
+                </p>
+                <p class="capability-skills">
+                  <span>Study</span><span>Modeling</span><span>Evaluation</span>
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-6 capability-column" data-aos="fade-up" data-aos-delay="200">
+            <article class="capability-item">
+              <div class="capability-index" aria-hidden="true">
+                <span class="capability-number">06</span>
+                <span class="capability-icon"><i class="bi bi-journal-code"></i></span>
+              </div>
+              <div>
+                <span class="capability-category">Communication</span>
+                <h3>Technical Writing &amp; Knowledge Communication</h3>
+                <p>
+                  Transforming complex technical concepts into structured academic
+                  papers, software documentation, case studies, code-supported
+                  explanations, and learning-oriented materials.
+                </p>
+                <p class="capability-skills">
+                  <span>Documentation</span><span>Explanation</span><span>Learning Materials</span>
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="capabilities-cta" data-aos="fade-up">
+          <h3>From ideas to structured technical work</h3>
+          <p>
+            Explore the projects, case studies, academic papers, technical
+            specifications, and code-supported research that demonstrate how
+            these areas come together in practice.
+          </p>
+          <div class="cta-actions">
+            <a href="portfolio.html" class="capability-btn"><i class="bi bi-grid"></i>View Portfolio</a>
+            <a href="additional_writings.html" class="capability-btn secondary"><i class="bi bi-journal-text"></i>Additional Writings</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer light-background">
+    <div class="container">
+      <div class="copyright text-center">
+        <p>© <span id="current-year"></span><strong class="px-1 sitename">Mersie Ademova</strong><span>All Rights Reserved.</span></p>
+      </div>
+
+      <div class="social-links d-flex justify-content-center">
+        <a href="https://github.com/mersiademova" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/mersie-ademova-752634277/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:ademovamersie@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.facebook.com/mersi.luciana" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/mersiademova/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to top"><i class="bi bi-arrow-up-short"></i></a>
+  <div id="preloader"></div>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>

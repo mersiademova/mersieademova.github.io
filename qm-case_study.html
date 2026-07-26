@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>QuenchMap | Mersie Ademova</title>
+
+  <meta name="description" content="Case study of QuenchMap, a PHP and MySQL web application for locating, reporting, and administratively managing public drinking-water sources through an interactive map.">
+  <meta name="keywords" content="QuenchMap, PHP, MySQL, Bootstrap, Google Maps, web application, geolocation, role-based access, CRUD, public water sources">
+
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .case-study-block { scroll-margin-top: 120px; }
+    .portfolio-info ul li { line-height: 1.6; margin-bottom: 12px; }
+    .portfolio-info ul li strong { display: block; margin-bottom: 2px; color: var(--heading-color); }
+
+    .case-study-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 11px 24px;
+      border: 2px solid var(--accent-color);
+      border-radius: 4px;
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .case-study-btn i { font-size: 16px; transition: transform 0.3s ease; }
+    .case-study-btn:hover { background-color: transparent; color: var(--accent-color); }
+    .case-study-btn:hover i { transform: translateY(3px); }
+
+    .case-study-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto 55px;
+      padding: 18px;
+      border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 8px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 30px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .case-study-nav a {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 15px;
+      border-radius: 4px;
+      color: var(--default-color);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .case-study-nav a:hover { background-color: var(--accent-color); color: var(--contrast-color); }
+    .study-section { padding: 70px 0; }
+    .study-section:nth-of-type(even) { background-color: color-mix(in srgb, var(--background-color), var(--accent-color) 2%); }
+
+    .study-heading {
+      position: relative;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .study-heading::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 55px;
+      height: 3px;
+      background-color: var(--accent-color);
+      content: "";
+    }
+
+    .study-subheading { margin-bottom: 14px; color: var(--heading-color); font-size: 21px; font-weight: 600; }
+    .study-text { color: var(--default-color); font-size: 16px; line-height: 1.85; }
+    .study-text:last-child { margin-bottom: 0; }
+
+    .highlight-box {
+      height: 100%;
+      padding: 30px;
+      border-left: 4px solid var(--accent-color);
+      border-radius: 6px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 30px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .highlight-box i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background-color: color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color);
+      font-size: 22px;
+    }
+
+    .highlight-box h4 { margin-bottom: 14px; color: var(--heading-color); font-size: 20px; font-weight: 600; }
+    .highlight-box p { margin: 0; line-height: 1.75; }
+
+    .feature-card,
+    .role-card,
+    .architecture-layer,
+    .workflow-step,
+    .test-card,
+    .decision-card,
+    .resource-card {
+      height: 100%;
+      border-radius: 7px;
+      background-color: var(--surface-color);
+    }
+
+    .feature-card,
+    .role-card {
+      padding: 28px;
+      border: 1px solid color-mix(in srgb, var(--default-color), transparent 89%);
+      transition: 0.3s ease;
+    }
+
+    .feature-card:hover,
+    .role-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px color-mix(in srgb, var(--default-color), transparent 91%);
+    }
+
+    .feature-card i,
+    .role-card i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 18px;
+      border-radius: 6px;
+      background-color: color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color);
+      font-size: 24px;
+    }
+
+    .feature-card h4,
+    .role-card h4 { margin-bottom: 12px; color: var(--heading-color); font-size: 19px; font-weight: 600; }
+
+    .feature-card p,
+    .role-card p { margin-bottom: 0; line-height: 1.75; }
+
+    .role-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+      color: var(--accent-color);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .architecture-layers {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      gap: 14px;
+      margin-top: 35px;
+    }
+
+    .architecture-layer {
+      padding: 24px 18px;
+      border-top: 4px solid var(--accent-color);
+      text-align: center;
+      box-shadow: 0 8px 25px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .architecture-layer i { margin-bottom: 13px; color: var(--accent-color); font-size: 28px; }
+    .architecture-layer h4 { margin-bottom: 9px; color: var(--heading-color); font-size: 16px; font-weight: 600; }
+    .architecture-layer p { margin-bottom: 0; font-size: 13px; line-height: 1.6; }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .workflow-step {
+      min-height: 195px;
+      padding: 28px 22px 22px;
+      border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+    }
+
+    .workflow-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 17px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      font-weight: 700;
+    }
+
+    .workflow-step h4 { margin-bottom: 10px; color: var(--heading-color); font-size: 17px; font-weight: 600; }
+    .workflow-step p { margin-bottom: 0; font-size: 14px; line-height: 1.7; }
+
+    .data-table {
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 8px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 28px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .data-table table { margin-bottom: 0; }
+    .data-table thead th { padding: 18px; background-color: var(--heading-color); color: var(--contrast-color); font-size: 14px; font-weight: 600; vertical-align: middle; }
+    .data-table tbody td { padding: 18px; font-size: 14px; line-height: 1.6; vertical-align: top; }
+    .data-table tbody tr:not(:last-child) td { border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 90%); }
+
+    .decision-card,
+    .test-card {
+      padding: 26px;
+      border-left: 4px solid var(--accent-color);
+      box-shadow: 0 8px 26px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .decision-card h4,
+    .test-card h4 { margin-bottom: 12px; color: var(--heading-color); font-size: 18px; font-weight: 600; }
+
+    .decision-card p,
+    .test-card p { margin-bottom: 0; line-height: 1.75; }
+
+    .strength-list,
+    .limitations-list,
+    .future-list { margin: 0; padding: 0; list-style: none; }
+
+    .strength-list li,
+    .limitations-list li,
+    .future-list li { position: relative; margin-bottom: 13px; padding-left: 28px; line-height: 1.7; }
+
+    .strength-list li::before { position: absolute; top: 2px; left: 0; color: var(--accent-color); font-family: "bootstrap-icons"; content: "\F26A"; }
+    .limitations-list li::before { position: absolute; top: 2px; left: 0; color: var(--accent-color); font-family: "bootstrap-icons"; content: "\F33A"; }
+    .future-list li::before { position: absolute; top: 2px; left: 0; color: var(--accent-color); font-family: "bootstrap-icons"; content: "\F138"; }
+
+    .resource-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px;
+      border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+    }
+
+    .resource-card i { flex-shrink: 0; color: var(--accent-color); font-size: 27px; }
+    .resource-card h4 { margin-bottom: 7px; color: var(--heading-color); font-size: 17px; font-weight: 600; }
+    .resource-card p { margin-bottom: 0; font-size: 14px; line-height: 1.65; }
+
+    .closing-statement {
+      padding: 42px;
+      border-radius: 8px;
+      background-color: var(--heading-color);
+      color: var(--contrast-color);
+      text-align: center;
+    }
+
+    .closing-statement i { margin-bottom: 18px; color: var(--accent-color); font-size: 36px; }
+    .closing-statement p { max-width: 930px; margin: 0 auto; color: var(--contrast-color); font-family: var(--heading-font); font-size: 21px; font-weight: 500; line-height: 1.65; }
+
+    @media (max-width: 1199px) {
+      .architecture-layers { grid-template-columns: repeat(3, 1fr); }
+      .workflow-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 767px) {
+      .study-section { padding: 50px 0; }
+      .study-heading { font-size: 25px; }
+      .case-study-nav { justify-content: flex-start; }
+      .case-study-nav a { flex: 1 1 auto; justify-content: center; }
+      .architecture-layers,
+      .workflow-grid { grid-template-columns: 1fr; }
+      .data-table { overflow-x: auto; }
+      .closing-statement { padding: 30px 22px; }
+      .closing-statement p { font-size: 18px; }
+    }
+  </style>
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0"></a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html">What I Do</a></li>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+
+          <li class="dropdown">
+            <a href="#">
+              <span>Writings</span>
+              <i class="bi bi-chevron-down toggle-dropdown"></i>
+            </a>
+
+            <ul>
+              <li><a href="writings/qm.pdf">Technical Documentation</a></li>
+            </ul>
+          </li>
+
+          <li><a href="contact.html">Contact</a></li>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </ul>
+
+        
+      </nav>
+
+      <div class="header-social-links">
+        
+         <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+         <a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+         <a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+         <a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+         <a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+        
+      </div>
+
+    </div>
+  </header>
+
+
+  <main class="main">
+
+    <section id="portfolio-details" class="portfolio-details section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>QuenchMap</h2>
+        <p>PHP · MySQL · Bootstrap · Google Maps · Role-Based Access · Location Data</p>
+      </div>
+
+    <section id="case-study" class="section case-study-block">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Case Study</h2>
+        <p>Integrating geographic visualization, community-generated data, administrative control, and role-based web access.</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <nav class="case-study-nav" aria-label="Case study navigation">
+          <a href="#problem">Problem</a>
+          <a href="#objective">Objective</a>
+          <a href="#users">Users</a>
+          <a href="#features">Features</a>
+          <a href="#map">Map</a>
+          <a href="#reporting">Reporting</a>
+          <a href="#database">Database</a>
+          <a href="#security">Access</a>
+          <a href="#admin">Administration</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#testing">Testing</a>
+          <a href="#outcome">Outcome</a>
+          <a href="#documentation">Documentation</a>
+        </nav>
+      </div>
+    </section>
+
+
+    <section id="problem" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4 align-items-stretch">
+
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">The Problem</h2>
+
+            <p class="study-text">
+              Information about publicly accessible drinking-water sources is often fragmented, incomplete, or difficult to locate. A source may be known only locally, while visitors and other users have no centralized way to discover it.
+            </p>
+
+            <p class="study-text">
+              A simple map is not sufficient when the information must also be updated, expanded, reviewed, searched, and managed. A useful system needs geographic visualization, community participation, structured data storage, and administrative control.
+            </p>
+
+            <p class="study-text">
+              The challenge was to design a platform where public users can access practical location information while registered users contribute new records and administrators preserve the structure and reliability of the system.
+            </p>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box">
+              <i class="bi bi-lightbulb"></i>
+              <h4>Project Motivation</h4>
+              <p>
+                QuenchMap was developed as a centralized, community-oriented information system that connects physical locations with structured web data and controlled user participation.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section id="objective" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4">
+
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">Project Objective</h2>
+
+            <p class="study-text">
+              The objective was to build a full-stack web application that allows users to discover, search, report, and manage public drinking-water sources through an interactive map.
+            </p>
+
+            <p class="study-text">
+              The application was designed around three access levels: guest, registered user, and administrator. Each role receives only the functions required for its purpose.
+            </p>
+
+            <p class="study-text">
+              The system combines a responsive frontend, PHP backend logic, MySQL persistence, user sessions, CRUD operations, map integration, data validation, and an administrative workflow.
+            </p>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box">
+              <i class="bi bi-bullseye"></i>
+              <h4>Core Design Principle</h4>
+              <p>
+                Public information should remain easy to access, while contribution and management functions must be controlled through authentication and authorization.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section id="users" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Users, Roles, and Permissions</h2>
+            <p class="study-text">QuenchMap separates public access, community contribution, and administrative management into distinct roles.</p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+          <div class="col-lg-4" data-aos="fade-up">
+            <div class="role-card">
+              <span class="role-label">Public Access</span>
+              <i class="bi bi-person"></i>
+              <h4>Guest</h4>
+              <p>
+                Can view the map, search locations by city, inspect public water-source information, and read published announcements without creating an account.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="role-card">
+              <span class="role-label">Authenticated Access</span>
+              <i class="bi bi-person-check"></i>
+              <h4>Registered User</h4>
+              <p>
+                Receives the public functions and can additionally submit a new water-source report with location and descriptive data.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="role-card">
+              <span class="role-label">Management Access</span>
+              <i class="bi bi-person-gear"></i>
+              <h4>Administrator</h4>
+              <p>
+                Manages reports, locations, users, and public announcements, preserving the structure and operational control of the platform.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="features" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Core Functionalities</h2>
+            <p class="study-text">The system combines discovery, contribution, administration, and persistent storage within one web application.</p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="feature-card">
+              <i class="bi bi-map"></i>
+              <h4>Interactive Map</h4>
+              <p>Displays stored water-source locations as geographic markers connected to information from the database.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+            <div class="feature-card">
+              <i class="bi bi-search"></i>
+              <h4>City-Based Search</h4>
+              <p>Allows users to locate relevant records by searching for a city or geographic area.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-card">
+              <i class="bi bi-geo-alt"></i>
+              <h4>Location Reporting</h4>
+              <p>Registered users can submit new water-source information through a structured form.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+            <div class="feature-card">
+              <i class="bi bi-shield-lock"></i>
+              <h4>Authentication</h4>
+              <p>Registration, login, sessions, and role checks control access to protected functions.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-card">
+              <i class="bi bi-speedometer2"></i>
+              <h4>Administrative Dashboard</h4>
+              <p>Provides centralized management of application records and restricted operations.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+            <div class="feature-card">
+              <i class="bi bi-megaphone"></i>
+              <h4>Public Announcements</h4>
+              <p>Allows administrators to publish information visible to visitors and registered users.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="map" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4 align-items-stretch">
+
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">Interactive Map Integration</h2>
+
+            <p class="study-text">
+              The map is the primary discovery interface of QuenchMap. Geographic coordinates stored in the database are translated into visible markers on the map.
+            </p>
+
+            <p class="study-text">
+              Each marker represents a water-source record and can be associated with descriptive information relevant to the user. This connects structured database content with an intuitive geographic view.
+            </p>
+
+            <p class="study-text">
+              City-based search helps narrow the geographic context and makes the system more usable than an unfiltered list of coordinates or database records.
+            </p>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box">
+              <i class="bi bi-geo-alt-fill"></i>
+              <h4>Integration Value</h4>
+              <p>
+                The external mapping service is not treated as a decorative component. It acts as the visual layer through which database records become geographically meaningful.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section id="reporting" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Location Reporting Workflow</h2>
+            <p class="study-text">Community contribution is implemented through a controlled reporting process rather than direct unrestricted database modification.</p>
+          </div>
+        </div>
+
+        <div class="workflow-grid" data-aos="fade-up" data-aos-delay="100">
+          <div class="workflow-step">
+            <span class="workflow-number">1</span>
+            <h4>User Authentication</h4>
+            <p>The contributor logs in before accessing the protected report form.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">2</span>
+            <h4>Enter Location Data</h4>
+            <p>The user supplies the geographic and descriptive information required by the application.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">3</span>
+            <h4>Validate Input</h4>
+            <p>Required values are checked before the report is accepted.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">4</span>
+            <h4>Store the Report</h4>
+            <p>Valid information is persisted in the MySQL database.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">5</span>
+            <h4>Administrative Review</h4>
+            <p>The administrator accesses the record through the management interface.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">6</span>
+            <h4>Manage the Record</h4>
+            <p>The report can be reviewed, updated, retained, or removed according to the application workflow.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">7</span>
+            <h4>Display Public Data</h4>
+            <p>Managed location information becomes available through the map and search interface.</p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">8</span>
+            <h4>Ongoing Maintenance</h4>
+            <p>The administrative layer keeps the dataset organized as the platform grows.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="database" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Database Design</h2>
+            <p class="study-text">
+              MySQL provides persistent storage for the entities required by the platform. The database separates identity, geographic content, user contribution, and administrative communication.
+            </p>
+          </div>
+        </div>
+
+        <div class="data-table mt-4" data-aos="fade-up" data-aos-delay="100">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Entity</th>
+                <th>Purpose</th>
+                <th>Typical Relationships</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><strong>Users</strong></td>
+                <td>Stores account information and application role.</td>
+                <td>Connected to authentication and user-submitted reports.</td>
+              </tr>
+
+              <tr>
+                <td><strong>Water Sources / Locations</strong></td>
+                <td>Stores the geographic and descriptive data displayed on the map.</td>
+                <td>Connected to city search and map markers.</td>
+              </tr>
+
+              <tr>
+                <td><strong>Reports</strong></td>
+                <td>Preserves data submitted through the contribution workflow.</td>
+                <td>Connected to registered users and administrative actions.</td>
+              </tr>
+
+              <tr>
+                <td><strong>Announcements</strong></td>
+                <td>Stores public messages created through the administrative interface.</td>
+                <td>Displayed to guests and authenticated users.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="study-text mt-4">
+          The public portfolio description focuses on the logical data model rather than exposing deployment credentials or environment-specific configuration.
+        </p>
+      </div>
+    </section>
+
+
+    <section id="security" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4 align-items-stretch">
+
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">Authentication and Authorization</h2>
+
+            <p class="study-text">
+              Authentication identifies the user, while authorization determines which functions the authenticated account may access.
+            </p>
+
+            <p class="study-text">
+              Public map browsing remains available without login. Contribution functions are restricted to registered users, and administrative functions are reserved for administrator accounts.
+            </p>
+
+            <p class="study-text">
+              PHP sessions preserve the authenticated state across protected pages, while role checks prevent users from reaching functions outside their assigned level.
+            </p>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box">
+              <i class="bi bi-shield-check"></i>
+              <h4>Access-Control Principle</h4>
+              <p>
+                The interface may hide restricted actions, but access control must also be enforced by server-side PHP logic. Visual restriction alone is not authorization.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section id="admin" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Administrative Management</h2>
+            <p class="study-text">The administrative dashboard centralizes the operations that should not be exposed to ordinary users.</p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+          <div class="col-md-6" data-aos="fade-up">
+            <div class="decision-card">
+              <h4>Location and Report Management</h4>
+              <p>Administrators can inspect and manage the records that feed the public map and location-search experience.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="decision-card">
+              <h4>User Management</h4>
+              <p>The platform provides controlled access to account-related information required for operational administration.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="decision-card">
+              <h4>Announcement Management</h4>
+              <p>Administrators can create and maintain public notices shown through the application.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="decision-card">
+              <h4>Centralized CRUD Workflow</h4>
+              <p>Create, read, update, and delete operations are grouped in a restricted environment rather than scattered across public pages.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="architecture" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Application Architecture</h2>
+            <p class="study-text">
+              QuenchMap separates presentation, request handling, access control, database interaction, and external map visualization into logical layers.
+            </p>
+          </div>
+        </div>
+
+        <div class="architecture-layers" data-aos="fade-up" data-aos-delay="100">
+          <div class="architecture-layer">
+            <i class="bi bi-window"></i>
+            <h4>Presentation Layer</h4>
+            <p>Bootstrap layouts, forms, navigation, public pages, and dashboard screens.</p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-filetype-php"></i>
+            <h4>Application Layer</h4>
+            <p>PHP request processing, form handling, page logic, and CRUD operations.</p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-person-lock"></i>
+            <h4>Access Layer</h4>
+            <p>Login, sessions, role checks, and protected routes.</p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-database"></i>
+            <h4>Data Layer</h4>
+            <p>MySQL persistence for users, reports, locations, and announcements.</p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-map"></i>
+            <h4>Map Integration Layer</h4>
+            <p>Geographic visualization, marker placement, and location-search context.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="workflow" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4">
+
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">Application Workflow</h2>
+
+            <p class="study-text">
+              A guest begins with public information and geographic search. When the user decides to contribute, authentication introduces a controlled transition from public access to data submission.
+            </p>
+
+            <p class="study-text">
+              Submitted data enters the persistent database and becomes manageable through the administrator interface. Public-facing pages then retrieve the relevant records and transform them into map markers, search results, and announcements.
+            </p>
+
+            <p class="study-text">
+              This workflow connects public discovery, authenticated contribution, persistent storage, and administrative control without mixing the responsibilities of the three user roles.
+            </p>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box">
+              <i class="bi bi-diagram-3"></i>
+              <h4>System Flow</h4>
+              <p>
+                Public access → authentication → structured report → database persistence → administrative management → geographic presentation.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section id="testing" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Testing and Validation</h2>
+            <p class="study-text">
+              The application was tested through role-based scenarios, database operations, form validation, and map-related interactions.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+          <div class="col-md-6" data-aos="fade-up">
+            <div class="test-card">
+              <h4>Guest Access</h4>
+              <p>Public users were tested against map viewing, city search, announcements, and restricted-page access.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="test-card">
+              <h4>Registration and Login</h4>
+              <p>Valid, invalid, incomplete, and duplicate account scenarios were used to examine authentication behavior.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="test-card">
+              <h4>Role Authorization</h4>
+              <p>Registered users and administrators were tested against functions outside and inside their assigned access level.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="test-card">
+              <h4>Report Validation</h4>
+              <p>Missing values, malformed inputs, and complete submissions were tested before database persistence.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="test-card">
+              <h4>CRUD Operations</h4>
+              <p>Create, read, update, and delete workflows were tested across the administrative interface.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="test-card">
+              <h4>Map and Search Behavior</h4>
+              <p>Stored coordinates, marker rendering, and city-based search were checked against database records.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="engineering-decisions" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Key Engineering Decisions</h2>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+          <div class="col-md-6" data-aos="fade-up">
+            <div class="decision-card">
+              <h4>Role Separation</h4>
+              <p>Guest, user, and administrator functions were separated to prevent public access from being confused with contribution or management rights.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+            <div class="decision-card">
+              <h4>Database-Driven Map Content</h4>
+              <p>Markers are derived from persistent records rather than being hard-coded into the interface.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="decision-card">
+              <h4>Centralized Administration</h4>
+              <p>Restricted operations are grouped in one dashboard to improve clarity and maintainability.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="decision-card">
+              <h4>Public-First Experience</h4>
+              <p>Users do not need an account merely to access the practical information for which the platform exists.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="outcome" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4">
+
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">Project Outcome</h2>
+
+            <p class="study-text">
+              The result is a functional full-stack prototype that connects geographic data, user accounts, community reports, administrative management, and public information.
+            </p>
+
+            <p class="study-text">
+              The project demonstrates practical integration of frontend presentation, PHP backend logic, MySQL persistence, CRUD operations, user sessions, role-based authorization, and an external mapping service.
+            </p>
+
+            <p class="study-text">
+              QuenchMap is therefore not simply a website containing a map. It is a structured information system in which map content is produced, stored, controlled, and presented through a defined user workflow.
+            </p>
+          </div>
+
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box">
+              <i class="bi bi-stars"></i>
+              <h4>Why This Project Matters</h4>
+              <p>
+                It shows the ability to design and implement a complete user-facing web system with data persistence, access control, geographic visualization, and operational administration.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row gy-4 mt-4">
+          <div class="col-lg-6" data-aos="fade-up">
+            <h3 class="study-subheading">Project Strengths</h3>
+            <ul class="strength-list">
+              <li>Full-stack PHP and MySQL implementation.</li>
+              <li>Interactive geographic visualization.</li>
+              <li>Guest, user, and administrator roles.</li>
+              <li>Structured location-reporting workflow.</li>
+              <li>Centralized CRUD administration.</li>
+              <li>City-based search and public announcements.</li>
+              <li>Responsive Bootstrap interface.</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="study-subheading">Current Limitations</h3>
+            <ul class="limitations-list">
+              <li>The project is a functional academic prototype rather than a production public service.</li>
+              <li>The quality of geographic data depends on user input and administrative maintenance.</li>
+              <li>External map functionality depends on service availability and deployment configuration.</li>
+              <li>The current system does not include automated field verification of reported water sources.</li>
+              <li>Advanced moderation, audit history, and notification systems are outside the current scope.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="future-development" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4">
+
+          <div class="col-lg-5" data-aos="fade-up">
+            <h2 class="study-heading">Future Development</h2>
+            <p class="study-text">The prototype provides a base for a more complete public location-information platform.</p>
+          </div>
+
+          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+            <ul class="future-list">
+              <li>Administrative approval states for submitted reports.</li>
+              <li>User photographs and source-condition updates.</li>
+              <li>Duplicate-location detection.</li>
+              <li>User ratings and confirmation history.</li>
+              <li>Map filters for status, city, and source type.</li>
+              <li>Email or in-application notifications.</li>
+              <li>Audit logs for administrative actions.</li>
+              <li>Improved security controls and production deployment.</li>
+              <li>Mobile-first location submission.</li>
+              <li>Multilingual public interface.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <section id="documentation" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-9">
+            <h2 class="study-heading">Documentation and Project Materials</h2>
+            <p class="study-text">The project can be supported by implementation, database, visual, and user-oriented materials.</p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <div class="resource-card">
+              <i class="bi bi-file-earmark-text"></i>
+              <div>
+                <h4>Project Report</h4>
+                <p>Problem definition, requirements, system design, implementation, testing, and conclusions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+            <div class="resource-card">
+              <i class="bi bi-database"></i>
+              <div>
+                <h4>Database Documentation</h4>
+                <p>Entity structure, relationships, persistent records, and CRUD responsibilities.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="resource-card">
+              <i class="bi bi-file-earmark-code"></i>
+              <div>
+                <h4>Technical Documentation</h4>
+                <p>PHP page logic, sessions, authorization, forms, map integration, and administrative operations.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+            <div class="resource-card">
+              <i class="bi bi-images"></i>
+              <div>
+                <h4>Application Screenshots</h4>
+                <p>Public map, city search, report forms, login screens, announcements, and administrator dashboard.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="resource-card">
+              <i class="bi bi-play-btn"></i>
+              <div>
+                <h4>Video Demonstration</h4>
+                <p>A future walkthrough of public browsing, report submission, and administrative management.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+            <div class="resource-card">
+              <i class="bi bi-github"></i>
+              <div>
+                <h4>GitHub Repository</h4>
+                <p>Repository link can be added after configuration secrets, database setup, screenshots, and README instructions are prepared for public release.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="study-section">
+      <div class="container" data-aos="fade-up">
+        <div class="closing-statement">
+          <i class="bi bi-quote"></i>
+          <p>
+            QuenchMap demonstrates how geographic data, community participation, administrative control, and web technologies can be integrated into one structured platform for improving access to practical public information.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer id="footer" class="footer light-background">
+    <div class="container">
+      <div class="copyright text-center">
+        <p>
+          © <span id="current-year"></span>
+          <strong class="px-1 sitename">Mersie Ademova</strong>
+          <span>All Rights Reserved.</span>
+        </p>
+      </div>
+
+      <div class="social-links d-flex justify-content-center">
+        
+        <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+<a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+<a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+<a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+<a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+        
+      </div>
+
+      <div class="credits text-center">
+        Designed by
+        <a href="https://bootstrapmade.com/" target="_blank" rel="noopener noreferrer">BootstrapMade</a>
+        · Distributed by
+        <a href="https://themewagon.com/" target="_blank" rel="noopener noreferrer">ThemeWagon</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <div id="preloader"></div>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    const yearElement = document.getElementById("current-year");
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+  </script>
+
+</body>
+</html>

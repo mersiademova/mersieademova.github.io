@@ -1,0 +1,2333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    RFID Access Control System — Servo Prototype | Mersie Ademova
+  </title>
+
+  <meta
+    name="description"
+    content="Case study of a team-based RFID access-control prototype using Arduino UNO, an RC522 RFID reader, and a servo motor to validate identification, authorization, actuator control, and system feedback."
+  >
+
+  <meta
+    name="keywords"
+    content="RFID access control, Arduino UNO, RC522, Servo SG90, embedded systems, SPI communication, access control prototype, technical documentation"
+  >
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+
+  <link
+    href="https://fonts.gstatic.com"
+    rel="preconnect"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Vendor CSS Files -->
+  <link
+    href="assets/vendor/bootstrap/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="assets/vendor/aos/aos.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="assets/vendor/swiper/swiper-bundle.min.css"
+    rel="stylesheet"
+  >
+
+  <link
+    href="assets/vendor/glightbox/css/glightbox.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Custom Case Study CSS -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .case-study-block {
+      scroll-margin-top: 120px;
+    }
+
+    .portfolio-info ul li {
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .portfolio-info ul li strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--heading-color);
+    }
+
+    .case-study-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 11px 24px;
+      border: 2px solid var(--accent-color);
+      border-radius: 4px;
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .case-study-btn i {
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .case-study-btn:hover {
+      background-color: transparent;
+      color: var(--accent-color);
+    }
+
+    .case-study-btn:hover i {
+      transform: translateY(3px);
+    }
+
+    .case-study-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto 55px;
+      padding: 18px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 8px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 30px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .case-study-nav a {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 15px;
+      border-radius: 4px;
+      color: var(--default-color);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .case-study-nav a:hover {
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+    }
+
+    .study-section {
+      padding: 70px 0;
+    }
+
+    .study-section:nth-of-type(even) {
+      background-color:
+        color-mix(in srgb, var(--background-color), var(--accent-color) 2%);
+    }
+
+    .study-heading {
+      position: relative;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .study-heading::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 55px;
+      height: 3px;
+      background-color: var(--accent-color);
+      content: "";
+    }
+
+    .study-subheading {
+      margin-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 21px;
+      font-weight: 600;
+    }
+
+    .study-text {
+      color: var(--default-color);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .study-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-box {
+      height: 100%;
+      padding: 30px;
+      border-left: 4px solid var(--accent-color);
+      border-radius: 6px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 30px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .highlight-box i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background-color:
+        color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color);
+      font-size: 22px;
+    }
+
+    .highlight-box h4 {
+      margin-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    .component-card,
+    .feature-card,
+    .architecture-layer,
+    .workflow-step,
+    .test-card,
+    .decision-card,
+    .resource-card {
+      height: 100%;
+      border-radius: 7px;
+      background-color: var(--surface-color);
+    }
+
+    .component-card,
+    .feature-card {
+      padding: 28px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 89%);
+      transition: 0.3s ease;
+    }
+
+    .component-card:hover,
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px
+        color-mix(in srgb, var(--default-color), transparent 91%);
+    }
+
+    .component-card i,
+    .feature-card i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 18px;
+      border-radius: 6px;
+      background-color:
+        color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color);
+      font-size: 24px;
+    }
+
+    .component-card h4,
+    .feature-card h4 {
+      margin-bottom: 12px;
+      color: var(--heading-color);
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    .component-card p,
+    .feature-card p {
+      margin-bottom: 0;
+      line-height: 1.75;
+    }
+
+    .component-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background-color:
+        color-mix(in srgb, var(--accent-color), transparent 90%);
+      color: var(--accent-color);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .connection-table {
+      overflow: hidden;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 8px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 28px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .connection-table table {
+      margin-bottom: 0;
+    }
+
+    .connection-table thead th {
+      padding: 18px;
+      background-color: var(--heading-color);
+      color: var(--contrast-color);
+      font-size: 14px;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+
+    .connection-table tbody td {
+      padding: 17px 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      vertical-align: middle;
+    }
+
+    .connection-table tbody tr:not(:last-child) td {
+      border-bottom: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 90%);
+    }
+
+    .architecture-layers {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      gap: 14px;
+      margin-top: 35px;
+    }
+
+    .architecture-layer {
+      padding: 24px 18px;
+      border-top: 4px solid var(--accent-color);
+      text-align: center;
+      box-shadow: 0 8px 25px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .architecture-layer i {
+      margin-bottom: 13px;
+      color: var(--accent-color);
+      font-size: 28px;
+    }
+
+    .architecture-layer h4 {
+      margin-bottom: 9px;
+      color: var(--heading-color);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .architecture-layer p {
+      margin-bottom: 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .workflow-step {
+      min-height: 195px;
+      padding: 28px 22px 22px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+    }
+
+    .workflow-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 17px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      font-weight: 700;
+    }
+
+    .workflow-step h4 {
+      margin-bottom: 10px;
+      color: var(--heading-color);
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .workflow-step p {
+      margin-bottom: 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .decision-card,
+    .test-card {
+      padding: 26px;
+      border-left: 4px solid var(--accent-color);
+      box-shadow: 0 8px 26px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .decision-card h4,
+    .test-card h4 {
+      margin-bottom: 12px;
+      color: var(--heading-color);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .decision-card p,
+    .test-card p {
+      margin-bottom: 0;
+      line-height: 1.75;
+    }
+
+    .strength-list,
+    .limitations-list,
+    .future-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .strength-list li,
+    .limitations-list li,
+    .future-list li {
+      position: relative;
+      margin-bottom: 13px;
+      padding-left: 28px;
+      line-height: 1.7;
+    }
+
+    .strength-list li::before {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      color: var(--accent-color);
+      font-family: "bootstrap-icons";
+      content: "\F26A";
+    }
+
+    .limitations-list li::before {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      color: var(--accent-color);
+      font-family: "bootstrap-icons";
+      content: "\F33A";
+    }
+
+    .future-list li::before {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      color: var(--accent-color);
+      font-family: "bootstrap-icons";
+      content: "\F138";
+    }
+
+    .resource-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+    }
+
+    .resource-card i {
+      flex-shrink: 0;
+      color: var(--accent-color);
+      font-size: 27px;
+    }
+
+    .resource-card h4 {
+      margin-bottom: 7px;
+      color: var(--heading-color);
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .resource-card p {
+      margin-bottom: 0;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .closing-statement {
+      padding: 42px;
+      border-radius: 8px;
+      background-color: var(--heading-color);
+      color: var(--contrast-color);
+      text-align: center;
+    }
+
+    .closing-statement i {
+      margin-bottom: 18px;
+      color: var(--accent-color);
+      font-size: 36px;
+    }
+
+    .closing-statement p {
+      max-width: 930px;
+      margin: 0 auto;
+      color: var(--contrast-color);
+      font-family: var(--heading-font);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 1199px) {
+      .architecture-layers {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .workflow-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .study-section {
+        padding: 50px 0;
+      }
+
+      .study-heading {
+        font-size: 25px;
+      }
+
+      .case-study-nav {
+        justify-content: flex-start;
+      }
+
+      .case-study-nav a {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+
+      .architecture-layers,
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .connection-table {
+        overflow-x: auto;
+      }
+
+      .closing-statement {
+        padding: 30px 22px;
+      }
+
+      .closing-statement p {
+        font-size: 18px;
+      }
+    }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: Kelly
+  * Template URL:
+    https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="portfolio-details-page">
+
+  <!-- Header -->
+  <header
+    id="header"
+    class="header d-flex align-items-center light-background sticky-top"
+  >
+    <div
+      class="container-fluid position-relative d-flex align-items-center justify-content-between"
+    >
+
+      <a
+        href="index.html"
+        class="logo d-flex align-items-center me-auto me-xl-0"
+      >
+        <!-- Optional logo -->
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html">What I Do</a></li>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+
+          <li class="dropdown">
+            <a href="#">
+              <span>Writings</span>
+              <i class="bi bi-chevron-down toggle-dropdown"></i>
+            </a>
+
+            <ul>
+              <li><a href="writings/mm.pdf">Academic Papers</a></li>
+            </ul>
+          </li>
+
+          <li><a href="contact.html">Contact</a></li>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </ul>
+
+        
+      </nav>
+
+      <div class="header-social-links">
+
+         <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+         <a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+         <a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+         <a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+         <a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+
+      </div>
+
+    </div>
+  </header>
+  <!-- /Header -->
+
+
+  <main class="main">
+
+    <!-- Portfolio Overview -->
+    <section
+      id="portfolio-details"
+      class="portfolio-details section"
+    >
+
+      <div
+        class="container section-title"
+        data-aos="fade-up"
+      >
+        <h2>RFID Access Control System — Servo Prototype</h2>
+
+        <p>
+          Arduino UNO · RC522 RFID · Servo SG90 ·
+          SPI Communication · Embedded Control · Serial Monitoring
+        </p>
+      </div>
+
+    <!-- Case Study Navigation -->
+    <section
+      id="case-study"
+      class="section case-study-block"
+    >
+
+      <div
+        class="container section-title"
+        data-aos="fade-up"
+      >
+        <h2>Case Study</h2>
+
+        <p>
+          A first-stage embedded prototype validating RFID identification,
+          authorization logic, actuator control, and automatic system reset.
+        </p>
+      </div>
+
+      <div
+        class="container"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+
+        <nav
+          class="case-study-nav"
+          aria-label="Case study navigation"
+        >
+          <a href="#problem">Problem</a>
+          <a href="#objective">Objective</a>
+          <a href="#scope">Scope</a>
+          <a href="#components">Components</a>
+          <a href="#connections">Connections</a>
+          <a href="#communication">RFID Communication</a>
+          <a href="#authorization">Authorization</a>
+          <a href="#servo">Servo Control</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#testing">Testing</a>
+          <a href="#outcome">Outcome</a>
+          <a href="#documentation">Documentation</a>
+        </nav>
+
+      </div>
+    </section>
+    <!-- /Case Study Navigation -->
+
+
+    <!-- Problem -->
+    <section
+      id="problem"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">The Access-Control Problem</h2>
+
+            <p class="study-text">
+              Electronic access-control systems must identify a presented
+              credential, determine whether it is authorized, activate or
+              preserve the locking mechanism, provide clear feedback, and
+              return to a secure waiting state.
+            </p>
+
+            <p class="study-text">
+              Even a simplified prototype requires reliable coordination
+              between a contactless identification device, decision logic,
+              an actuator, and the user-feedback channel. A failure in any
+              stage can produce an incorrect access decision or an undefined
+              mechanism state.
+            </p>
+
+            <p class="study-text">
+              The project addresses this problem through a compact RFID
+              prototype in which identification is performed by the RC522
+              reader and physical lock behavior is represented by a servo
+              motor.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-lightbulb"></i>
+
+              <h4>Project Motivation</h4>
+
+              <p>
+                The servo-based implementation provides a visible and
+                controllable way to validate the complete access cycle before
+                considering more complex locking hardware.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Problem -->
+
+
+    <!-- Objective -->
+    <section
+      id="objective"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Project Objective</h2>
+
+            <p class="study-text">
+              The objective was to implement a functional RFID access-control
+              prototype that recognizes predefined cards and translates the
+              authorization result into a visible mechanical response.
+            </p>
+
+            <p class="study-text">
+              The system was designed to read an RFID UID, compare it with
+              two authorized UID values, open the servo mechanism when access
+              is approved, preserve the closed position when access is denied,
+              display the result through the Serial Monitor, and reset the
+              reader for the next card.
+            </p>
+
+            <p class="study-text">
+              The prototype combines embedded control, SPI communication,
+              RFID identification, actuator control, timing logic, and
+              scenario-based testing.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-bullseye"></i>
+
+              <h4>Core Design Principle</h4>
+
+              <p>
+                Every scan must produce one unambiguous result: authorized
+                access with controlled opening, or denied access with the
+                mechanism remaining locked.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Objective -->
+
+
+    <!-- Prototype Scope -->
+    <section
+      id="scope"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Prototype Scope</h2>
+
+            <p class="study-text">
+              The project represents the first functional version of the
+              access-control system. Its scope is deliberately limited to
+              the core identification and actuation cycle.
+            </p>
+
+            <p class="study-text">
+              The authorization list is defined directly in the program,
+              the actuator is a servo motor, and the Serial Monitor is used
+              as the status interface. The prototype does not include remote
+              administration, database storage, user enrollment, access
+              history, or network communication.
+            </p>
+
+            <p class="study-text">
+              This controlled scope makes it possible to isolate and verify
+              the fundamental behavior of the system without introducing
+              unrelated infrastructure.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-box"></i>
+
+              <h4>Validated Core Cycle</h4>
+
+              <p>
+                Card detection → UID reading → authorization comparison →
+                servo response → status message → automatic reset.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Prototype Scope -->
+
+
+    <!-- Hardware Components -->
+    <section
+      id="components"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Hardware Components</h2>
+
+            <p class="study-text">
+              The prototype uses a minimal hardware configuration in which
+              each component has one clearly defined responsibility.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6 col-lg-3"
+            data-aos="fade-up"
+          >
+            <div class="component-card">
+              <span class="component-label">Controller</span>
+
+              <i class="bi bi-cpu"></i>
+
+              <h4>Arduino UNO</h4>
+
+              <p>
+                Executes the program logic, manages SPI communication,
+                compares UID values, controls the servo, and sends status
+                messages to the Serial Monitor.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="component-card">
+              <span class="component-label">Identification</span>
+
+              <i class="bi bi-credit-card-2-front"></i>
+
+              <h4>RC522 RFID Reader</h4>
+
+              <p>
+                Detects RFID cards and tags operating at 13.56 MHz and
+                provides the unique card identifier used by the authorization
+                logic.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="component-card">
+              <span class="component-label">Actuator</span>
+
+              <i class="bi bi-gear"></i>
+
+              <h4>Servo SG90</h4>
+
+              <p>
+                Represents the physical locking mechanism through controlled
+                closed and open positions.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="component-card">
+              <span class="component-label">Credential</span>
+
+              <i class="bi bi-tags"></i>
+
+              <h4>RFID Cards and Tags</h4>
+
+              <p>
+                Provide unique UID values. Two predefined identifiers are
+                treated as authorized credentials in the prototype.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Hardware Components -->
+
+
+    <!-- Electrical Connections -->
+    <section
+      id="connections"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Electrical Connections</h2>
+
+            <p class="study-text">
+              The RC522 communicates through the Arduino UNO hardware SPI
+              pins, while the servo receives its control signal from a
+              dedicated digital pin.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <div class="connection-table">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>RC522 Pin</th>
+                    <th>Arduino UNO Connection</th>
+                    <th>Function</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td><strong>SDA / SS</strong></td>
+                    <td>D10</td>
+                    <td>SPI slave selection</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>SCK</strong></td>
+                    <td>D13</td>
+                    <td>SPI clock</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>MOSI</strong></td>
+                    <td>D11</td>
+                    <td>Controller-to-reader data</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>MISO</strong></td>
+                    <td>D12</td>
+                    <td>Reader-to-controller data</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>RST</strong></td>
+                    <td>D9</td>
+                    <td>Reader reset</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>3.3V</strong></td>
+                    <td>3.3V</td>
+                    <td>Module power supply</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>GND</strong></td>
+                    <td>GND</td>
+                    <td>Common ground</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="connection-table">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Servo Wire</th>
+                    <th>Arduino UNO Connection</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td><strong>Signal</strong></td>
+                    <td>D6</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>VCC</strong></td>
+                    <td>5V</td>
+                  </tr>
+
+                  <tr>
+                    <td><strong>GND</strong></td>
+                    <td>GND</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="highlight-box mt-4">
+              <i class="bi bi-exclamation-triangle"></i>
+
+              <h4>Voltage Requirement</h4>
+
+              <p>
+                The RC522 module is powered from 3.3 V. Connecting the reader
+                to 5 V can damage the module or produce unreliable behavior.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Electrical Connections -->
+
+
+    <!-- RFID Communication -->
+    <section
+      id="communication"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">RFID Communication</h2>
+
+            <p class="study-text">
+              Communication between the Arduino UNO and the RC522 reader is
+              implemented through the SPI protocol. The controller provides
+              the clock and selects the reader, while data is exchanged over
+              separate input and output lines.
+            </p>
+
+            <p class="study-text">
+              The program continuously checks whether a new card is present.
+              When a card is detected, the RC522 reads its UID bytes and
+              transfers them to the controller for formatting and comparison.
+            </p>
+
+            <p class="study-text">
+              After the card is processed, communication with the current
+              card is completed and the reader returns to the waiting state.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-broadcast-pin"></i>
+
+              <h4>Used Libraries</h4>
+
+              <p>
+                <strong>SPI</strong> manages the communication bus.<br>
+                <strong>MFRC522</strong> provides reader initialization,
+                card detection, and UID access.<br>
+                <strong>Servo</strong> generates the actuator control signal.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /RFID Communication -->
+
+
+    <!-- Authorization Logic -->
+    <section
+      id="authorization"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Authorization Logic</h2>
+
+            <p class="study-text">
+              The UID of every scanned card is compared with two predefined
+              authorized identifiers stored in the program.
+            </p>
+
+            <p class="study-text">
+              When the scanned UID matches either authorized value, the
+              system classifies the credential as valid. Any UID outside the
+              predefined list is treated as unauthorized.
+            </p>
+
+            <p class="study-text">
+              This approach is suitable for a controlled prototype because
+              it isolates the decision logic and makes every test result easy
+              to reproduce. It is not intended as a scalable credential-
+              management mechanism.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-shield-check"></i>
+
+              <h4>Decision Rule</h4>
+
+              <p>
+                UID matches authorized list → access granted.<br>
+                UID does not match authorized list → access denied.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Authorization Logic -->
+
+
+    <!-- Servo Control -->
+    <section
+      id="servo"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Servo Lock Mechanism</h2>
+
+            <p class="study-text">
+              The servo motor represents the physical locking mechanism. A
+              closed position corresponds to denied or inactive access, while
+              the open position represents temporary authorization.
+            </p>
+
+            <p class="study-text">
+              When a valid card is detected, the controller moves the servo
+              to the open position, preserves that state for a defined time
+              interval, and then returns it to the closed position.
+            </p>
+
+            <p class="study-text">
+              An invalid or unknown card does not trigger the opening cycle.
+              The mechanism remains in the secure position while the denial
+              message is displayed.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-lock"></i>
+
+              <h4>Automatic Relocking</h4>
+
+              <p>
+                The servo does not remain open after an approved scan. The
+                timed return to the closed position completes the access
+                cycle and restores the initial system state.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Servo Control -->
+
+
+    <!-- Core Functionalities -->
+    <section
+      id="features"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Core Functionalities</h2>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+          >
+            <div class="feature-card">
+              <i class="bi bi-credit-card"></i>
+
+              <h4>RFID Identification</h4>
+
+              <p>
+                Detects a presented credential and reads its unique UID.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="feature-card">
+              <i class="bi bi-person-check"></i>
+
+              <h4>Authorization Check</h4>
+
+              <p>
+                Compares the scanned UID with the predefined valid-card list.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="feature-card">
+              <i class="bi bi-gear"></i>
+
+              <h4>Actuator Control</h4>
+
+              <p>
+                Converts the authorization result into a visible servo
+                movement.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="feature-card">
+              <i class="bi bi-lock-fill"></i>
+
+              <h4>Automatic Relocking</h4>
+
+              <p>
+                Returns the mechanism to the closed position after the
+                approved access interval.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="feature-card">
+              <i class="bi bi-terminal"></i>
+
+              <h4>Serial Feedback</h4>
+
+              <p>
+                Displays scanned identifiers and access-granted or
+                access-denied messages.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <div class="feature-card">
+              <i class="bi bi-arrow-clockwise"></i>
+
+              <h4>System Reset</h4>
+
+              <p>
+                Completes communication with the processed card and prepares
+                the reader for the next scan.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Core Functionalities -->
+
+
+    <!-- Architecture -->
+    <section
+      id="architecture"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">System Architecture</h2>
+
+            <p class="study-text">
+              The prototype can be described through five logical layers
+              connecting physical input, decision processing, mechanical
+              response, and feedback.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="architecture-layers"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+
+          <div class="architecture-layer">
+            <i class="bi bi-tags"></i>
+
+            <h4>Credential Layer</h4>
+
+            <p>
+              RFID cards and tags provide unique identification values.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-broadcast"></i>
+
+            <h4>Reader Layer</h4>
+
+            <p>
+              RC522 detects the card and transfers its UID through SPI.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-cpu"></i>
+
+            <h4>Control Layer</h4>
+
+            <p>
+              Arduino executes UID comparison, timing, and state logic.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-gear"></i>
+
+            <h4>Actuator Layer</h4>
+
+            <p>
+              Servo represents opening, holding, and closing behavior.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-terminal"></i>
+
+            <h4>Feedback Layer</h4>
+
+            <p>
+              Serial Monitor presents UID and access-status messages.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Architecture -->
+
+
+    <!-- Workflow -->
+    <section
+      id="workflow"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">System Workflow</h2>
+
+            <p class="study-text">
+              Every scan passes through the same deterministic sequence.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="workflow-grid"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+
+          <div class="workflow-step">
+            <span class="workflow-number">1</span>
+
+            <h4>Initialize Hardware</h4>
+
+            <p>
+              Serial communication, SPI, RC522, and servo control are
+              initialized.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">2</span>
+
+            <h4>Wait for Card</h4>
+
+            <p>
+              The reader continuously checks for a newly presented RFID
+              credential.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">3</span>
+
+            <h4>Read UID</h4>
+
+            <p>
+              The identifier bytes are retrieved and prepared for
+              comparison.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">4</span>
+
+            <h4>Compare Identifier</h4>
+
+            <p>
+              The UID is checked against the two authorized values.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">5</span>
+
+            <h4>Grant or Deny Access</h4>
+
+            <p>
+              The system selects the valid-card or invalid-card branch.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">6</span>
+
+            <h4>Control Servo</h4>
+
+            <p>
+              A valid card opens the mechanism; an invalid card leaves it
+              closed.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">7</span>
+
+            <h4>Display Status</h4>
+
+            <p>
+              The UID and access result are shown through the Serial Monitor.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">8</span>
+
+            <h4>Reset for Next Scan</h4>
+
+            <p>
+              The card session is completed and the system returns to the
+              waiting state.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Workflow -->
+
+
+    <!-- Testing -->
+    <section
+      id="testing"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Testing Scenarios</h2>
+
+            <p class="study-text">
+              The prototype was evaluated through access scenarios that test
+              identification, decision logic, timing behavior, actuator
+              response, and system recovery.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+          >
+            <div class="test-card">
+              <h4>Valid Card</h4>
+
+              <p>
+                The UID is recognized, access is granted, the servo moves to
+                the open position, a positive status message is displayed,
+                and the mechanism closes automatically.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="test-card">
+              <h4>Invalid Card</h4>
+
+              <p>
+                The UID is read but does not match the authorized list. The
+                servo remains closed and an access-denied message is shown.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="test-card">
+              <h4>Unknown Card</h4>
+
+              <p>
+                A card that has never been registered in the program is
+                processed as an unauthorized credential without changing the
+                secure mechanism state.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="test-card">
+              <h4>Repeated Scanning</h4>
+
+              <p>
+                Consecutive scans verify that the previous card session is
+                completed and that the reader correctly returns to the
+                waiting state.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="test-card">
+              <h4>Delay and Relocking Behavior</h4>
+
+              <p>
+                The opening interval is checked to confirm that the mechanism
+                remains open only for the intended duration before returning
+                to the closed position.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <div class="test-card">
+              <h4>Response and Feedback</h4>
+
+              <p>
+                The test verifies that card detection, message display, and
+                actuator response occur in the correct sequence without an
+                ambiguous intermediate state.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Testing -->
+
+
+    <!-- Engineering Decisions -->
+    <section
+      id="engineering-decisions"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Key Engineering Decisions</h2>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+          >
+            <div class="decision-card">
+              <h4>Servo as a Visible Lock Model</h4>
+
+              <p>
+                A servo motor makes opening and closing behavior directly
+                observable, which simplifies prototype validation.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="decision-card">
+              <h4>Hard-Coded Authorized UIDs</h4>
+
+              <p>
+                A fixed authorization list reduces complexity and supports
+                reproducible tests of the decision logic.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="decision-card">
+              <h4>Serial Monitor as Feedback Interface</h4>
+
+              <p>
+                The Serial Monitor exposes scanned identifiers and decision
+                results without requiring additional display hardware.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="decision-card">
+              <h4>Automatic Return to Secure State</h4>
+
+              <p>
+                The mechanism returns to the closed position after every
+                approved cycle instead of depending on an additional user
+                action.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Engineering Decisions -->
+
+
+    <!-- Outcome -->
+    <section
+      id="outcome"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Project Outcome</h2>
+
+            <p class="study-text">
+              The result is a functional first-stage RFID access-control
+              prototype that completes the full identification,
+              authorization, actuator-response, feedback, and reset cycle.
+            </p>
+
+            <p class="study-text">
+              The system distinguishes authorized and unauthorized cards,
+              controls a visible locking model, communicates status through
+              the Serial Monitor, and restores the locked state after an
+              approved scan.
+            </p>
+
+            <p class="study-text">
+              The project demonstrates the practical coordination of an RFID
+              reader, SPI communication, embedded decision logic, timing, and
+              servo control within one compact system.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-stars"></i>
+
+              <h4>Why This Project Matters</h4>
+
+              <p>
+                The prototype turns an abstract access-control sequence into
+                a complete, observable embedded workflow that can be tested
+                at every stage.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row gy-4 mt-4">
+
+          <div
+            class="col-lg-6"
+            data-aos="fade-up"
+          >
+            <h3 class="study-subheading">Project Strengths</h3>
+
+            <ul class="strength-list">
+              <li>
+                Clear separation of identification, authorization, and
+                actuator response.
+              </li>
+
+              <li>
+                Contactless RFID credential reading.
+              </li>
+
+              <li>
+                Support for two authorized UID values.
+              </li>
+
+              <li>
+                Visible servo-based lock simulation.
+              </li>
+
+              <li>
+                Automatic return to the locked state.
+              </li>
+
+              <li>
+                Real-time UID and status feedback.
+              </li>
+
+              <li>
+                Compact hardware configuration and reproducible tests.
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="col-lg-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <h3 class="study-subheading">Prototype Limitations</h3>
+
+            <ul class="limitations-list">
+              <li>
+                Authorized UIDs are stored directly in the program.
+              </li>
+
+              <li>
+                The servo simulates a lock but is not a production locking
+                mechanism.
+              </li>
+
+              <li>
+                Access events are not stored in a database or persistent log.
+              </li>
+
+              <li>
+                The prototype has no local card-enrollment interface.
+              </li>
+
+              <li>
+                Serial Monitor feedback requires a connected development
+                environment.
+              </li>
+
+              <li>
+                Network communication and remote administration are outside
+                the project scope.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Outcome -->
+
+
+    <!-- Future Development -->
+    <section
+      id="future-development"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Possible Future Development</h2>
+
+            <p class="study-text">
+              The first version provides a stable base for expanding the
+              prototype while preserving the validated access-control logic.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <ul class="future-list">
+              <li>
+                Persistent card storage through EEPROM or an external
+                database.
+              </li>
+
+              <li>
+                Administrative card enrollment and removal.
+              </li>
+
+              <li>
+                Buzzer and LED feedback for access decisions.
+              </li>
+
+              <li>
+                LCD status display.
+              </li>
+
+              <li>
+                Timestamped access-event logging.
+              </li>
+
+              <li>
+                Combined RFID and PIN authentication.
+              </li>
+
+              <li>
+                Door-state or tamper sensors.
+              </li>
+
+              <li>
+                Network communication and remote monitoring.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Future Development -->
+
+
+    <!-- Documentation -->
+    <section
+      id="documentation"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">
+              Documentation and Project Materials
+            </h2>
+
+            <p class="study-text">
+              The project is supported by analytical and technical materials
+              describing the system structure, components, communication,
+              operating sequence, and validation scenarios.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+          >
+            <div class="resource-card">
+              <i class="bi bi-file-earmark-text"></i>
+
+              <div>
+                <h4>Seminar Paper</h4>
+
+                <p>
+                  Technical description of the access-control problem,
+                  hardware, software logic, testing, and results.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="resource-card">
+              <i class="bi bi-diagram-3"></i>
+
+              <div>
+                <h4>System Analysis</h4>
+
+                <p>
+                  Functional decomposition, communication flow, access logic,
+                  actuator behavior, and scenario analysis.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="resource-card">
+              <i class="bi bi-plug"></i>
+
+              <div>
+                <h4>Connection Documentation</h4>
+
+                <p>
+                  RC522 and servo wiring, SPI pin mapping, voltage notes, and
+                  component responsibilities.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="resource-card">
+              <i class="bi bi-clipboard-check"></i>
+
+              <div>
+                <h4>Test Scenarios</h4>
+
+                <p>
+                  Valid, invalid, unknown, repeated-scan, delay, and response
+                  scenarios with expected behavior.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="resource-card">
+              <i class="bi bi-images"></i>
+
+              <div>
+                <h4>Prototype Screenshots</h4>
+
+                <p>
+                  Hardware assembly, wiring, card scans, Serial Monitor
+                  messages, and servo states.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <div class="resource-card">
+              <i class="bi bi-file-earmark-code"></i>
+
+              <div>
+                <h4>Program Listing</h4>
+
+                <p>
+                  Arduino code used for reader initialization, UID handling,
+                  authorization comparison, servo control, and status output.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Documentation -->
+
+
+    <!-- Closing Statement -->
+    <section class="study-section">
+      <div
+        class="container"
+        data-aos="fade-up"
+      >
+        <div class="closing-statement">
+          <i class="bi bi-quote"></i>
+
+          <p>
+            This prototype validates the essential access-control cycle:
+            identification, authorization, actuator response, user feedback,
+            automatic relocking, and readiness for the next credential.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- /Closing Statement -->
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer
+    id="footer"
+    class="footer light-background"
+  >
+    <div class="container">
+
+      <div class="copyright text-center">
+        <p>
+          © <span id="current-year"></span>
+
+          <strong class="px-1 sitename">
+            Mersie Ademova
+          </strong>
+
+          <span>All Rights Reserved.</span>
+        </p>
+      </div>
+
+      <div class="social-links d-flex justify-content-center">
+
+      <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+<a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+<a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+<a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+<a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+
+      </div>
+
+      <div class="credits text-center">
+        Designed by
+
+        <a
+          href="https://bootstrapmade.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          BootstrapMade
+        </a>
+
+        · Distributed by
+
+        <a
+          href="https://themewagon.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ThemeWagon
+        </a>
+      </div>
+
+    </div>
+  </footer>
+  <!-- /Footer -->
+
+
+  <!-- Scroll Top -->
+  <a
+    href="#"
+    id="scroll-top"
+    class="scroll-top d-flex align-items-center justify-content-center"
+    aria-label="Scroll to top"
+  >
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Current Year -->
+  <script>
+    const yearElement = document.getElementById("current-year");
+
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <metaname="viewport"content="width=device-width, initial-scale="1.0">
+
+  <title>Decision Support System | Mersie Ademova</title>
+
+  <meta name="description"content="Case study of a desktop decision-support system for meal-demand prediction, planning, statistical analysis, accuracy evaluation, and reporting.">
+
+  <meta name="keywords"content="Python, statistical modeling, demand prediction, database design, desktop application, data analysis, portfolio">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+
+  <link href="https://fonts.gstatic.com"rel="preconnect"crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap"rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css"rel="stylesheet">
+
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css"rel="stylesheet">
+
+  <link href="assets/vendor/aos/aos.css"rel="stylesheet">
+
+  <linkhref="assets/vendor/swiper/swiper-bundle.min.css"rel="stylesheet">
+
+  <link href="assets/vendor/glightbox/css/glightbox.min.css"rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css"rel="stylesheet">
+
+  <!-- Custom CSS for this case study -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .case-study-block {
+      scroll-margin-top: 120px;
+    }
+
+    .portfolio-info ul li {
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .portfolio-info ul li strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--heading-color);
+    }
+
+    .case-study-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 11px 24px;
+      border: 2px solid var(--accent-color);
+      border-radius: 4px;
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .case-study-btn i {
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .case-study-btn:hover {
+      background-color: transparent;
+      color: var(--accent-color);
+    }
+
+    .case-study-btn:hover i {
+      transform: translateY(3px);
+    }
+
+    .case-study-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto 55px;
+      padding: 18px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 8px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 30px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .case-study-nav a {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 15px;
+      border-radius: 4px;
+      color: var(--default-color);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .case-study-nav a:hover {
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+    }
+
+    .study-section {
+      padding: 70px 0;
+    }
+
+    .study-section:nth-of-type(even) {
+      background-color:
+        color-mix(in srgb, var(--background-color), var(--accent-color) 2%);
+    }
+
+    .study-heading {
+      position: relative;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .study-heading::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 55px;
+      height: 3px;
+      background-color: var(--accent-color);
+      content: "";
+    }
+
+    .study-subheading {
+      margin-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 21px;
+      font-weight: 600;
+    }
+
+    .study-text {
+      color: var(--default-color);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .study-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .highlight-box {
+      height: 100%;
+      padding: 30px;
+      border-left: 4px solid var(--accent-color);
+      border-radius: 6px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 30px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .highlight-box i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background-color:
+        color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color);
+      font-size: 22px;
+    }
+
+    .highlight-box h4 {
+      margin-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    .objective-cycle {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 35px;
+    }
+
+    .cycle-step {
+      display: flex;
+      flex: 1 1 170px;
+      align-items: center;
+      justify-content: center;
+      min-height: 105px;
+      padding: 20px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 6px;
+      background-color: var(--surface-color);
+      color: var(--heading-color);
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: 0 8px 24px
+        color-mix(in srgb, var(--default-color), transparent 95%);
+    }
+
+    .cycle-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-color);
+      font-size: 25px;
+    }
+
+    .feature-card {
+      height: 100%;
+      padding: 28px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 89%);
+      border-radius: 7px;
+      background-color: var(--surface-color);
+      transition: 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px
+        color-mix(in srgb, var(--default-color), transparent 91%);
+    }
+
+    .feature-card i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 18px;
+      border-radius: 6px;
+      background-color:
+        color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color);
+      font-size: 23px;
+    }
+
+    .feature-card h4 {
+      margin-bottom: 12px;
+      color: var(--heading-color);
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      margin-bottom: 0;
+      line-height: 1.75;
+    }
+
+    .method-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 25px 0;
+    }
+
+    .method-tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid
+        color-mix(in srgb, var(--accent-color), transparent 55%);
+      border-radius: 50px;
+      background-color:
+        color-mix(in srgb, var(--accent-color), transparent 92%);
+      color: var(--heading-color);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .architecture-layers {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      gap: 14px;
+      margin-top: 35px;
+    }
+
+    .architecture-layer {
+      padding: 24px 18px;
+      border-top: 4px solid var(--accent-color);
+      border-radius: 6px;
+      background-color: var(--surface-color);
+      text-align: center;
+      box-shadow: 0 8px 25px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .architecture-layer i {
+      margin-bottom: 13px;
+      color: var(--accent-color);
+      font-size: 28px;
+    }
+
+    .architecture-layer h4 {
+      margin-bottom: 9px;
+      color: var(--heading-color);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .architecture-layer p {
+      margin-bottom: 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .data-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 760px;
+      margin: 45px auto 0;
+    }
+
+    .data-flow-step {
+      position: relative;
+      padding: 17px 20px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 5px;
+      background-color: var(--surface-color);
+      color: var(--heading-color);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .data-flow-step:not(:last-child)::after {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      z-index: 2;
+      color: var(--accent-color);
+      font-family: "bootstrap-icons";
+      font-size: 18px;
+      content: "\F128";
+      transform: translateX(-50%);
+    }
+
+    .data-flow-step:not(:last-child) {
+      margin-bottom: 15px;
+    }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .workflow-step {
+      position: relative;
+      min-height: 195px;
+      padding: 28px 22px 22px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 7px;
+      background-color: var(--surface-color);
+    }
+
+    .workflow-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 17px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      font-weight: 700;
+    }
+
+    .workflow-step h4 {
+      margin-bottom: 10px;
+      color: var(--heading-color);
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .workflow-step p {
+      margin-bottom: 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .decision-card {
+      height: 100%;
+      padding: 28px;
+      border-bottom: 4px solid var(--accent-color);
+      border-radius: 7px;
+      background-color: var(--surface-color);
+      box-shadow: 0 8px 26px
+        color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+
+    .decision-card h4 {
+      margin-bottom: 14px;
+      color: var(--heading-color);
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .decision-card p {
+      margin-bottom: 0;
+      line-height: 1.75;
+    }
+
+    .strength-list,
+    .limitations-list,
+    .future-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .strength-list li,
+    .limitations-list li,
+    .future-list li {
+      position: relative;
+      margin-bottom: 13px;
+      padding-left: 28px;
+      line-height: 1.7;
+    }
+
+    .strength-list li::before {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      color: var(--accent-color);
+      font-family: "bootstrap-icons";
+      content: "\F26A";
+    }
+
+    .limitations-list li::before {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      color: var(--accent-color);
+      font-family: "bootstrap-icons";
+      content: "\F33A";
+    }
+
+    .future-list li::before {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      color: var(--accent-color);
+      font-family: "bootstrap-icons";
+      content: "\F138";
+    }
+
+    .resource-card {
+      display: flex;
+      height: 100%;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px;
+      border: 1px solid
+        color-mix(in srgb, var(--default-color), transparent 88%);
+      border-radius: 7px;
+      background-color: var(--surface-color);
+    }
+
+    .resource-card i {
+      flex-shrink: 0;
+      color: var(--accent-color);
+      font-size: 27px;
+    }
+
+    .resource-card h4 {
+      margin-bottom: 7px;
+      color: var(--heading-color);
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .resource-card p {
+      margin-bottom: 0;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .closing-statement {
+      padding: 42px;
+      border-radius: 8px;
+      background-color: var(--heading-color);
+      color: var(--contrast-color);
+      text-align: center;
+    }
+
+    .closing-statement i {
+      margin-bottom: 18px;
+      color: var(--accent-color);
+      font-size: 36px;
+    }
+
+    .closing-statement p {
+      max-width: 930px;
+      margin: 0 auto;
+      color: var(--contrast-color);
+      font-family: var(--heading-font);
+      font-size: 21px;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 1199px) {
+      .architecture-layers {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .workflow-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .study-section {
+        padding: 50px 0;
+      }
+
+      .study-heading {
+        font-size: 25px;
+      }
+
+      .case-study-nav {
+        justify-content: flex-start;
+      }
+
+      .case-study-nav a {
+        flex: 1 1 auto;
+        justify-content: center;
+      }
+
+      .objective-cycle {
+        flex-direction: column;
+      }
+
+      .cycle-arrow {
+        transform: rotate(90deg);
+      }
+
+      .architecture-layers {
+        grid-template-columns: 1fr;
+      }
+
+      .workflow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .closing-statement {
+        padding: 30px 22px;
+      }
+
+      .closing-statement p {
+        font-size: 18px;
+      }
+    }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: Kelly
+  * Template URL:
+    https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="portfolio-details-page">
+
+  <!-- Header -->
+  <header id="header"class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0" >
+        <!-- Optional logo -->
+        <!-- <img src="assets/img/logo.png" alt="Mersie Ademova"> -->
+      </a><nav id="navmenu" class="navmenu">
+        <ul><li><a href="index.html">Home</a><li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html">What I Do</a></li>
+          <li><a href="portfolio.html" class="active">Portfolio</a></li>
+          <li class="dropdown"><a href="#"><span>Writings</span><i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul><li><a href="writings/dss.pdf">Academic Papers</a></li>
+              <li><a href="writings/IKT.pdf">ICT Project Management Plan</a> </li></ul></li>
+          <li><a href="contact.html">Contact</a></li>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </ul>
+      </nav>
+      <div class="header-social-links">
+        <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+    </div>
+  </header>
+  <!-- /Header -->
+   <main class="main">
+
+
+    <section id="portfolio-details" class="portfolio-details section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Decision Support System</h2>
+        <p>Python · Statistical Modeling · Database Design · Desktop GUI · Data Visualization</p>
+      </div>
+    <section id="case-study" class="section case-study-block">
+      <div class="container section-title" data-aos="fade-up">
+ 
+ 
+
+ 
+        <h2>Case Study</h2>
+        <p>From a real operational problem to a structured predictive decision-support system.</p>
+      </div>
+
+      <div
+        class="container"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+
+        <nav
+          class="case-study-nav"
+          aria-label="Case study navigation"
+        >
+          <a href="#problem">Problem</a>
+          <a href="#objective">Objective</a>
+          <a href="#functionalities">System</a>
+          <a href="#statistics">Methods</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#evaluation">Evaluation</a>
+          <a href="#outcome">Outcome</a>
+          <a href="#documentation">Documentation</a>
+        </nav>
+
+      </div>
+    </section>
+    <!-- /Case Study Introduction -->
+
+
+    <!-- Problem and Motivation -->
+    <section
+      id="problem"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">The Problem</h2>
+
+            <p class="study-text">
+              Meal planning in large organizational catering environments
+              often depends on manually collected attendance information,
+              previous experience, and short-term estimates.
+            </p>
+
+            <p class="study-text">
+              These methods may not sufficiently account for historical
+              demand patterns, menu structure, category preferences,
+              working-day conditions, changes in actual attendance, and
+              unexpected operational circumstances.
+            </p>
+
+            <p class="study-text">
+              Inaccurate estimates can result in food waste, shortages,
+              unnecessary operational costs, and unreliable planning.
+              The challenge is therefore not limited to calculating a
+              number. It requires the complete planning context to be
+              collected, structured, preserved, and evaluated.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-lightbulb"></i>
+
+              <h4>Project Motivation</h4>
+
+              <p>
+                The project originated from observing a real operational
+                planning problem: the number of meals that must be prepared
+                changes according to attendance, menu composition, meal
+                category, working-day type, and previous demand patterns.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div
+          class="row mt-4"
+          data-aos="fade-up"
+          data-aos-delay="150"
+        >
+          <div class="col-12">
+            <div class="highlight-box">
+              <i class="bi bi-diagram-3"></i>
+
+              <h4>From Isolated Calculation to Complete System</h4>
+
+              <p>
+                Instead of treating prediction as an isolated statistical
+                calculation, I designed a complete application that connects
+                menu planning, historical records, prediction, realized
+                demand, accuracy analysis, and reporting within one
+                structured workflow.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- /Problem and Motivation -->
+
+
+    <!-- Objective -->
+    <section
+      id="objective"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row justify-content-center"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-10 text-center">
+
+            <h2 class="study-heading d-inline-block">
+              Project Objective
+            </h2>
+
+            <p class="study-text">
+              The objective was to develop a structured decision-support
+              system capable of transforming historical operational data
+              into measurable and reviewable demand forecasts.
+            </p>
+
+            <p class="study-text">
+              The system was designed not only to generate predictions, but
+              also to preserve the complete planning context, compare
+              predictions with realized demand, evaluate prediction
+              accuracy, and support future model improvement.
+            </p>
+
+          </div>
+        </div>
+
+        <div
+          class="objective-cycle"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+
+          <div class="cycle-step">
+            Historical Data
+          </div>
+
+          <div class="cycle-arrow">
+            <i class="bi bi-arrow-right"></i>
+          </div>
+
+          <div class="cycle-step">
+            Statistical Prediction
+          </div>
+
+          <div class="cycle-arrow">
+            <i class="bi bi-arrow-right"></i>
+          </div>
+
+          <div class="cycle-step">
+            Realized Demand
+          </div>
+
+          <div class="cycle-arrow">
+            <i class="bi bi-arrow-right"></i>
+          </div>
+
+          <div class="cycle-step">
+            Accuracy Evaluation
+          </div>
+
+          <div class="cycle-arrow">
+            <i class="bi bi-arrow-right"></i>
+          </div>
+
+          <div class="cycle-step">
+            Improved Future Prediction
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Objective -->
+
+
+    <!-- Core Functionalities -->
+    <section
+      id="functionalities"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Core Functionalities</h2>
+
+            <p class="study-text">
+              The application integrates the complete operational and
+              analytical cycle instead of treating each activity as an
+              unrelated process.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+          >
+            <div class="feature-card">
+              <i class="bi bi-calendar-week"></i>
+
+              <h4>Weekly Menu Management</h4>
+
+              <p>
+                Creates and manages one menu for each calendar week.
+                Working days, weekends, holidays, and non-working days can
+                be defined, while meals are organized by standard
+                categories.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="feature-card">
+              <i class="bi bi-clock-history"></i>
+
+              <h4>Historical Data Management</h4>
+
+              <p>
+                Preserves previous demand records for comparing similar
+                periods, recognizing recurring patterns, and preparing
+                structured input data for prediction models.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="feature-card">
+              <i class="bi bi-graph-up-arrow"></i>
+
+              <h4>Prediction Module</h4>
+
+              <p>
+                Evaluates historical demand in relation to menu categories,
+                previous observations, and operational context to generate
+                an estimated demand for the selected planning period.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="feature-card">
+              <i class="bi bi-pencil-square"></i>
+
+              <h4>Realized Demand Entry</h4>
+
+              <p>
+                Allows the user to record the demand that actually occurred,
+                creating a measurable connection between forecast values
+                and real operational results.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="feature-card">
+              <i class="bi bi-bullseye"></i>
+
+              <h4>Accuracy Evaluation</h4>
+
+              <p>
+                Compares predicted and realized demand, calculates
+                deviations, and tracks model accuracy so that every forecast
+                can be reviewed instead of accepted without verification.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <div class="feature-card">
+              <i class="bi bi-bar-chart-line"></i>
+
+              <h4>Reports and Visual Analysis</h4>
+
+              <p>
+                Generates statistical summaries, prediction-versus-reality
+                comparisons, historical analyses, graphical reports, and
+                visual accuracy indicators.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div
+          class="row mt-4"
+          data-aos="fade-up"
+        >
+          <div class="col-12">
+            <div class="highlight-box">
+              <i class="bi bi-database"></i>
+
+              <h4>Database Persistence</h4>
+
+              <p>
+                Menus, categories, calendar periods, historical demand,
+                generated predictions, realized quantities, and analytical
+                results are stored in a structured database rather than
+                being kept only temporarily during application execution.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- /Core Functionalities -->
+
+
+    <!-- Statistical Approach -->
+    <section
+      id="statistics"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-center">
+
+          <div
+            class="col-lg-7"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Statistical Approach</h2>
+
+            <p class="study-text">
+              The statistical component explores multiple approaches to
+              parameter estimation and demand prediction, including
+              conditional probability, Bayesian reasoning, the method of
+              moments, and maximum likelihood estimation.
+            </p>
+
+            <p class="study-text">
+              The objective was not to present one prediction value as
+              unquestionably correct. The application is designed to compare
+              model behavior, preserve the assumptions behind each estimate,
+              and evaluate predictions against realized demand.
+            </p>
+
+            <div class="method-tags">
+              <span class="method-tag">
+                Conditional Probability
+              </span>
+
+              <span class="method-tag">
+                Bayesian Reasoning
+              </span>
+
+              <span class="method-tag">
+                Method of Moments
+              </span>
+
+              <span class="method-tag">
+                Maximum Likelihood Estimation
+              </span>
+
+              <span class="method-tag">
+                Descriptive Statistics
+              </span>
+
+              <span class="method-tag">
+                Accuracy Monitoring
+              </span>
+            </div>
+          </div>
+
+          <div
+            class="col-lg-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-clipboard-data"></i>
+
+              <h4>Measurable Prediction</h4>
+
+              <p>
+                A useful prediction must be testable. By entering realized
+                demand and comparing it with the forecast, the application
+                transforms prediction from an unsupported assumption into a
+                measurable experiment.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Statistical Approach -->
+
+
+    <!-- Architecture -->
+    <section
+      id="architecture"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">System Architecture</h2>
+
+            <p class="study-text">
+              The system is divided into five logical layers that separate
+              the graphical interface, operational logic, prediction
+              methods, persistent data, and analytical presentation.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="architecture-layers"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+
+          <div class="architecture-layer">
+            <i class="bi bi-window"></i>
+
+            <h4>Presentation Layer</h4>
+
+            <p>
+              Desktop graphical interface and user interaction.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-diagram-2"></i>
+
+            <h4>Application Logic</h4>
+
+            <p>
+              Menu, demand, calendar, and workflow management.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-calculator"></i>
+
+            <h4>Statistical Layer</h4>
+
+            <p>
+              Prediction, parameter estimation, and evaluation methods.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-database"></i>
+
+            <h4>Data Layer</h4>
+
+            <p>
+              Relational database and structured historical records.
+            </p>
+          </div>
+
+          <div class="architecture-layer">
+            <i class="bi bi-pie-chart"></i>
+
+            <h4>Reporting Layer</h4>
+
+            <p>
+              Tables, statistical summaries, and visual reports.
+            </p>
+          </div>
+
+        </div>
+
+        <div
+          class="data-flow"
+          data-aos="fade-up"
+          data-aos-delay="150"
+        >
+
+          <div class="data-flow-step">
+            Weekly Menu Data + Historical Demand + Operational Context
+          </div>
+
+          <div class="data-flow-step">
+            Data Processing and Preparation
+          </div>
+
+          <div class="data-flow-step">
+            Statistical Prediction Models
+          </div>
+
+          <div class="data-flow-step">
+            Generated Demand Forecast
+          </div>
+
+          <div class="data-flow-step">
+            Realized Demand Entry
+          </div>
+
+          <div class="data-flow-step">
+            Accuracy Analysis and Reporting
+          </div>
+
+          <div class="data-flow-step">
+            Results Returned to the Historical Dataset
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Architecture -->
+
+
+    <!-- Workflow -->
+    <section
+      id="workflow"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Application Workflow</h2>
+
+            <p class="study-text">
+              The user follows a structured process from menu creation to
+              final evaluation. Each completed cycle produces new historical
+              information for future predictions.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="workflow-grid"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+
+          <div class="workflow-step">
+            <span class="workflow-number">1</span>
+
+            <h4>Select the Planning Week</h4>
+
+            <p>
+              The user selects an existing week or creates a new calendar
+              period.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">2</span>
+
+            <h4>Define Day Types</h4>
+
+            <p>
+              Working days, weekends, holidays, and non-working days are
+              identified.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">3</span>
+
+            <h4>Create the Weekly Menu</h4>
+
+            <p>
+              Meal packages and standard categories are assigned to each
+              relevant day.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">4</span>
+
+            <h4>Connect Historical Data</h4>
+
+            <p>
+              The system relates the new planning context to previous
+              operational records.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">5</span>
+
+            <h4>Generate Prediction</h4>
+
+            <p>
+              The selected statistical model produces an estimated demand.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">6</span>
+
+            <h4>Enter Realized Demand</h4>
+
+            <p>
+              Actual quantities are recorded after the operational period.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">7</span>
+
+            <h4>Evaluate Accuracy</h4>
+
+            <p>
+              Deviations and prediction accuracy are calculated and
+              displayed.
+            </p>
+          </div>
+
+          <div class="workflow-step">
+            <span class="workflow-number">8</span>
+
+            <h4>Preserve the Results</h4>
+
+            <p>
+              Final results become part of the historical database for
+              future analysis.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Workflow -->
+
+
+    <!-- Engineering Decisions -->
+    <section
+      id="engineering-decisions"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">Key Engineering Decisions</h2>
+
+            <p class="study-text">
+              The architecture and implementation choices were based on the
+              intended operational environment, the need for traceable data,
+              and the requirement that every forecast remain reviewable.
+            </p>
+          </div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+          >
+            <div class="decision-card">
+              <h4>Why a Desktop Application?</h4>
+
+              <p>
+                A desktop system supports operation in a controlled local
+                environment, enables rapid prototype testing, avoids
+                unnecessary web infrastructure, and is suitable for an
+                administrative user working directly with local records.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="decision-card">
+              <h4>Why a Structured Database?</h4>
+
+              <p>
+                A predictive system has limited value without a consistent
+                historical record. The database preserves the relationship
+                between menus, demand, forecasts, realized values, and
+                evaluation results.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="decision-card">
+              <h4>Why Connect Prediction to Menus?</h4>
+
+              <p>
+                Demand does not depend only on total attendance. It can also
+                be influenced by the composition, category, and perceived
+                attractiveness of the available meal options.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="decision-card">
+              <h4>Why Include Accuracy Analysis?</h4>
+
+              <p>
+                A prediction should not only be generated. It must be
+                compared with reality so that the model can be understood,
+                evaluated, and improved over time.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Engineering Decisions -->
+
+
+    <!-- Evaluation -->
+    <section
+      id="evaluation"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div class="row gy-4 align-items-stretch">
+
+          <div
+            class="col-lg-6"
+            data-aos="fade-up"
+          >
+            <h2 class="study-heading">Testing and Evaluation</h2>
+
+            <p class="study-text">
+              The application was tested as a connected workflow rather than
+              as a collection of isolated screens. The testing process
+              included data entry, menu creation, prediction generation,
+              realized-demand recording, accuracy calculation, database
+              persistence, and visual reporting.
+            </p>
+
+            <p class="study-text">
+              Particular attention was given to the consistency of stored
+              information, the prevention of duplicate weekly menus, the
+              relationship between predicted and realized values, and the
+              ability to reuse completed records in future analyses.
+            </p>
+          </div>
+
+          <div
+            class="col-lg-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="highlight-box">
+              <i class="bi bi-check2-circle"></i>
+
+              <h4>Evaluation Principle</h4>
+
+              <p>
+                Prediction quality must be assessed through repeated
+                comparison with real outcomes. The system therefore
+                preserves both the forecast and the realized demand instead
+                of replacing one value with the other.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Evaluation -->
+
+
+    <!-- Outcome -->
+    <section
+      id="outcome"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row gy-4"
+          data-aos="fade-up"
+        >
+
+          <div class="col-lg-7">
+            <h2 class="study-heading">Project Outcome</h2>
+
+            <p class="study-text">
+              The result is a functional desktop prototype that integrates
+              menu planning, historical demand management, statistical
+              prediction, realized-demand recording, accuracy evaluation,
+              database storage, and graphical reporting.
+            </p>
+
+            <p class="study-text">
+              The project demonstrates how an operational problem can be
+              transformed into a structured data and software system while
+              preserving a clear connection between practical use,
+              statistical methodology, and measurable results.
+            </p>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="highlight-box">
+              <i class="bi bi-stars"></i>
+
+              <h4>Why This Project Matters</h4>
+
+              <p>
+                The project is not based on a tutorial, an isolated
+                algorithm, or an artificial exercise. It begins with a real
+                process and develops the complete system required to analyze,
+                support, test, and improve that process.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row gy-4 mt-4">
+
+          <div
+            class="col-lg-6"
+            data-aos="fade-up"
+          >
+            <h3 class="study-subheading">Project Strengths</h3>
+
+            <ul class="strength-list">
+              <li>
+                Originates from an observed real-world operational problem.
+              </li>
+
+              <li>
+                Models the complete process before and after prediction.
+              </li>
+
+              <li>
+                Combines software development, databases, statistics,
+                interface design, operational analysis, and documentation.
+              </li>
+
+              <li>
+                Includes a measurable mechanism for evaluating predictions.
+              </li>
+
+              <li>
+                Supports iterative development and future enterprise
+                integration.
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="col-lg-6"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <h3 class="study-subheading">Current Limitations</h3>
+
+            <ul class="limitations-list">
+              <li>
+                The system has not yet been integrated with a live
+                enterprise data source.
+              </li>
+
+              <li>
+                Some operational information currently requires manual
+                entry.
+              </li>
+
+              <li>
+                Prediction quality depends on the volume and consistency of
+                historical data.
+              </li>
+
+              <li>
+                Unexpected attendance changes, menu substitutions, and
+                organizational events may influence results.
+              </li>
+
+              <li>
+                Wider production testing is required for long-term model
+                evaluation.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Outcome -->
+
+
+    <!-- Future Development -->
+    <section
+      id="future-development"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row gy-4"
+          data-aos="fade-up"
+        >
+
+          <div class="col-lg-5">
+            <h2 class="study-heading">Future Development</h2>
+
+            <p class="study-text">
+              The current prototype establishes the system architecture and
+              analytical workflow. Future development can focus on
+              automation, integration, broader deployment, and continuous
+              model improvement.
+            </p>
+          </div>
+
+          <div class="col-lg-7">
+            <ul class="future-list">
+              <li>
+                Automated import and export of operational data.
+              </li>
+
+              <li>
+                API integration with an organizational information system.
+              </li>
+
+              <li>
+                Automated attendance-data retrieval.
+              </li>
+
+              <li>
+                Additional predictive models and model comparison.
+              </li>
+
+              <li>
+                Automatic selection of the most suitable prediction method.
+              </li>
+
+              <li>
+                Web or cloud-based version.
+              </li>
+
+              <li>
+                Role-based user access and multiple organizational sites.
+              </li>
+
+              <li>
+                Interactive dashboards and deviation alerts.
+              </li>
+
+              <li>
+                Cost, waste, and shortage analysis.
+              </li>
+
+              <li>
+                Integration with a hardware-based operational tracking
+                system.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Future Development -->
+
+
+    <!-- Documentation -->
+    <section
+      id="documentation"
+      class="study-section case-study-block"
+    >
+      <div class="container">
+
+        <div
+          class="row"
+          data-aos="fade-up"
+        >
+          <div class="col-lg-9">
+            <h2 class="study-heading">
+              Documentation and Project Materials
+            </h2>
+
+            <p class="study-text">
+              The system is supported by extensive written and visual
+              materials that document its functionality, statistical
+              background, technical structure, project planning, and use.
+            </p>
+          </div>
+          <div class="resource-card">
+  <i class="bi bi-kanban"></i>
+
+  <div>
+    <h4>ICT Project Management Plan</h4>
+
+    <p>
+      Project planning document covering stakeholders, work breakdown
+      structure, task dependencies, scheduling in Microsoft Project,
+      risk management, and expected deliverables.
+    </p>
+
+    <a
+      href="writings/IKT.pdf"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View Document
+    </a>
+  </div>
+</div>
+        </div>
+
+        <div class="row gy-4 mt-2">
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+          >
+            <div class="resource-card">
+              <i class="bi bi-file-earmark-text"></i>
+
+              <div>
+                <h4>Seminar Paper</h4>
+
+                <p>
+                  Complete academic presentation of the problem,
+                  methodology, application, and results.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="50"
+          >
+            <div class="resource-card">
+              <i class="bi bi-file-earmark-code"></i>
+
+              <div>
+                <h4>Technical Documentation</h4>
+
+                <p>
+                  System structure, modules, database organization,
+                  implementation details, and architecture.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="resource-card">
+              <i class="bi bi-book"></i>
+
+              <div>
+                <h4>User Manual</h4>
+
+                <p>
+                  Step-by-step guidance for weekly planning, data entry,
+                  prediction, evaluation, and reporting.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            <div class="resource-card">
+              <i class="bi bi-graph-up"></i>
+
+              <div>
+                <h4>Statistical Methodology</h4>
+
+                <p>
+                  Explanation of prediction methods, assumptions, parameter
+                  estimation, and accuracy measurement.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="resource-card">
+              <i class="bi bi-kanban"></i>
+
+              <div>
+                <h4>Project Management Report</h4>
+
+                <p>
+                  Project scope, lifecycle, resources, activities,
+                  dependencies, scheduling, and expected results.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6 col-lg-4"
+            data-aos="fade-up"
+            data-aos-delay="250"
+          >
+            <div class="resource-card">
+              <i class="bi bi-play-btn"></i>
+
+              <div>
+                <h4>Visual Demonstration</h4>
+
+                <p>
+                  Application screenshots and a future video walkthrough of
+                  the complete user workflow.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div
+          class="row mt-5"
+          data-aos="fade-up"
+        >
+          <div class="col-12">
+            <div class="highlight-box">
+              <i class="bi bi-shield-lock"></i>
+
+              <h4>Source Code Availability</h4>
+
+              <p>
+                The complete source code is not publicly available.
+                Selected implementation details, architecture materials,
+                representative code components, and technical documentation
+                may be provided for portfolio and evaluation purposes.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- /Documentation -->
+
+
+    <!-- Closing Statement -->
+    <section class="study-section">
+      <div
+        class="container"
+        data-aos="fade-up"
+      >
+        <div class="closing-statement">
+          <i class="bi bi-quote"></i>
+
+          <p>
+            This project is not only an implementation of statistical
+            prediction methods. It is an end-to-end exploration of how a
+            real operational problem can be observed, structured, modeled,
+            implemented, tested, documented, and prepared for future
+            integration.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- /Closing Statement -->
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer
+    id="footer"
+    class="footer light-background"
+  >
+    <div class="container">
+
+      <div class="copyright text-center">
+        <p>
+          © <span id="current-year"></span>
+
+          <strong class="px-1 sitename">
+            Mersie Ademova
+          </strong>
+
+          <span>All Rights Reserved.</span>
+        </p>
+      </div>
+
+      <div class="social-links d-flex justify-content-center">
+<a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+<a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+<a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+<a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+<a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+      </div>
+
+      <div class="credits text-center">
+        Designed by
+
+        <a
+          href="https://bootstrapmade.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          BootstrapMade
+        </a>
+
+        · Distributed by
+
+        <a
+          href="https://themewagon.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ThemeWagon
+        </a>
+      </div>
+
+    </div>
+  </footer>
+  <!-- /Footer -->
+
+
+  <!-- Scroll Top -->
+  <a
+    href="#"
+    id="scroll-top"
+    class="scroll-top d-flex align-items-center justify-content-center"
+    aria-label="Scroll to top"
+  >
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+
+  <!-- Automatically displays the current year -->
+  <script>
+    const yearElement = document.getElementById("current-year");
+
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+  </script>
+
+</body>
+
+</html>
