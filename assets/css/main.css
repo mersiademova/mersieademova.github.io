@@ -1415,29 +1415,63 @@ section,
   background: color-mix(in srgb, var(--accent-color), transparent 25%);
 }
 
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
-}
-.navbar-logo {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Small logo fixed at the beginning of the navigation bar */
+.header {
+  position: relative;
+  padding-left: 52px !important;
 }
 
-.navbar-logo img {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-  display: block;
+/* Hide the old template logo to avoid duplication */
+.header .logo {
+  display: none !important;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-image: url("../img/logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  z-index: 1001;
+  pointer-events: none;
 }
 
 @media (max-width: 1199px) {
-  .navbar-logo img {
-    width: 36px;
-    height: 36px;
+  .header {
+    padding-left: 46px !important;
+  }
+
+  .header::before {
+    left: 14px;
+    width: 22px;
+    height: 22px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
