@@ -26,13 +26,26 @@
    * Mobile nav toggle
    */
   const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+const navList = document.querySelector('#navmenu > ul');
 
-  function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavToggleBtn.classList.toggle('bi-list');
-    mobileNavToggleBtn.classList.toggle('bi-x');
-  }
+/* Move the mobile button outside the hidden navigation list */
+if (
+  mobileNavToggleBtn &&
+  navList &&
+  mobileNavToggleBtn.parentElement === navList
+) {
+  navList.insertAdjacentElement('afterend', mobileNavToggleBtn);
+}
+
+function mobileNavToogle() {
+  document.body.classList.toggle('mobile-nav-active');
+  mobileNavToggleBtn.classList.toggle('bi-list');
+  mobileNavToggleBtn.classList.toggle('bi-x');
+}
+
+if (mobileNavToggleBtn) {
   mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+}
 
   /**
    * Hide mobile nav on same-page/hash links
