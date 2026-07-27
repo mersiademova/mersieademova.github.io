@@ -1416,46 +1416,43 @@ section,
 }
 
 /* Small logo fixed at the beginning of the navigation bar */
-/* Portfolio logo at the far-left side of the navigation bar */
+.header {
+  position: relative;
+  padding-left: 52px !important;
+}
+
+/* Hide the old template logo to avoid duplication */
+.header .logo {
+  display: none !important;
+}
+
 .header::before {
   content: "";
   position: absolute;
-  left: 20px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  width: 22px;
-  height: 22px;
-
-  background-color: transparent;
-  background-image: url("../img/logo.png?v=3");
+  width: 24px;
+  height: 24px;
+  background-image: url("../img/logo.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-
-  display: block;
-  z-index: 9999;
+  z-index: 1001;
   pointer-events: none;
 }
 
 @media (max-width: 1199px) {
+  .header {
+    padding-left: 46px !important;
+  }
+
   .header::before {
-    left: 15px;
-    width: 20px;
-    height: 20px;
+    left: 14px;
+    width: 22px;
+    height: 22px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
