@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mersiademova.github.io/sitemap.xml
+Sitemap: https://mersiademova.github.io/mersieademova.github.io/sitemap.xml
