@@ -1421,3 +1421,23 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+.navbar-logo {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-logo img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 1199px) {
+  .navbar-logo img {
+    width: 36px;
+    height: 36px;
+  }
+}
