@@ -1415,9 +1415,31 @@ section,
   background: color-mix(in srgb, var(--accent-color), transparent 25%);
 }
 
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
+/* Logo only — navigation stays unchanged */
+.header {
+  position: relative;
 }
+
+.header::before {
+  content: "";
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 36px;
+  height: 36px;
+
+  background-image: url("../img/logo.png?v=5");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+
+  z-index: 1000;
+  pointer-events: none;
+}
+
+
+
+
