@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>QuenchMap | Mersie Ademova</title>
-
-  <meta name="description" content="Case study of QuenchMap, a PHP and MySQL web application for locating, reporting, and administratively managing public drinking-water sources through an interactive map.">
-  <meta name="keywords" content="QuenchMap, PHP, MySQL, Bootstrap, Google Maps, web application, geolocation, role-based access, CRUD, public water sources">
+  <title>Serial vs Parallel Sorting Benchmark | Mersie Ademova</title>
+  <meta name="description" content="Case study of a Python benchmarking application with desktop and Streamlit interfaces, comparing serial, multithreaded, and multiprocessing sorting algorithms.">
+  <meta name="keywords" content="Python, Streamlit, parallel computing, multiprocessing, threading, sorting algorithms, benchmarking, speedup, efficiency">
 
   <link href="assets/img/favicon.png?v=2" rel="icon" type="image/png" sizes="32x32">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-
   <link href="assets/css/main.css" rel="stylesheet">
 
   <style>
@@ -32,285 +28,194 @@
     .portfolio-info ul li strong { display: block; margin-bottom: 2px; color: var(--heading-color); }
 
     .case-study-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 18px;
-      padding: 11px 24px;
-      border: 2px solid var(--accent-color);
-      border-radius: 4px;
-      background-color: var(--accent-color);
-      color: var(--contrast-color);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.4px;
-      text-decoration: none;
-      transition: 0.3s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 18px; padding: 11px 24px; border: 2px solid var(--accent-color);
+      border-radius: 4px; background: var(--accent-color); color: var(--contrast-color);
+      font-size: 14px; font-weight: 600; text-decoration: none; transition: .3s ease;
     }
-
-    .case-study-btn i { font-size: 16px; transition: transform 0.3s ease; }
-    .case-study-btn:hover { background-color: transparent; color: var(--accent-color); }
+    .case-study-btn:hover { background: transparent; color: var(--accent-color); }
+    .case-study-btn i { transition: transform .3s ease; }
     .case-study-btn:hover i { transform: translateY(3px); }
 
+    .case-study-actions {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+      margin: 28px 0 34px;
+    }
+    .project-action {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px 20px; border: 2px solid var(--accent-color); border-radius: 5px;
+      font-size: 14px; font-weight: 600; text-decoration: none; transition: .3s ease;
+    }
+    .project-action.primary-action {
+      background: var(--accent-color); color: var(--contrast-color);
+    }
+    .project-action.primary-action:hover {
+      background: transparent; color: var(--accent-color);
+    }
+    .project-action.secondary-action {
+      background: transparent; color: var(--accent-color);
+    }
+    .project-action.secondary-action:hover {
+      background: var(--accent-color); color: var(--contrast-color);
+    }
+    .project-action i { font-size: 16px; }
+
+
     .case-study-nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin: 0 auto 55px;
-      padding: 18px;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+      margin: 0 auto 55px; padding: 18px; border-radius: 8px;
       border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
-      border-radius: 8px;
-      background-color: var(--surface-color);
+      background: var(--surface-color);
       box-shadow: 0 8px 30px color-mix(in srgb, var(--default-color), transparent 94%);
     }
-
     .case-study-nav a {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 15px;
-      border-radius: 4px;
-      color: var(--default-color);
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: 0.3s ease;
+      padding: 8px 15px; border-radius: 4px; color: var(--default-color);
+      font-size: 14px; font-weight: 500; text-decoration: none; transition: .3s ease;
     }
+    .case-study-nav a:hover { background: var(--accent-color); color: var(--contrast-color); }
 
-    .case-study-nav a:hover { background-color: var(--accent-color); color: var(--contrast-color); }
     .study-section { padding: 70px 0; }
-    .study-section:nth-of-type(even) { background-color: color-mix(in srgb, var(--background-color), var(--accent-color) 2%); }
-
+    .study-section:nth-of-type(even) {
+      background: color-mix(in srgb, var(--background-color), var(--accent-color) 2%);
+    }
     .study-heading {
-      position: relative;
-      margin-bottom: 24px;
-      padding-bottom: 14px;
-      color: var(--heading-color);
-      font-size: 30px;
-      font-weight: 700;
+      position: relative; margin-bottom: 24px; padding-bottom: 14px;
+      color: var(--heading-color); font-size: 30px; font-weight: 700;
     }
-
     .study-heading::after {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 55px;
-      height: 3px;
-      background-color: var(--accent-color);
-      content: "";
+      position: absolute; left: 0; bottom: 0; width: 55px; height: 3px;
+      background: var(--accent-color); content: "";
     }
-
     .study-subheading { margin-bottom: 14px; color: var(--heading-color); font-size: 21px; font-weight: 600; }
     .study-text { color: var(--default-color); font-size: 16px; line-height: 1.85; }
-    .study-text:last-child { margin-bottom: 0; }
 
-    .highlight-box {
-      height: 100%;
-      padding: 30px;
-      border-left: 4px solid var(--accent-color);
-      border-radius: 6px;
-      background-color: var(--surface-color);
-      box-shadow: 0 8px 30px color-mix(in srgb, var(--default-color), transparent 94%);
+    .highlight-box, .card-box, .test-card, .decision-card, .resource-card {
+      height: 100%; border-radius: 7px; background: var(--surface-color);
+      box-shadow: 0 8px 28px color-mix(in srgb, var(--default-color), transparent 94%);
     }
-
-    .highlight-box i {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 46px;
-      height: 46px;
-      margin-bottom: 18px;
-      border-radius: 50%;
-      background-color: color-mix(in srgb, var(--accent-color), transparent 88%);
-      color: var(--accent-color);
-      font-size: 22px;
+    .highlight-box { padding: 30px; border-left: 4px solid var(--accent-color); }
+    .highlight-box i, .card-box i {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; margin-bottom: 18px; border-radius: 6px;
+      background: color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color); font-size: 23px;
     }
-
-    .highlight-box h4 { margin-bottom: 14px; color: var(--heading-color); font-size: 20px; font-weight: 600; }
-    .highlight-box p { margin: 0; line-height: 1.75; }
-
-    .feature-card,
-    .role-card,
-    .architecture-layer,
-    .workflow-step,
-    .test-card,
-    .decision-card,
-    .resource-card {
-      height: 100%;
-      border-radius: 7px;
-      background-color: var(--surface-color);
+    .highlight-box h4, .card-box h4, .test-card h4, .decision-card h4, .resource-card h4 {
+      margin-bottom: 12px; color: var(--heading-color); font-size: 19px; font-weight: 600;
     }
+    .highlight-box p, .card-box p, .test-card p, .decision-card p, .resource-card p { margin-bottom: 0; line-height: 1.75; }
 
-    .feature-card,
-    .role-card {
-      padding: 28px;
-      border: 1px solid color-mix(in srgb, var(--default-color), transparent 89%);
-      transition: 0.3s ease;
+    .card-box {
+      padding: 28px; border: 1px solid color-mix(in srgb, var(--default-color), transparent 89%);
+      transition: .3s ease;
     }
-
-    .feature-card:hover,
-    .role-card:hover {
+    .card-box:hover {
       transform: translateY(-5px);
       box-shadow: 0 12px 32px color-mix(in srgb, var(--default-color), transparent 91%);
     }
-
-    .feature-card i,
-    .role-card i {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 50px;
-      height: 50px;
-      margin-bottom: 18px;
-      border-radius: 6px;
-      background-color: color-mix(in srgb, var(--accent-color), transparent 88%);
-      color: var(--accent-color);
-      font-size: 24px;
+    .tag {
+      display: inline-block; margin-bottom: 14px; padding: 5px 10px; border-radius: 20px;
+      background: color-mix(in srgb, var(--accent-color), transparent 90%);
+      color: var(--accent-color); font-size: 12px; font-weight: 600;
+    }
+    .formula {
+      margin: 14px 0; color: var(--accent-color); font-family: "Times New Roman", serif;
+      font-size: 24px; font-weight: 600; text-align: center;
     }
 
-    .feature-card h4,
-    .role-card h4 { margin-bottom: 12px; color: var(--heading-color); font-size: 19px; font-weight: 600; }
-
-    .feature-card p,
-    .role-card p { margin-bottom: 0; line-height: 1.75; }
-
-    .role-label {
-      display: inline-block;
-      margin-bottom: 14px;
-      padding: 5px 10px;
-      border-radius: 20px;
-      background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
-      color: var(--accent-color);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
+    .architecture-grid {
+      display: grid; grid-template-columns: repeat(5, minmax(150px, 1fr)); gap: 14px; margin-top: 35px;
     }
-
-    .architecture-layers {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(150px, 1fr));
-      gap: 14px;
-      margin-top: 35px;
-    }
-
-    .architecture-layer {
-      padding: 24px 18px;
-      border-top: 4px solid var(--accent-color);
-      text-align: center;
+    .architecture-item {
+      padding: 24px 18px; border-top: 4px solid var(--accent-color); border-radius: 6px;
+      background: var(--surface-color); text-align: center;
       box-shadow: 0 8px 25px color-mix(in srgb, var(--default-color), transparent 94%);
     }
+    .architecture-item i { margin-bottom: 13px; color: var(--accent-color); font-size: 28px; }
+    .architecture-item h4 { margin-bottom: 9px; color: var(--heading-color); font-size: 16px; font-weight: 600; }
+    .architecture-item p { margin: 0; font-size: 13px; line-height: 1.6; }
 
-    .architecture-layer i { margin-bottom: 13px; color: var(--accent-color); font-size: 28px; }
-    .architecture-layer h4 { margin-bottom: 9px; color: var(--heading-color); font-size: 16px; font-weight: 600; }
-    .architecture-layer p { margin-bottom: 0; font-size: 13px; line-height: 1.6; }
-
-    .workflow-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-top: 35px;
-    }
-
+    .workflow-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 35px; }
     .workflow-step {
-      min-height: 195px;
-      padding: 28px 22px 22px;
+      min-height: 195px; padding: 28px 22px 22px; border-radius: 7px;
       border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+      background: var(--surface-color);
     }
-
     .workflow-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      margin-bottom: 17px;
-      border-radius: 50%;
-      background-color: var(--accent-color);
-      color: var(--contrast-color);
-      font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; margin-bottom: 17px; border-radius: 50%;
+      background: var(--accent-color); color: var(--contrast-color); font-weight: 700;
     }
-
     .workflow-step h4 { margin-bottom: 10px; color: var(--heading-color); font-size: 17px; font-weight: 600; }
-    .workflow-step p { margin-bottom: 0; font-size: 14px; line-height: 1.7; }
+    .workflow-step p { margin: 0; font-size: 14px; line-height: 1.7; }
 
-    .data-table {
-      overflow: hidden;
+    .comparison-table {
+      overflow: hidden; border-radius: 8px; background: var(--surface-color);
       border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
-      border-radius: 8px;
-      background-color: var(--surface-color);
       box-shadow: 0 8px 28px color-mix(in srgb, var(--default-color), transparent 94%);
     }
-
-    .data-table table { margin-bottom: 0; }
-    .data-table thead th { padding: 18px; background-color: var(--heading-color); color: var(--contrast-color); font-size: 14px; font-weight: 600; vertical-align: middle; }
-    .data-table tbody td { padding: 18px; font-size: 14px; line-height: 1.6; vertical-align: top; }
-    .data-table tbody tr:not(:last-child) td { border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 90%); }
-
-    .decision-card,
-    .test-card {
-      padding: 26px;
-      border-left: 4px solid var(--accent-color);
-      box-shadow: 0 8px 26px color-mix(in srgb, var(--default-color), transparent 94%);
+    .comparison-table table { margin-bottom: 0; }
+    .comparison-table thead th {
+      padding: 18px; background: var(--heading-color); color: var(--contrast-color);
+      font-size: 14px; font-weight: 600; vertical-align: middle;
     }
+    .comparison-table tbody td { padding: 18px; font-size: 14px; line-height: 1.6; vertical-align: top; }
 
-    .decision-card h4,
-    .test-card h4 { margin-bottom: 12px; color: var(--heading-color); font-size: 18px; font-weight: 600; }
-
-    .decision-card p,
-    .test-card p { margin-bottom: 0; line-height: 1.75; }
-
-    .strength-list,
-    .limitations-list,
-    .future-list { margin: 0; padding: 0; list-style: none; }
-
-    .strength-list li,
-    .limitations-list li,
-    .future-list li { position: relative; margin-bottom: 13px; padding-left: 28px; line-height: 1.7; }
-
-    .strength-list li::before { position: absolute; top: 2px; left: 0; color: var(--accent-color); font-family: "bootstrap-icons"; content: "\F26A"; }
-    .limitations-list li::before { position: absolute; top: 2px; left: 0; color: var(--accent-color); font-family: "bootstrap-icons"; content: "\F33A"; }
-    .future-list li::before { position: absolute; top: 2px; left: 0; color: var(--accent-color); font-family: "bootstrap-icons"; content: "\F138"; }
-
-    .resource-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 24px;
-      border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
-    }
-
+    .test-card, .decision-card { padding: 26px; border-left: 4px solid var(--accent-color); }
+    .resource-card { display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%); }
     .resource-card i { flex-shrink: 0; color: var(--accent-color); font-size: 27px; }
-    .resource-card h4 { margin-bottom: 7px; color: var(--heading-color); font-size: 17px; font-weight: 600; }
-    .resource-card p { margin-bottom: 0; font-size: 14px; line-height: 1.65; }
+    .resource-card p { font-size: 14px; line-height: 1.65; }
+
+    .resource-card-link {
+      color: inherit; text-decoration: none; transition: .3s ease;
+    }
+    .resource-card-link:hover {
+      color: inherit; transform: translateY(-5px);
+      box-shadow: 0 12px 32px color-mix(in srgb, var(--default-color), transparent 91%);
+    }
+    .resource-link {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
+      color: var(--accent-color); font-size: 14px; font-weight: 600;
+    }
+    .resource-link i { font-size: 14px; transition: transform .3s ease; }
+    .resource-card-link:hover .resource-link i { transform: translateX(4px); }
+
+    .strength-list, .limitations-list, .future-list { margin: 0; padding: 0; list-style: none; }
+    .strength-list li, .limitations-list li, .future-list li {
+      position: relative; margin-bottom: 13px; padding-left: 28px; line-height: 1.7;
+    }
+    .strength-list li::before, .limitations-list li::before, .future-list li::before {
+      position: absolute; top: 2px; left: 0; color: var(--accent-color); font-family: "bootstrap-icons";
+    }
+    .strength-list li::before { content: "\F26A"; }
+    .limitations-list li::before { content: "\F33A"; }
+    .future-list li::before { content: "\F138"; }
 
     .closing-statement {
-      padding: 42px;
-      border-radius: 8px;
-      background-color: var(--heading-color);
-      color: var(--contrast-color);
-      text-align: center;
+      padding: 42px; border-radius: 8px; background: var(--heading-color);
+      color: var(--contrast-color); text-align: center;
     }
-
     .closing-statement i { margin-bottom: 18px; color: var(--accent-color); font-size: 36px; }
-    .closing-statement p { max-width: 930px; margin: 0 auto; color: var(--contrast-color); font-family: var(--heading-font); font-size: 21px; font-weight: 500; line-height: 1.65; }
+    .closing-statement p {
+      max-width: 930px; margin: 0 auto; color: var(--contrast-color);
+      font-family: var(--heading-font); font-size: 21px; font-weight: 500; line-height: 1.65;
+    }
 
     @media (max-width: 1199px) {
-      .architecture-layers { grid-template-columns: repeat(3, 1fr); }
+      .architecture-grid { grid-template-columns: repeat(3, 1fr); }
       .workflow-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
     @media (max-width: 767px) {
       .study-section { padding: 50px 0; }
       .study-heading { font-size: 25px; }
       .case-study-nav { justify-content: flex-start; }
-      .case-study-nav a { flex: 1 1 auto; justify-content: center; }
-      .architecture-layers,
-      .workflow-grid { grid-template-columns: 1fr; }
-      .data-table { overflow-x: auto; }
+      .case-study-nav a { flex: 1 1 auto; text-align: center; }
+      .architecture-grid, .workflow-grid { grid-template-columns: 1fr; }
+      .comparison-table { overflow-x: auto; }
       .closing-statement { padding: 30px 22px; }
       .closing-statement p { font-size: 18px; }
+      .case-study-actions { flex-direction: column; align-items: stretch; }
+      .project-action { width: 100%; }
     }
   </style>
 </head>
@@ -319,7 +224,6 @@
 
   <header id="header" class="header d-flex align-items-center light-background sticky-top">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
-
       <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0"></a>
 
       <nav id="navmenu" class="navmenu">
@@ -329,66 +233,83 @@
           <li><a href="resume.html">Resume</a></li>
           <li><a href="services.html">What I Do</a></li>
           <li><a href="portfolio.html" class="active">Portfolio</a></li>
-
           <li class="dropdown">
-            <a href="#">
-              <span>Writings</span>
-              <i class="bi bi-chevron-down toggle-dropdown"></i>
-            </a>
-
+            <a href="#"><span>Writings</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="writings/qm.pdf">Technical Documentation</a></li>
+              <li><a href="writings/pp.pdf">Academic Papers</a></li>
             </ul>
           </li>
-
           <li><a href="contact.html">Contact</a></li>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </ul>
-
         
       </nav>
 
       <div class="header-social-links">
         
-         <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
-         <a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-         <a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
-         <a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
-         <a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
+          <a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
+          <a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
         
       </div>
-
     </div>
   </header>
-
 
   <main class="main">
 
     <section id="portfolio-details" class="portfolio-details section">
       <div class="container section-title" data-aos="fade-up">
-        <h2>QuenchMap</h2>
-        <p>PHP · MySQL · Bootstrap · Google Maps · Role-Based Access · Location Data</p>
+        <h2>Serial vs Parallel Sorting Benchmark</h2>
+        <p>Python · Streamlit · Multiprocessing · Threading · Sorting Algorithms · Performance Analysis · Data Visualization</p>
       </div>
+    </section>
 
     <section id="case-study" class="section case-study-block">
       <div class="container section-title" data-aos="fade-up">
         <h2>Case Study</h2>
-        <p>Integrating geographic visualization, community-generated data, administrative control, and role-based web access.</p>
+        <p>Investigating when parallel execution improves performance, when overhead becomes dominant, and how algorithm choice changes the result.</p>
       </div>
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="case-study-actions" aria-label="Project resources">
+          <a href="https://parallel-sorting-benchmark.streamlit.app/"
+             class="project-action primary-action"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-play-circle"></i>
+            Live Application
+          </a>
+
+          <a href="https://github.com/mersiademova/parallel-sorting-benchmark"
+             class="project-action secondary-action"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-github"></i>
+            Source Code
+          </a>
+
+          <a href="writings/pp.pdf"
+             class="project-action secondary-action"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-file-earmark-pdf"></i>
+            Academic Paper
+          </a>
+        </div>
+
         <nav class="case-study-nav" aria-label="Case study navigation">
           <a href="#problem">Problem</a>
           <a href="#objective">Objective</a>
-          <a href="#users">Users</a>
-          <a href="#features">Features</a>
-          <a href="#map">Map</a>
-          <a href="#reporting">Reporting</a>
-          <a href="#database">Database</a>
-          <a href="#security">Access</a>
-          <a href="#admin">Administration</a>
+          <a href="#questions">Questions</a>
+          <a href="#algorithms">Algorithms</a>
+          <a href="#models">Execution Models</a>
+          <a href="#configuration">Configuration</a>
+          <a href="#metrics">Metrics</a>
           <a href="#architecture">Architecture</a>
           <a href="#workflow">Workflow</a>
+          <a href="#results">Results</a>
           <a href="#testing">Testing</a>
           <a href="#outcome">Outcome</a>
           <a href="#documentation">Documentation</a>
@@ -396,784 +317,344 @@
       </div>
     </section>
 
-
     <section id="problem" class="study-section case-study-block">
       <div class="container">
         <div class="row gy-4 align-items-stretch">
-
           <div class="col-lg-7" data-aos="fade-up">
-            <h2 class="study-heading">The Problem</h2>
-
-            <p class="study-text">
-              Information about publicly accessible drinking-water sources is often fragmented, incomplete, or difficult to locate. A source may be known only locally, while visitors and other users have no centralized way to discover it.
-            </p>
-
-            <p class="study-text">
-              A simple map is not sufficient when the information must also be updated, expanded, reviewed, searched, and managed. A useful system needs geographic visualization, community participation, structured data storage, and administrative control.
-            </p>
-
-            <p class="study-text">
-              The challenge was to design a platform where public users can access practical location information while registered users contribute new records and administrators preserve the structure and reliability of the system.
-            </p>
+            <h2 class="study-heading">The Computational Problem</h2>
+            <p class="study-text">Sorting is a fundamental computational task, but practical performance depends on more than theoretical complexity. Dataset size, memory behavior, worker-management cost, communication overhead, and the execution model can significantly influence the measured result.</p>
+            <p class="study-text">Parallelization is often presented as a direct path to faster execution. In practice, dividing data, creating workers, transferring values, synchronizing tasks, and merging partial results introduce additional cost.</p>
+            <p class="study-text">The real question is not whether parallel execution is theoretically possible, but under which conditions it becomes beneficial and when its overhead makes it slower than a serial implementation.</p>
           </div>
-
           <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
             <div class="highlight-box">
               <i class="bi bi-lightbulb"></i>
               <h4>Project Motivation</h4>
-              <p>
-                QuenchMap was developed as a centralized, community-oriented information system that connects physical locations with structured web data and controlled user participation.
-              </p>
+              <p>The project replaces assumptions about parallel performance with measurable evidence. Algorithms, dataset sizes, execution modes, and worker counts are tested under controlled and comparable conditions.</p>
             </div>
           </div>
-
         </div>
       </div>
     </section>
-
 
     <section id="objective" class="study-section case-study-block">
       <div class="container">
         <div class="row gy-4">
-
           <div class="col-lg-7" data-aos="fade-up">
             <h2 class="study-heading">Project Objective</h2>
-
-            <p class="study-text">
-              The objective was to build a full-stack web application that allows users to discover, search, report, and manage public drinking-water sources through an interactive map.
-            </p>
-
-            <p class="study-text">
-              The application was designed around three access levels: guest, registered user, and administrator. Each role receives only the functions required for its purpose.
-            </p>
-
-            <p class="study-text">
-              The system combines a responsive frontend, PHP backend logic, MySQL persistence, user sessions, CRUD operations, map integration, data validation, and an administrative workflow.
-            </p>
+            <p class="study-text">The objective was to develop a benchmarking application that compares serial, multithreaded, and multiprocessing implementations of several sorting algorithms across progressively larger datasets. The project was originally built with a desktop interface and later adapted into a browser-accessible Streamlit interface.</p>
+            <p class="study-text">The system measures execution time, speedup, efficiency, scalability, and overhead while preserving a fair serial baseline and equivalent input data.</p>
+            <p class="study-text">The project combines algorithm implementation, parallel programming, experimental design, workload control, data collection, numerical analysis, and visualization.</p>
           </div>
-
           <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
             <div class="highlight-box">
               <i class="bi bi-bullseye"></i>
-              <h4>Core Design Principle</h4>
-              <p>
-                Public information should remain easy to access, while contribution and management functions must be controlled through authentication and authorization.
-              </p>
+              <h4>Core Principle</h4>
+              <p>The benchmark does not assume that a parallel method is superior. Every result is evaluated relative to a measured serial baseline for the same algorithm and dataset.</p>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-
-    <section id="users" class="study-section case-study-block">
+    <section id="questions" class="study-section case-study-block">
       <div class="container">
         <div class="row" data-aos="fade-up">
           <div class="col-lg-9">
-            <h2 class="study-heading">Users, Roles, and Permissions</h2>
-            <p class="study-text">QuenchMap separates public access, community contribution, and administrative management into distinct roles.</p>
+            <h2 class="study-heading">Experimental Questions</h2>
+            <p class="study-text">The benchmark is structured around questions that can be answered only through controlled measurement.</p>
           </div>
         </div>
-
         <div class="row gy-4 mt-2">
-          <div class="col-lg-4" data-aos="fade-up">
-            <div class="role-card">
-              <span class="role-label">Public Access</span>
-              <i class="bi bi-person"></i>
-              <h4>Guest</h4>
-              <p>
-                Can view the map, search locations by city, inspect public water-source information, and read published announcements without creating an account.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="role-card">
-              <span class="role-label">Authenticated Access</span>
-              <i class="bi bi-person-check"></i>
-              <h4>Registered User</h4>
-              <p>
-                Receives the public functions and can additionally submit a new water-source report with location and descriptive data.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="role-card">
-              <span class="role-label">Management Access</span>
-              <i class="bi bi-person-gear"></i>
-              <h4>Administrator</h4>
-              <p>
-                Manages reports, locations, users, and public announcements, preserving the structure and operational control of the platform.
-              </p>
-            </div>
-          </div>
+          <div class="col-md-6" data-aos="fade-up"><div class="card-box"><i class="bi bi-speedometer2"></i><h4>When Does Parallelism Become Faster?</h4><p>The experiment examines the point at which useful computation exceeds the cost of worker creation, coordination, and result merging.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50"><div class="card-box"><i class="bi bi-cpu"></i><h4>How Does Worker Count Affect Performance?</h4><p>Tests with 2, 4, 6, and 8 workers reveal improvement, saturation, and diminishing returns.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="card-box"><i class="bi bi-diagram-3"></i><h4>Do Algorithms Respond Equally?</h4><p>Bubble Sort, Merge Sort, and Quick Sort have different computational structures and different parallelization behavior.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150"><div class="card-box"><i class="bi bi-layers"></i><h4>How Significant Is Overhead?</h4><p>The benchmark evaluates the cost of data partitioning, startup, synchronization, communication, and merging.</p></div></div>
         </div>
       </div>
     </section>
 
-
-    <section id="features" class="study-section case-study-block">
+    <section id="algorithms" class="study-section case-study-block">
       <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Core Functionalities</h2>
-            <p class="study-text">The system combines discovery, contribution, administration, and persistent storage within one web application.</p>
-          </div>
-        </div>
-
+        <div class="row" data-aos="fade-up"><div class="col-lg-9"><h2 class="study-heading">Implemented Sorting Algorithms</h2><p class="study-text">The selected algorithms represent different complexity levels and partitioning strategies.</p></div></div>
         <div class="row gy-4 mt-2">
-          <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <div class="feature-card">
-              <i class="bi bi-map"></i>
-              <h4>Interactive Map</h4>
-              <p>Displays stored water-source locations as geographic markers connected to information from the database.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
-            <div class="feature-card">
-              <i class="bi bi-search"></i>
-              <h4>City-Based Search</h4>
-              <p>Allows users to locate relevant records by searching for a city or geographic area.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="feature-card">
-              <i class="bi bi-geo-alt"></i>
-              <h4>Location Reporting</h4>
-              <p>Registered users can submit new water-source information through a structured form.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
-            <div class="feature-card">
-              <i class="bi bi-shield-lock"></i>
-              <h4>Authentication</h4>
-              <p>Registration, login, sessions, and role checks control access to protected functions.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="feature-card">
-              <i class="bi bi-speedometer2"></i>
-              <h4>Administrative Dashboard</h4>
-              <p>Provides centralized management of application records and restricted operations.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
-            <div class="feature-card">
-              <i class="bi bi-megaphone"></i>
-              <h4>Public Announcements</h4>
-              <p>Allows administrators to publish information visible to visitors and registered users.</p>
-            </div>
-          </div>
+          <div class="col-lg-4" data-aos="fade-up"><div class="card-box"><span class="tag">Average: O(n²)</span><i class="bi bi-arrow-down-up"></i><h4>Bubble Sort</h4><p>Repeatedly compares adjacent elements. It provides an intentionally inefficient baseline that demonstrates how algorithmic complexity dominates performance on large datasets.</p></div></div>
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100"><div class="card-box"><span class="tag">Average: O(n log n)</span><i class="bi bi-diagram-2"></i><h4>Merge Sort</h4><p>Divides the dataset, sorts smaller parts, and merges the results. Its structure is naturally suitable for chunk-based parallel execution.</p></div></div>
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200"><div class="card-box"><span class="tag">Average: O(n log n)</span><i class="bi bi-signpost-split"></i><h4>Quick Sort</h4><p>Selects a pivot, partitions values, and recursively processes subsets. Performance depends on partition quality and recursive decomposition.</p></div></div>
         </div>
       </div>
     </section>
 
-
-    <section id="map" class="study-section case-study-block">
+    <section id="models" class="study-section case-study-block">
       <div class="container">
-        <div class="row gy-4 align-items-stretch">
+        <div class="row" data-aos="fade-up"><div class="col-lg-9"><h2 class="study-heading">Execution Models</h2><p class="study-text">Each algorithm is evaluated through multiple execution models under one interface.</p></div></div>
+        <div class="row gy-4 mt-2">
+          <div class="col-lg-4" data-aos="fade-up"><div class="card-box"><i class="bi bi-1-circle"></i><h4>Serial Execution</h4><p>The complete dataset is processed in one execution path. This result is the reference baseline for speedup and efficiency.</p></div></div>
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100"><div class="card-box"><i class="bi bi-bezier"></i><h4>Multithreading</h4><p>The workload is distributed across threads. Because sorting is CPU-bound, the benchmark also reveals the practical influence of Python’s Global Interpreter Lock.</p></div></div>
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200"><div class="card-box"><i class="bi bi-cpu-fill"></i><h4>Multiprocessing</h4><p>Independent processes sort separate data chunks and can use multiple CPU cores. Partial results are merged into one sorted sequence.</p></div></div>
+        </div>
+   
+   
 
+    <section id="configuration" class="study-section case-study-block">
+      <div class="container">
+        <div class="row gy-4">
           <div class="col-lg-7" data-aos="fade-up">
-            <h2 class="study-heading">Interactive Map Integration</h2>
-
-            <p class="study-text">
-              The map is the primary discovery interface of QuenchMap. Geographic coordinates stored in the database are translated into visible markers on the map.
-            </p>
-
-            <p class="study-text">
-              Each marker represents a water-source record and can be associated with descriptive information relevant to the user. This connects structured database content with an intuitive geographic view.
-            </p>
-
-            <p class="study-text">
-              City-based search helps narrow the geographic context and makes the system more usable than an unfiltered list of coordinates or database records.
-            </p>
+            <h2 class="study-heading">Benchmark Configuration</h2>
+            <p class="study-text">The application supports manually selected tests and an automated mode that executes predefined combinations of algorithms, dataset sizes, execution modes, and worker counts.</p>
+            <p class="study-text">Dataset sizes extend from small inputs to 5,000,000 elements. Worker configurations range from 2 to 8. The serial result is measured once for each algorithm and dataset and reused as the baseline.</p>
+            <p class="study-text">Practical safeguards prevent unsuitable experiments from consuming excessive resources. Bubble Sort is excluded above 50,000 elements, and threading is disabled for datasets of 3,000,000 elements or more.</p>
           </div>
-
           <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <div class="highlight-box">
-              <i class="bi bi-geo-alt-fill"></i>
-              <h4>Integration Value</h4>
-              <p>
-                The external mapping service is not treated as a decorative component. It acts as the visual layer through which database records become geographically meaningful.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <section id="reporting" class="study-section case-study-block">
-      <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Location Reporting Workflow</h2>
-            <p class="study-text">Community contribution is implemented through a controlled reporting process rather than direct unrestricted database modification.</p>
-          </div>
-        </div>
-
-        <div class="workflow-grid" data-aos="fade-up" data-aos-delay="100">
-          <div class="workflow-step">
-            <span class="workflow-number">1</span>
-            <h4>User Authentication</h4>
-            <p>The contributor logs in before accessing the protected report form.</p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">2</span>
-            <h4>Enter Location Data</h4>
-            <p>The user supplies the geographic and descriptive information required by the application.</p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">3</span>
-            <h4>Validate Input</h4>
-            <p>Required values are checked before the report is accepted.</p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">4</span>
-            <h4>Store the Report</h4>
-            <p>Valid information is persisted in the MySQL database.</p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">5</span>
-            <h4>Administrative Review</h4>
-            <p>The administrator accesses the record through the management interface.</p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">6</span>
-            <h4>Manage the Record</h4>
-            <p>The report can be reviewed, updated, retained, or removed according to the application workflow.</p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">7</span>
-            <h4>Display Public Data</h4>
-            <p>Managed location information becomes available through the map and search interface.</p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">8</span>
-            <h4>Ongoing Maintenance</h4>
-            <p>The administrative layer keeps the dataset organized as the platform grows.</p>
+            <div class="highlight-box"><i class="bi bi-pc-display-horizontal"></i><h4>Test Environment</h4><p>Python 3.12<br>Intel Core i7-1065G7 processor<br>Maximum worker configuration: 8<br>Dataset sizes up to 5,000,000 elements</p></div>
           </div>
         </div>
       </div>
     </section>
 
-
-    <section id="database" class="study-section case-study-block">
+    <section id="metrics" class="study-section case-study-block">
       <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Database Design</h2>
-            <p class="study-text">
-              MySQL provides persistent storage for the entities required by the platform. The database separates identity, geographic content, user contribution, and administrative communication.
-            </p>
-          </div>
-        </div>
-
-        <div class="data-table mt-4" data-aos="fade-up" data-aos-delay="100">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Entity</th>
-                <th>Purpose</th>
-                <th>Typical Relationships</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td><strong>Users</strong></td>
-                <td>Stores account information and application role.</td>
-                <td>Connected to authentication and user-submitted reports.</td>
-              </tr>
-
-              <tr>
-                <td><strong>Water Sources / Locations</strong></td>
-                <td>Stores the geographic and descriptive data displayed on the map.</td>
-                <td>Connected to city search and map markers.</td>
-              </tr>
-
-              <tr>
-                <td><strong>Reports</strong></td>
-                <td>Preserves data submitted through the contribution workflow.</td>
-                <td>Connected to registered users and administrative actions.</td>
-              </tr>
-
-              <tr>
-                <td><strong>Announcements</strong></td>
-                <td>Stores public messages created through the administrative interface.</td>
-                <td>Displayed to guests and authenticated users.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <p class="study-text mt-4">
-          The public portfolio description focuses on the logical data model rather than exposing deployment credentials or environment-specific configuration.
-        </p>
-      </div>
-    </section>
-
-
-    <section id="security" class="study-section case-study-block">
-      <div class="container">
-        <div class="row gy-4 align-items-stretch">
-
-          <div class="col-lg-7" data-aos="fade-up">
-            <h2 class="study-heading">Authentication and Authorization</h2>
-
-            <p class="study-text">
-              Authentication identifies the user, while authorization determines which functions the authenticated account may access.
-            </p>
-
-            <p class="study-text">
-              Public map browsing remains available without login. Contribution functions are restricted to registered users, and administrative functions are reserved for administrator accounts.
-            </p>
-
-            <p class="study-text">
-              PHP sessions preserve the authenticated state across protected pages, while role checks prevent users from reaching functions outside their assigned level.
-            </p>
-          </div>
-
-          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <div class="highlight-box">
-              <i class="bi bi-shield-check"></i>
-              <h4>Access-Control Principle</h4>
-              <p>
-                The interface may hide restricted actions, but access control must also be enforced by server-side PHP logic. Visual restriction alone is not authorization.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <section id="admin" class="study-section case-study-block">
-      <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Administrative Management</h2>
-            <p class="study-text">The administrative dashboard centralizes the operations that should not be exposed to ordinary users.</p>
-          </div>
-        </div>
-
+        <div class="row" data-aos="fade-up"><div class="col-lg-9"><h2 class="study-heading">Performance Metrics</h2><p class="study-text">Execution time alone cannot fully describe parallel behavior.</p></div></div>
         <div class="row gy-4 mt-2">
-          <div class="col-md-6" data-aos="fade-up">
-            <div class="decision-card">
-              <h4>Location and Report Management</h4>
-              <p>Administrators can inspect and manage the records that feed the public map and location-search experience.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
-            <div class="decision-card">
-              <h4>User Management</h4>
-              <p>The platform provides controlled access to account-related information required for operational administration.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="decision-card">
-              <h4>Announcement Management</h4>
-              <p>Administrators can create and maintain public notices shown through the application.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
-            <div class="decision-card">
-              <h4>Centralized CRUD Workflow</h4>
-              <p>Create, read, update, and delete operations are grouped in a restricted environment rather than scattered across public pages.</p>
-            </div>
-          </div>
+          <div class="col-md-6 col-lg-3" data-aos="fade-up"><div class="card-box"><i class="bi bi-stopwatch"></i><h4>Execution Time</h4><p>Total duration required to complete the selected sorting task.</p></div></div>
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="50"><div class="card-box"><i class="bi bi-speedometer"></i><h4>Speedup</h4><div class="formula">S = T<sub>serial</sub> / T<sub>parallel</sub></div><p>Shows how much faster or slower the parallel execution is.</p></div></div>
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100"><div class="card-box"><i class="bi bi-percent"></i><h4>Efficiency</h4><div class="formula">E = S / p</div><p>Relates achieved speedup to the number of workers used.</p></div></div>
+          <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="150"><div class="card-box"><i class="bi bi-graph-up-arrow"></i><h4>Scalability</h4><p>Examines whether performance improves consistently as workload and workers increase.</p></div></div>
         </div>
       </div>
     </section>
-
 
     <section id="architecture" class="study-section case-study-block">
       <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Application Architecture</h2>
-            <p class="study-text">
-              QuenchMap separates presentation, request handling, access control, database interaction, and external map visualization into logical layers.
-            </p>
-          </div>
-        </div>
-
-        <div class="architecture-layers" data-aos="fade-up" data-aos-delay="100">
-          <div class="architecture-layer">
-            <i class="bi bi-window"></i>
-            <h4>Presentation Layer</h4>
-            <p>Bootstrap layouts, forms, navigation, public pages, and dashboard screens.</p>
-          </div>
-
-          <div class="architecture-layer">
-            <i class="bi bi-filetype-php"></i>
-            <h4>Application Layer</h4>
-            <p>PHP request processing, form handling, page logic, and CRUD operations.</p>
-          </div>
-
-          <div class="architecture-layer">
-            <i class="bi bi-person-lock"></i>
-            <h4>Access Layer</h4>
-            <p>Login, sessions, role checks, and protected routes.</p>
-          </div>
-
-          <div class="architecture-layer">
-            <i class="bi bi-database"></i>
-            <h4>Data Layer</h4>
-            <p>MySQL persistence for users, reports, locations, and announcements.</p>
-          </div>
-
-          <div class="architecture-layer">
-            <i class="bi bi-map"></i>
-            <h4>Map Integration Layer</h4>
-            <p>Geographic visualization, marker placement, and location-search context.</p>
-          </div>
+        <div class="row" data-aos="fade-up"><div class="col-lg-9"><h2 class="study-heading">Application Architecture</h2><p class="study-text">The system separates interface control, dataset generation, algorithms, execution orchestration, measurement, and visualization.</p></div></div>
+        <div class="architecture-grid" data-aos="fade-up" data-aos-delay="100">
+          <div class="architecture-item"><i class="bi bi-window"></i><h4>Presentation Layer</h4><p>Tkinter desktop and Streamlit web interfaces, controls, tables, status messages, and charts.</p></div>
+          <div class="architecture-item"><i class="bi bi-database"></i><h4>Dataset Layer</h4><p>Random dataset generation, size control, copying, and reuse.</p></div>
+          <div class="architecture-item"><i class="bi bi-code-square"></i><h4>Algorithm Layer</h4><p>Bubble Sort, Merge Sort, Quick Sort, and merge procedures.</p></div>
+          <div class="architecture-item"><i class="bi bi-cpu"></i><h4>Execution Layer</h4><p>Serial, threading, multiprocessing, chunking, and workers.</p></div>
+          <div class="architecture-item"><i class="bi bi-bar-chart-line"></i><h4>Analysis Layer</h4><p>Timing, speedup, efficiency, heatmaps, and comparison views.</p></div>
         </div>
       </div>
     </section>
-
 
     <section id="workflow" class="study-section case-study-block">
       <div class="container">
-        <div class="row gy-4">
-
-          <div class="col-lg-7" data-aos="fade-up">
-            <h2 class="study-heading">Application Workflow</h2>
-
-            <p class="study-text">
-              A guest begins with public information and geographic search. When the user decides to contribute, authentication introduces a controlled transition from public access to data submission.
-            </p>
-
-            <p class="study-text">
-              Submitted data enters the persistent database and becomes manageable through the administrator interface. Public-facing pages then retrieve the relevant records and transform them into map markers, search results, and announcements.
-            </p>
-
-            <p class="study-text">
-              This workflow connects public discovery, authenticated contribution, persistent storage, and administrative control without mixing the responsibilities of the three user roles.
-            </p>
-          </div>
-
-          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <div class="highlight-box">
-              <i class="bi bi-diagram-3"></i>
-              <h4>System Flow</h4>
-              <p>
-                Public access → authentication → structured report → database persistence → administrative management → geographic presentation.
-              </p>
-            </div>
-          </div>
-
+        <div class="row" data-aos="fade-up"><div class="col-lg-9"><h2 class="study-heading">Experimental Workflow</h2><p class="study-text">Each test follows a controlled sequence from configuration to interpretation.</p></div></div>
+        <div class="workflow-grid" data-aos="fade-up" data-aos-delay="100">
+          <div class="workflow-step"><span class="workflow-number">1</span><h4>Select Algorithm</h4><p>Bubble Sort, Merge Sort, or Quick Sort is selected.</p></div>
+          <div class="workflow-step"><span class="workflow-number">2</span><h4>Select Dataset Size</h4><p>The number of elements is chosen according to the experiment.</p></div>
+          <div class="workflow-step"><span class="workflow-number">3</span><h4>Generate Dataset</h4><p>One source dataset is copied so all modes process equivalent data.</p></div>
+          <div class="workflow-step"><span class="workflow-number">4</span><h4>Measure Serial Baseline</h4><p>The serial version is timed once and preserved as the reference.</p></div>
+          <div class="workflow-step"><span class="workflow-number">5</span><h4>Select Execution Mode</h4><p>Threading or multiprocessing is chosen for the parallel test.</p></div>
+          <div class="workflow-step"><span class="workflow-number">6</span><h4>Configure Workers</h4><p>The workload is executed with 2, 4, 6, or 8 workers.</p></div>
+          <div class="workflow-step"><span class="workflow-number">7</span><h4>Calculate Metrics</h4><p>Time, speedup, efficiency, and related values are calculated.</p></div>
+          <div class="workflow-step"><span class="workflow-number">8</span><h4>Visualize Results</h4><p>Tables, charts, and heatmaps reveal performance patterns.</p></div>
         </div>
       </div>
     </section>
 
-
-    <section id="testing" class="study-section case-study-block">
+    <section id="results" class="study-section case-study-block">
       <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Testing and Validation</h2>
-            <p class="study-text">
-              The application was tested through role-based scenarios, database operations, form validation, and map-related interactions.
-            </p>
+        <div class="row gy-4">
+          <div class="col-lg-7" data-aos="fade-up">
+            <h2 class="study-heading">Results and Interpretation</h2>
+            <p class="study-text">The benchmark demonstrates that parallel execution is not automatically faster. On small datasets, worker creation, scheduling, data transfer, and result merging can require more time than the sorting operation itself.</p>
+            <p class="study-text">As dataset size increases, multiprocessing can provide a measurable advantage for suitable algorithms because separate processes can use multiple CPU cores. Speedup, however, does not increase linearly with worker count.</p>
+            <p class="study-text">Threading is less effective for CPU-bound sorting because Python threads compete under the Global Interpreter Lock. Merge Sort and Quick Sort remain appropriate for large datasets, while Bubble Sort becomes impractical because of quadratic growth.</p>
+          </div>
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="highlight-box"><i class="bi bi-graph-up"></i><h4>Main Finding</h4><p>Parallel performance depends on the relationship between useful computation and coordination cost. The best strategy changes with algorithm, dataset size, worker count, and runtime environment.</p></div>
           </div>
         </div>
 
-        <div class="row gy-4 mt-2">
-          <div class="col-md-6" data-aos="fade-up">
-            <div class="test-card">
-              <h4>Guest Access</h4>
-              <p>Public users were tested against map viewing, city search, announcements, and restricted-page access.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
-            <div class="test-card">
-              <h4>Registration and Login</h4>
-              <p>Valid, invalid, incomplete, and duplicate account scenarios were used to examine authentication behavior.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="test-card">
-              <h4>Role Authorization</h4>
-              <p>Registered users and administrators were tested against functions outside and inside their assigned access level.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
-            <div class="test-card">
-              <h4>Report Validation</h4>
-              <p>Missing values, malformed inputs, and complete submissions were tested before database persistence.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="test-card">
-              <h4>CRUD Operations</h4>
-              <p>Create, read, update, and delete workflows were tested across the administrative interface.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
-            <div class="test-card">
-              <h4>Map and Search Behavior</h4>
-              <p>Stored coordinates, marker rendering, and city-based search were checked against database records.</p>
-            </div>
-          </div>
+        <div class="comparison-table mt-5" data-aos="fade-up">
+          <table class="table">
+            <thead><tr><th>Execution Mode</th><th>Primary Advantage</th><th>Main Limitation</th><th>Most Suitable Use</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Serial</strong></td><td>Minimal coordination overhead.</td><td>Cannot exploit multiple CPU cores.</td><td>Small datasets and baseline measurement.</td></tr>
+              <tr><td><strong>Threading</strong></td><td>Lightweight workers and shared memory.</td><td>Limited by the Python GIL for CPU-bound work.</td><td>Experimental comparison and I/O-heavy workloads.</td></tr>
+              <tr><td><strong>Multiprocessing</strong></td><td>Can use multiple processor cores.</td><td>Startup, serialization, memory, and merging overhead.</td><td>Larger CPU-bound workloads.</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
-
 
     <section id="engineering-decisions" class="study-section case-study-block">
       <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Key Engineering Decisions</h2>
-          </div>
-        </div>
-
+        <div class="row" data-aos="fade-up"><div class="col-lg-9"><h2 class="study-heading">Key Engineering Decisions</h2></div></div>
         <div class="row gy-4 mt-2">
-          <div class="col-md-6" data-aos="fade-up">
-            <div class="decision-card">
-              <h4>Role Separation</h4>
-              <p>Guest, user, and administrator functions were separated to prevent public access from being confused with contribution or management rights.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
-            <div class="decision-card">
-              <h4>Database-Driven Map Content</h4>
-              <p>Markers are derived from persistent records rather than being hard-coded into the interface.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="decision-card">
-              <h4>Centralized Administration</h4>
-              <p>Restricted operations are grouped in one dashboard to improve clarity and maintainability.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
-            <div class="decision-card">
-              <h4>Public-First Experience</h4>
-              <p>Users do not need an account merely to access the practical information for which the platform exists.</p>
-            </div>
-          </div>
+          <div class="col-md-6" data-aos="fade-up"><div class="decision-card"><h4>One Serial Baseline per Dataset</h4><p>Reusing one measured serial result avoids unnecessary repeated work and provides a consistent reference.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50"><div class="decision-card"><h4>Equivalent Input Data</h4><p>Every mode receives a copy of the same dataset, preventing random input differences from distorting the comparison.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="decision-card"><h4>Algorithm-Specific Limits</h4><p>Bubble Sort and very large threading tests are restricted to prevent impractical or destabilizing workloads.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150"><div class="decision-card"><h4>Multiple Visual Representations</h4><p>Tables preserve exact values, charts reveal trends, and heatmaps expose multidimensional performance patterns.</p></div></div>
         </div>
       </div>
     </section>
 
+    <section id="testing" class="study-section case-study-block">
+      <div class="container">
+        <div class="row" data-aos="fade-up"><div class="col-lg-9"><h2 class="study-heading">Testing and Validation</h2><p class="study-text">The application was tested for sorting correctness, experimental consistency, interface stability, workload restrictions, and metric validity.</p></div></div>
+        <div class="row gy-4 mt-2">
+          <div class="col-md-6" data-aos="fade-up"><div class="test-card"><h4>Sorting Correctness</h4><p>Each mode was verified to produce the same ordered sequence as the serial reference.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50"><div class="test-card"><h4>Dataset Consistency</h4><p>Copies of one generated dataset were used for fair comparison.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="test-card"><h4>Boundary Conditions</h4><p>Small, medium, large, maximum, invalid, and prohibited configurations were tested.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150"><div class="test-card"><h4>Metric Validation</h4><p>Speedup and efficiency were checked against stored serial and parallel times.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="test-card"><h4>Automated Mode</h4><p>Multi-test execution was validated across algorithms, sizes, modes, and workers.</p></div></div>
+          <div class="col-md-6" data-aos="fade-up" data-aos-delay="250"><div class="test-card"><h4>Interface Behavior</h4><p>Status updates and result rendering were examined during long-running tests.</p></div></div>
+        </div>
+      </div>
+    </section>
 
     <section id="outcome" class="study-section case-study-block">
       <div class="container">
         <div class="row gy-4">
-
           <div class="col-lg-7" data-aos="fade-up">
             <h2 class="study-heading">Project Outcome</h2>
-
-            <p class="study-text">
-              The result is a functional full-stack prototype that connects geographic data, user accounts, community reports, administrative management, and public information.
-            </p>
-
-            <p class="study-text">
-              The project demonstrates practical integration of frontend presentation, PHP backend logic, MySQL persistence, CRUD operations, user sessions, role-based authorization, and an external mapping service.
-            </p>
-
-            <p class="study-text">
-              QuenchMap is therefore not simply a website containing a map. It is a structured information system in which map content is produced, stored, controlled, and presented through a defined user workflow.
-            </p>
+            <p class="study-text">The result is a functional benchmarking application with desktop and browser-accessible interfaces that compares three sorting algorithms across serial, multithreaded, and multiprocessing execution.</p>
+            <p class="study-text">The system transforms raw timings into an interpretable performance study through speedup, efficiency, scalability, result tables, charts, and heatmaps.</p>
+            <p class="study-text">The project demonstrates that performance engineering requires a fair baseline, controlled input, appropriate workload limits, reproducible measurement, and careful interpretation.</p>
           </div>
-
-          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <div class="highlight-box">
-              <i class="bi bi-stars"></i>
-              <h4>Why This Project Matters</h4>
-              <p>
-                It shows the ability to design and implement a complete user-facing web system with data persistence, access control, geographic visualization, and operational administration.
-              </p>
-            </div>
-          </div>
-
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100"><div class="highlight-box"><i class="bi bi-stars"></i><h4>Why This Project Matters</h4><p>It connects algorithms, concurrency models, processor behavior, experimental design, statistics, and visualization within one measurable computational study.</p></div></div>
         </div>
 
         <div class="row gy-4 mt-4">
           <div class="col-lg-6" data-aos="fade-up">
             <h3 class="study-subheading">Project Strengths</h3>
             <ul class="strength-list">
-              <li>Full-stack PHP and MySQL implementation.</li>
-              <li>Interactive geographic visualization.</li>
-              <li>Guest, user, and administrator roles.</li>
-              <li>Structured location-reporting workflow.</li>
-              <li>Centralized CRUD administration.</li>
-              <li>City-based search and public announcements.</li>
-              <li>Responsive Bootstrap interface.</li>
+              <li>Compares three algorithms and three execution models.</li>
+              <li>Supports datasets up to 5,000,000 elements.</li>
+              <li>Evaluates 2 to 8 workers.</li>
+              <li>Measures execution time, speedup, and efficiency.</li>
+              <li>Includes automated benchmark execution.</li>
+              <li>Presents tables, charts, and heatmaps.</li>
+              <li>Applies practical workload restrictions.</li>
             </ul>
           </div>
-
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <h3 class="study-subheading">Current Limitations</h3>
             <ul class="limitations-list">
-              <li>The project is a functional academic prototype rather than a production public service.</li>
-              <li>The quality of geographic data depends on user input and administrative maintenance.</li>
-              <li>External map functionality depends on service availability and deployment configuration.</li>
-              <li>The current system does not include automated field verification of reported water sources.</li>
-              <li>Advanced moderation, audit history, and notification systems are outside the current scope.</li>
+              <li>Results depend on hardware, operating system, Python version, and background workload.</li>
+              <li>Threading performance is affected by the Python GIL.</li>
+              <li>Process startup and serialization influence multiprocessing measurements.</li>
+              <li>Bubble Sort is not practical for very large datasets.</li>
+              <li>Single-run timings can be affected by temporary system activity.</li>
+              <li>GPU-based sorting is outside the current scope.</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
-
 
     <section id="future-development" class="study-section case-study-block">
       <div class="container">
         <div class="row gy-4">
-
-          <div class="col-lg-5" data-aos="fade-up">
-            <h2 class="study-heading">Future Development</h2>
-            <p class="study-text">The prototype provides a base for a more complete public location-information platform.</p>
-          </div>
-
+          <div class="col-lg-5" data-aos="fade-up"><h2 class="study-heading">Future Development</h2><p class="study-text">The current benchmark provides a foundation for a broader performance-analysis laboratory.</p></div>
           <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
             <ul class="future-list">
-              <li>Administrative approval states for submitted reports.</li>
-              <li>User photographs and source-condition updates.</li>
-              <li>Duplicate-location detection.</li>
-              <li>User ratings and confirmation history.</li>
-              <li>Map filters for status, city, and source type.</li>
-              <li>Email or in-application notifications.</li>
-              <li>Audit logs for administrative actions.</li>
-              <li>Improved security controls and production deployment.</li>
-              <li>Mobile-first location submission.</li>
-              <li>Multilingual public interface.</li>
+              <li>Multiple repetitions with mean, median, and standard deviation.</li>
+              <li>Confidence intervals for execution times.</li>
+              <li>CPU and memory utilization monitoring.</li>
+              <li>Additional sorting algorithms.</li>
+              <li>Sorted, reverse-sorted, nearly sorted, and duplicate-heavy datasets.</li>
+              <li>Process-pool reuse to isolate startup cost.</li>
+              <li>CSV export and reproducible reports.</li>
+              <li>Cross-platform and multi-machine comparison.</li>
+              <li>GPU and distributed-computing experiments.</li>
+              <li>Automatic recommendation of the best configuration.</li>
             </ul>
           </div>
-
         </div>
       </div>
     </section>
-
 
     <section id="documentation" class="study-section case-study-block">
       <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Documentation and Project Materials</h2>
-            <p class="study-text">The project can be supported by implementation, database, visual, and user-oriented materials.</p>
-          </div>
-        </div>
-
+        <div class="row" data-aos="fade-up"><div class="col-lg-9"><h2 class="study-heading">Documentation and Project Materials</h2><p class="study-text">The project can be supported by technical, experimental, and visual materials.</p></div></div>
         <div class="row gy-4 mt-2">
           <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <div class="resource-card">
-              <i class="bi bi-file-earmark-text"></i>
+            <a href="writings/pp.pdf" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-file-earmark-pdf"></i>
               <div>
-                <h4>Project Report</h4>
-                <p>Problem definition, requirements, system design, implementation, testing, and conclusions.</p>
+                <h4>Academic Paper</h4>
+                <p>Theory, algorithms, experimental setup, measurements, and conclusions.</p>
+                <span class="resource-link">Open PDF <i class="bi bi-arrow-right"></i></span>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
-            <div class="resource-card">
-              <i class="bi bi-database"></i>
+            <a href="https://parallel-sorting-benchmark.streamlit.app/" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-play-circle"></i>
               <div>
-                <h4>Database Documentation</h4>
-                <p>Entity structure, relationships, persistent records, and CRUD responsibilities.</p>
+                <h4>Live Web Application</h4>
+                <p>Interactive Streamlit version with Basic, User, and Auto benchmark modes.</p>
+                <span class="resource-link">Launch application <i class="bi bi-arrow-right"></i></span>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="resource-card">
-              <i class="bi bi-file-earmark-code"></i>
+            <a href="https://github.com/mersiademova/parallel-sorting-benchmark" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-github"></i>
               <div>
-                <h4>Technical Documentation</h4>
-                <p>PHP page logic, sessions, authorization, forms, map integration, and administrative operations.</p>
+                <h4>Source Code</h4>
+                <p>Desktop and Streamlit interfaces with serial, threaded, and multiprocessing benchmark logic.</p>
+                <span class="resource-link">View source code <i class="bi bi-arrow-right"></i></span>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
-            <div class="resource-card">
-              <i class="bi bi-images"></i>
+            <a href="https://github.com/mersiademova/parallel-sorting-benchmark#readme" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-file-earmark-code"></i>
               <div>
-                <h4>Application Screenshots</h4>
-                <p>Public map, city search, report forms, login screens, announcements, and administrator dashboard.</p>
+                <h4>Repository README</h4>
+                <p>Project structure, execution modes, installation steps, and usage instructions.</p>
+                <span class="resource-link">Read README <i class="bi bi-arrow-right"></i></span>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="resource-card">
-              <i class="bi bi-play-btn"></i>
+            <a href="https://github.com/mersiademova/parallel-sorting-benchmark/blob/main/main_launcher.py" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-window"></i>
               <div>
-                <h4>Video Demonstration</h4>
-                <p>A future walkthrough of public browsing, report submission, and administrative management.</p>
+                <h4>Desktop Application</h4>
+                <p>Original Tkinter launcher and interface modes preserved within the same project.</p>
+                <span class="resource-link">View desktop entry point <i class="bi bi-arrow-right"></i></span>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
-            <div class="resource-card">
-              <i class="bi bi-github"></i>
+            <a href="https://github.com/mersiademova/parallel-sorting-benchmark/tree/main/visualizations" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-bar-chart-line"></i>
               <div>
-                <h4>GitHub Repository</h4>
-                <p>Repository link can be added after configuration secrets, database setup, screenshots, and README instructions are prepared for public release.</p>
+                <h4>Visualization Modules</h4>
+                <p>Charts, comparison views, efficiency plots, and heatmap components.</p>
+                <span class="resource-link">Explore visualizations <i class="bi bi-arrow-right"></i></span>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
     </section>
-
 
     <section class="study-section">
       <div class="container" data-aos="fade-up">
         <div class="closing-statement">
           <i class="bi bi-quote"></i>
-          <p>
-            QuenchMap demonstrates how geographic data, community participation, administrative control, and web technologies can be integrated into one structured platform for improving access to practical public information.
-          </p>
+          <p>This project does not attempt to prove that parallel execution is always superior. It investigates the conditions under which parallelization improves performance, when overhead becomes dominant, and how algorithm choice, dataset size, and worker configuration influence real computational results.</p>
         </div>
       </div>
     </section>
 
   </main>
 
-
   <footer id="footer" class="footer light-background">
     <div class="container">
-      <div class="copyright text-center">
-        <p>
-          © <span id="current-year"></span>
-          <strong class="px-1 sitename">Mersie Ademova</strong>
-          <span>All Rights Reserved.</span>
-        </p>
-      </div>
-
+      <div class="copyright text-center"><p>© <span id="current-year"></span> <strong class="px-1 sitename">Mersie Ademova</strong> <span>All Rights Reserved.</span></p></div>
       <div class="social-links d-flex justify-content-center">
         
         <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
@@ -1183,21 +664,11 @@
 <a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
         
       </div>
-
-      <div class="credits text-center">
-        Designed by
-        <a href="https://bootstrapmade.com/" target="_blank" rel="noopener noreferrer">BootstrapMade</a>
-        · Distributed by
-        <a href="https://themewagon.com/" target="_blank" rel="noopener noreferrer">ThemeWagon</a>
-      </div>
+      <div class="credits text-center">Designed by <a href="https://bootstrapmade.com/" target="_blank" rel="noopener noreferrer">BootstrapMade</a> · Distributed by <a href="https://themewagon.com/" target="_blank" rel="noopener noreferrer">ThemeWagon</a></div>
     </div>
   </footer>
 
-
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to top">
-    <i class="bi bi-arrow-up-short"></i>
-  </a>
-
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to top"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
 
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -1213,9 +684,7 @@
 
   <script>
     const yearElement = document.getElementById("current-year");
-    if (yearElement) {
-      yearElement.textContent = new Date().getFullYear();
-    }
+    if (yearElement) yearElement.textContent = new Date().getFullYear();
   </script>
 
 </body>
