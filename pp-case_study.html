@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Serial vs Parallel Sorting Benchmark | Mersie Ademova</title>
-  <meta name="description" content="Case study of a Python benchmarking application comparing serial, multithreaded, and multiprocessing sorting algorithms.">
-  <meta name="keywords" content="Python, parallel computing, multiprocessing, threading, sorting algorithms, benchmarking, speedup, efficiency">
+  <meta name="description" content="Case study of a Python benchmarking application with desktop and Streamlit interfaces, comparing serial, multithreaded, and multiprocessing sorting algorithms.">
+  <meta name="keywords" content="Python, Streamlit, parallel computing, multiprocessing, threading, sorting algorithms, benchmarking, speedup, efficiency">
 
   <link href="assets/img/favicon.png?v=2" rel="icon" type="image/png" sizes="32x32">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -22,138 +22,201 @@
   <link href="assets/css/main.css" rel="stylesheet">
 
   <style>
-  html { scroll-behavior: smooth; }
-  .case-study-block { scroll-margin-top: 120px; }
-  .portfolio-info ul li { margin-bottom: 12px; line-height: 1.6; }
-  .portfolio-info ul li strong { display: block; margin-bottom: 2px; color: var(--heading-color); }
-  .case-study-btn {
-    display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
-    padding: 11px 24px; border: 2px solid var(--accent-color); border-radius: 4px;
-    background: var(--accent-color); color: var(--contrast-color); font-weight: 600;
-    text-decoration: none; transition: .3s ease;
-  }
-  .case-study-btn:hover { background: transparent; color: var(--accent-color); }
-  .case-study-btn.secondary { background: transparent; color: var(--accent-color); }
-  .case-study-btn.secondary:hover { background: var(--accent-color); color: var(--contrast-color); }
-  .project-actions {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
-    margin-top: 28px;
-  }
-  .case-study-nav {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
-    margin-bottom: 55px; padding: 18px; border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
-    border-radius: 8px; background: var(--surface-color);
-    box-shadow: 0 8px 30px color-mix(in srgb, var(--default-color), transparent 94%);
-  }
-  .case-study-nav a {
-    padding: 8px 15px; border-radius: 4px; color: var(--default-color);
-    font-size: 14px; font-weight: 500; text-decoration: none; transition: .3s ease;
-  }
-  .case-study-nav a:hover { background: var(--accent-color); color: var(--contrast-color); }
-  .study-section { padding: 70px 0; }
-  .study-heading {
-    position: relative; margin-bottom: 24px; padding-bottom: 14px;
-    color: var(--heading-color); font-size: 30px; font-weight: 700;
-  }
-  .study-heading::after {
-    content: ""; position: absolute; left: 0; bottom: 0; width: 55px; height: 3px;
-    background: var(--accent-color);
-  }
-  .study-subheading { margin-bottom: 14px; color: var(--heading-color); font-size: 21px; font-weight: 600; }
-  .study-text { font-size: 16px; line-height: 1.85; }
-  .highlight-box, .content-card, .method-card, .feature-card, .test-card, .resource-card {
-    height: 100%; padding: 28px; border-radius: 7px; background: var(--surface-color);
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 89%);
-    box-shadow: 0 8px 26px color-mix(in srgb, var(--default-color), transparent 94%);
-  }
-  .highlight-box { border-left: 4px solid var(--accent-color); }
-  .highlight-box i, .method-card i, .feature-card i {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 48px; height: 48px; margin-bottom: 18px; border-radius: 6px;
-    background: color-mix(in srgb, var(--accent-color), transparent 88%);
-    color: var(--accent-color); font-size: 23px;
-  }
-  .highlight-box h4, .method-card h4, .feature-card h4, .test-card h4, .resource-card h4 {
-    margin-bottom: 12px; color: var(--heading-color); font-size: 19px; font-weight: 600;
-  }
-  .highlight-box p, .method-card p, .feature-card p, .test-card p, .resource-card p { margin: 0; line-height: 1.75; }
-  .method-type {
-    display: inline-block; margin-bottom: 14px; padding: 5px 10px; border-radius: 20px;
-    background: color-mix(in srgb, var(--accent-color), transparent 90%);
-    color: var(--accent-color); font-size: 12px; font-weight: 600; text-transform: uppercase;
-  }
-  .architecture-grid, .workflow-grid { display: grid; gap: 18px; margin-top: 35px; }
-  .architecture-grid { grid-template-columns: repeat(4, 1fr); }
-  .workflow-grid { grid-template-columns: repeat(4, 1fr); }
-  .architecture-item, .workflow-step {
-    padding: 24px 20px; border-radius: 7px; background: var(--surface-color);
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
-  }
-  .architecture-item { text-align: center; border-top: 4px solid var(--accent-color); }
-  .architecture-item i { display: block; margin-bottom: 12px; color: var(--accent-color); font-size: 28px; }
-  .architecture-item h4, .workflow-step h4 { color: var(--heading-color); font-size: 17px; font-weight: 600; }
-  .architecture-item p, .workflow-step p { margin: 0; font-size: 14px; line-height: 1.7; }
-  .workflow-number {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 38px; height: 38px; margin-bottom: 16px; border-radius: 50%;
-    background: var(--accent-color); color: var(--contrast-color); font-weight: 700;
-  }
-  .comparison-table { overflow-x: auto; border-radius: 8px; box-shadow: 0 8px 28px color-mix(in srgb, var(--default-color), transparent 94%); }
-  .comparison-table table { margin-bottom: 0; }
-  .comparison-table thead th { padding: 18px; background: var(--heading-color); color: var(--contrast-color); }
-  .comparison-table tbody td { padding: 18px; vertical-align: top; line-height: 1.6; }
-  .clean-list { margin: 0; padding: 0; list-style: none; }
-  .clean-list li { position: relative; margin-bottom: 13px; padding-left: 28px; line-height: 1.7; }
-  .clean-list li::before {
-    content: "\F26A"; position: absolute; left: 0; top: 2px;
-    color: var(--accent-color); font-family: "bootstrap-icons";
-  }
-  .resource-card { display: flex; align-items: flex-start; gap: 16px; }
-  .resource-card > i { flex-shrink: 0; color: var(--accent-color); font-size: 27px; }
-  .resource-card > div {
-    display: flex; flex-direction: column; align-items: flex-start; height: 100%;
-  }
-  .resource-card-link {
-    display: block; height: 100%; color: inherit; text-decoration: none;
-  }
-  .resource-card-link .resource-card { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
-  .resource-card-link:hover .resource-card {
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, var(--accent-color), transparent 45%);
-    box-shadow: 0 12px 32px color-mix(in srgb, var(--default-color), transparent 90%);
-  }
-  .resource-card-link:hover h4 { color: var(--accent-color); }
-  .resource-link {
-    display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
-    color: var(--accent-color); font-size: 14px; font-weight: 600;
-  }
-  .resource-link i {
-    flex-shrink: 0; color: inherit; font-size: 14px; transition: transform .3s ease;
-  }
-  .resource-card-link:hover .resource-link i { transform: translateX(4px); }
-  .closing-statement {
-    padding: 42px; border-radius: 8px; background: var(--heading-color);
-    color: var(--contrast-color); text-align: center;
-  }
-  .closing-statement i { margin-bottom: 18px; color: var(--accent-color); font-size: 36px; }
-  .closing-statement p {
-    max-width: 930px; margin: 0 auto; color: var(--contrast-color);
-    font-family: var(--heading-font); font-size: 21px; font-weight: 500; line-height: 1.65;
-  }
-  @media (max-width: 1199px) {
-    .architecture-grid, .workflow-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 767px) {
-    .study-section { padding: 50px 0; }
-    .study-heading { font-size: 25px; }
-    .case-study-nav { justify-content: flex-start; }
-    .case-study-nav a { flex: 1 1 auto; text-align: center; }
-    .architecture-grid, .workflow-grid { grid-template-columns: 1fr; }
-    .closing-statement { padding: 30px 22px; }
-    .closing-statement p { font-size: 18px; }
-  }
+    html { scroll-behavior: smooth; }
+    .case-study-block { scroll-margin-top: 120px; }
+    .portfolio-info ul li { line-height: 1.6; margin-bottom: 12px; }
+    .portfolio-info ul li strong { display: block; margin-bottom: 2px; color: var(--heading-color); }
 
-  
+    .case-study-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 18px; padding: 11px 24px; border: 2px solid var(--accent-color);
+      border-radius: 4px; background: var(--accent-color); color: var(--contrast-color);
+      font-size: 14px; font-weight: 600; text-decoration: none; transition: .3s ease;
+    }
+    .case-study-btn:hover { background: transparent; color: var(--accent-color); }
+    .case-study-btn i { transition: transform .3s ease; }
+    .case-study-btn:hover i { transform: translateY(3px); }
+
+    .case-study-actions {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+      margin: 28px 0 34px;
+    }
+    .project-action {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px 20px; border: 2px solid var(--accent-color); border-radius: 5px;
+      font-size: 14px; font-weight: 600; text-decoration: none; transition: .3s ease;
+    }
+    .project-action.primary-action {
+      background: var(--accent-color); color: var(--contrast-color);
+    }
+    .project-action.primary-action:hover {
+      background: transparent; color: var(--accent-color);
+    }
+    .project-action.secondary-action {
+      background: transparent; color: var(--accent-color);
+    }
+    .project-action.secondary-action:hover {
+      background: var(--accent-color); color: var(--contrast-color);
+    }
+    .project-action i { font-size: 16px; }
+
+
+    .case-study-nav {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+      margin: 0 auto 55px; padding: 18px; border-radius: 8px;
+      border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+      background: var(--surface-color);
+      box-shadow: 0 8px 30px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+    .case-study-nav a {
+      padding: 8px 15px; border-radius: 4px; color: var(--default-color);
+      font-size: 14px; font-weight: 500; text-decoration: none; transition: .3s ease;
+    }
+    .case-study-nav a:hover { background: var(--accent-color); color: var(--contrast-color); }
+
+    .study-section { padding: 70px 0; }
+    .study-section:nth-of-type(even) {
+      background: color-mix(in srgb, var(--background-color), var(--accent-color) 2%);
+    }
+    .study-heading {
+      position: relative; margin-bottom: 24px; padding-bottom: 14px;
+      color: var(--heading-color); font-size: 30px; font-weight: 700;
+    }
+    .study-heading::after {
+      position: absolute; left: 0; bottom: 0; width: 55px; height: 3px;
+      background: var(--accent-color); content: "";
+    }
+    .study-subheading { margin-bottom: 14px; color: var(--heading-color); font-size: 21px; font-weight: 600; }
+    .study-text { color: var(--default-color); font-size: 16px; line-height: 1.85; }
+
+    .highlight-box, .card-box, .test-card, .decision-card, .resource-card {
+      height: 100%; border-radius: 7px; background: var(--surface-color);
+      box-shadow: 0 8px 28px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+    .highlight-box { padding: 30px; border-left: 4px solid var(--accent-color); }
+    .highlight-box i, .card-box i {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; margin-bottom: 18px; border-radius: 6px;
+      background: color-mix(in srgb, var(--accent-color), transparent 88%);
+      color: var(--accent-color); font-size: 23px;
+    }
+    .highlight-box h4, .card-box h4, .test-card h4, .decision-card h4, .resource-card h4 {
+      margin-bottom: 12px; color: var(--heading-color); font-size: 19px; font-weight: 600;
+    }
+    .highlight-box p, .card-box p, .test-card p, .decision-card p, .resource-card p { margin-bottom: 0; line-height: 1.75; }
+
+    .card-box {
+      padding: 28px; border: 1px solid color-mix(in srgb, var(--default-color), transparent 89%);
+      transition: .3s ease;
+    }
+    .card-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px color-mix(in srgb, var(--default-color), transparent 91%);
+    }
+    .tag {
+      display: inline-block; margin-bottom: 14px; padding: 5px 10px; border-radius: 20px;
+      background: color-mix(in srgb, var(--accent-color), transparent 90%);
+      color: var(--accent-color); font-size: 12px; font-weight: 600;
+    }
+    .formula {
+      margin: 14px 0; color: var(--accent-color); font-family: "Times New Roman", serif;
+      font-size: 24px; font-weight: 600; text-align: center;
+    }
+
+    .architecture-grid {
+      display: grid; grid-template-columns: repeat(5, minmax(150px, 1fr)); gap: 14px; margin-top: 35px;
+    }
+    .architecture-item {
+      padding: 24px 18px; border-top: 4px solid var(--accent-color); border-radius: 6px;
+      background: var(--surface-color); text-align: center;
+      box-shadow: 0 8px 25px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+    .architecture-item i { margin-bottom: 13px; color: var(--accent-color); font-size: 28px; }
+    .architecture-item h4 { margin-bottom: 9px; color: var(--heading-color); font-size: 16px; font-weight: 600; }
+    .architecture-item p { margin: 0; font-size: 13px; line-height: 1.6; }
+
+    .workflow-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 35px; }
+    .workflow-step {
+      min-height: 195px; padding: 28px 22px 22px; border-radius: 7px;
+      border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+      background: var(--surface-color);
+    }
+    .workflow-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; margin-bottom: 17px; border-radius: 50%;
+      background: var(--accent-color); color: var(--contrast-color); font-weight: 700;
+    }
+    .workflow-step h4 { margin-bottom: 10px; color: var(--heading-color); font-size: 17px; font-weight: 600; }
+    .workflow-step p { margin: 0; font-size: 14px; line-height: 1.7; }
+
+    .comparison-table {
+      overflow: hidden; border-radius: 8px; background: var(--surface-color);
+      border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+      box-shadow: 0 8px 28px color-mix(in srgb, var(--default-color), transparent 94%);
+    }
+    .comparison-table table { margin-bottom: 0; }
+    .comparison-table thead th {
+      padding: 18px; background: var(--heading-color); color: var(--contrast-color);
+      font-size: 14px; font-weight: 600; vertical-align: middle;
+    }
+    .comparison-table tbody td { padding: 18px; font-size: 14px; line-height: 1.6; vertical-align: top; }
+
+    .test-card, .decision-card { padding: 26px; border-left: 4px solid var(--accent-color); }
+    .resource-card { display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%); }
+    .resource-card i { flex-shrink: 0; color: var(--accent-color); font-size: 27px; }
+    .resource-card p { font-size: 14px; line-height: 1.65; }
+
+    .resource-card-link {
+      color: inherit; text-decoration: none; transition: .3s ease;
+    }
+    .resource-card-link:hover {
+      color: inherit; transform: translateY(-5px);
+      box-shadow: 0 12px 32px color-mix(in srgb, var(--default-color), transparent 91%);
+    }
+    .resource-link {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
+      color: var(--accent-color); font-size: 14px; font-weight: 600;
+    }
+    .resource-link i { font-size: 14px; transition: transform .3s ease; }
+    .resource-card-link:hover .resource-link i { transform: translateX(4px); }
+
+    .strength-list, .limitations-list, .future-list { margin: 0; padding: 0; list-style: none; }
+    .strength-list li, .limitations-list li, .future-list li {
+      position: relative; margin-bottom: 13px; padding-left: 28px; line-height: 1.7;
+    }
+    .strength-list li::before, .limitations-list li::before, .future-list li::before {
+      position: absolute; top: 2px; left: 0; color: var(--accent-color); font-family: "bootstrap-icons";
+    }
+    .strength-list li::before { content: "\F26A"; }
+    .limitations-list li::before { content: "\F33A"; }
+    .future-list li::before { content: "\F138"; }
+
+    .closing-statement {
+      padding: 42px; border-radius: 8px; background: var(--heading-color);
+      color: var(--contrast-color); text-align: center;
+    }
+    .closing-statement i { margin-bottom: 18px; color: var(--accent-color); font-size: 36px; }
+    .closing-statement p {
+      max-width: 930px; margin: 0 auto; color: var(--contrast-color);
+      font-family: var(--heading-font); font-size: 21px; font-weight: 500; line-height: 1.65;
+    }
+
+    @media (max-width: 1199px) {
+      .architecture-grid { grid-template-columns: repeat(3, 1fr); }
+      .workflow-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 767px) {
+      .study-section { padding: 50px 0; }
+      .study-heading { font-size: 25px; }
+      .case-study-nav { justify-content: flex-start; }
+      .case-study-nav a { flex: 1 1 auto; text-align: center; }
+      .architecture-grid, .workflow-grid { grid-template-columns: 1fr; }
+      .comparison-table { overflow-x: auto; }
+      .closing-statement { padding: 30px 22px; }
+      .closing-statement p { font-size: 18px; }
+      .case-study-actions { flex-direction: column; align-items: stretch; }
+      .project-action { width: 100%; }
+    }
   </style>
 </head>
 
@@ -178,7 +241,6 @@
           </li>
           <li><a href="contact.html">Contact</a></li>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </ul>
         
       </nav>
@@ -200,7 +262,7 @@
     <section id="portfolio-details" class="portfolio-details section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Serial vs Parallel Sorting Benchmark</h2>
-        <p>Python · Multiprocessing · Threading · Sorting Algorithms · Performance Analysis · Data Visualization</p>
+        <p>Python · Streamlit · Multiprocessing · Threading · Sorting Algorithms · Performance Analysis · Data Visualization</p>
       </div>
     </section>
 
@@ -211,6 +273,32 @@
       </div>
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="case-study-actions" aria-label="Project resources">
+          <a href="https://parallel-sorting-benchmark.streamlit.app/"
+             class="project-action primary-action"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-play-circle"></i>
+            Live Application
+          </a>
+
+          <a href="https://github.com/mersiademova/parallel-sorting-benchmark"
+             class="project-action secondary-action"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-github"></i>
+            Source Code
+          </a>
+
+          <a href="writings/pp.pdf"
+             class="project-action secondary-action"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-file-earmark-pdf"></i>
+            Academic Paper
+          </a>
+        </div>
+
         <nav class="case-study-nav" aria-label="Case study navigation">
           <a href="#problem">Problem</a>
           <a href="#objective">Objective</a>
@@ -254,7 +342,7 @@
         <div class="row gy-4">
           <div class="col-lg-7" data-aos="fade-up">
             <h2 class="study-heading">Project Objective</h2>
-            <p class="study-text">The objective was to develop a desktop benchmarking application that compares serial, multithreaded, and multiprocessing implementations of several sorting algorithms across progressively larger datasets.</p>
+            <p class="study-text">The objective was to develop a benchmarking application that compares serial, multithreaded, and multiprocessing implementations of several sorting algorithms across progressively larger datasets. The project was originally built with a desktop interface and later adapted into a browser-accessible Streamlit interface.</p>
             <p class="study-text">The system measures execution time, speedup, efficiency, scalability, and overhead while preserving a fair serial baseline and equivalent input data.</p>
             <p class="study-text">The project combines algorithm implementation, parallel programming, experimental design, workload control, data collection, numerical analysis, and visualization.</p>
           </div>
@@ -340,7 +428,7 @@
       <div class="container">
         <div class="row" data-aos="fade-up"><div class="col-lg-9"><h2 class="study-heading">Application Architecture</h2><p class="study-text">The system separates interface control, dataset generation, algorithms, execution orchestration, measurement, and visualization.</p></div></div>
         <div class="architecture-grid" data-aos="fade-up" data-aos-delay="100">
-          <div class="architecture-item"><i class="bi bi-window"></i><h4>Presentation Layer</h4><p>Tkinter interface, controls, tables, status messages, and charts.</p></div>
+          <div class="architecture-item"><i class="bi bi-window"></i><h4>Presentation Layer</h4><p>Tkinter desktop and Streamlit web interfaces, controls, tables, status messages, and charts.</p></div>
           <div class="architecture-item"><i class="bi bi-database"></i><h4>Dataset Layer</h4><p>Random dataset generation, size control, copying, and reuse.</p></div>
           <div class="architecture-item"><i class="bi bi-code-square"></i><h4>Algorithm Layer</h4><p>Bubble Sort, Merge Sort, Quick Sort, and merge procedures.</p></div>
           <div class="architecture-item"><i class="bi bi-cpu"></i><h4>Execution Layer</h4><p>Serial, threading, multiprocessing, chunking, and workers.</p></div>
@@ -423,7 +511,7 @@
         <div class="row gy-4">
           <div class="col-lg-7" data-aos="fade-up">
             <h2 class="study-heading">Project Outcome</h2>
-            <p class="study-text">The result is a functional graphical benchmarking application that compares three sorting algorithms across serial, multithreaded, and multiprocessing execution.</p>
+            <p class="study-text">The result is a functional benchmarking application with desktop and browser-accessible interfaces that compares three sorting algorithms across serial, multithreaded, and multiprocessing execution.</p>
             <p class="study-text">The system transforms raw timings into an interpretable performance study through speedup, efficiency, scalability, result tables, charts, and heatmaps.</p>
             <p class="study-text">The project demonstrates that performance engineering requires a fair baseline, controlled input, appropriate workload limits, reproducible measurement, and careful interpretation.</p>
           </div>
@@ -484,12 +572,71 @@
       <div class="container">
         <div class="row" data-aos="fade-up"><div class="col-lg-9"><h2 class="study-heading">Documentation and Project Materials</h2><p class="study-text">The project can be supported by technical, experimental, and visual materials.</p></div></div>
         <div class="row gy-4 mt-2">
-          <div class="col-md-6 col-lg-4" data-aos="fade-up"><div class="resource-card"><i class="bi bi-file-earmark-text"></i><div><h4>Seminar Paper</h4><p>Theory, algorithms, experimental setup, measurements, and conclusions.</p></div></div></div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50"><div class="resource-card"><i class="bi bi-file-earmark-code"></i><div><h4>Technical Documentation</h4><p>Modules, sorting functions, worker management, timing logic, and visualization.</p></div></div></div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100"><div class="resource-card"><i class="bi bi-journal-code"></i><div><h4>Source Code</h4><p>Python implementation of serial, threaded, and multiprocessing benchmarks.</p></div></div></div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150"><div class="resource-card"><i class="bi bi-images"></i><div><h4>Application Screenshots</h4><p>Configuration, tables, charts, efficiency views, and heatmaps.</p></div></div></div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200"><div class="resource-card"><i class="bi bi-play-btn"></i><div><h4>Video Demonstration</h4><p>A future walkthrough of configuration, execution, and interpretation.</p></div></div></div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250"><div class="resource-card"><i class="bi bi-github"></i><div><h4>GitHub Repository</h4><p>Repository link can be added after the code and README are finalized.</p></div></div></div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <a href="writings/pp.pdf" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-file-earmark-pdf"></i>
+              <div>
+                <h4>Academic Paper</h4>
+                <p>Theory, algorithms, experimental setup, measurements, and conclusions.</p>
+                <span class="resource-link">Open PDF <i class="bi bi-arrow-right"></i></span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+            <a href="https://parallel-sorting-benchmark.streamlit.app/" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-play-circle"></i>
+              <div>
+                <h4>Live Web Application</h4>
+                <p>Interactive Streamlit version with Basic, User, and Auto benchmark modes.</p>
+                <span class="resource-link">Launch application <i class="bi bi-arrow-right"></i></span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <a href="https://github.com/mersiademova/parallel-sorting-benchmark" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-github"></i>
+              <div>
+                <h4>Source Code</h4>
+                <p>Desktop and Streamlit interfaces with serial, threaded, and multiprocessing benchmark logic.</p>
+                <span class="resource-link">View source code <i class="bi bi-arrow-right"></i></span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+            <a href="https://github.com/mersiademova/parallel-sorting-benchmark#readme" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-file-earmark-code"></i>
+              <div>
+                <h4>Repository README</h4>
+                <p>Project structure, execution modes, installation steps, and usage instructions.</p>
+                <span class="resource-link">Read README <i class="bi bi-arrow-right"></i></span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <a href="https://github.com/mersiademova/parallel-sorting-benchmark/blob/main/main_launcher.py" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-window"></i>
+              <div>
+                <h4>Desktop Application</h4>
+                <p>Original Tkinter launcher and interface modes preserved within the same project.</p>
+                <span class="resource-link">View desktop entry point <i class="bi bi-arrow-right"></i></span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+            <a href="https://github.com/mersiademova/parallel-sorting-benchmark/tree/main/visualizations" class="resource-card resource-card-link" target="_blank" rel="noopener noreferrer">
+              <i class="bi bi-bar-chart-line"></i>
+              <div>
+                <h4>Visualization Modules</h4>
+                <p>Charts, comparison views, efficiency plots, and heatmap components.</p>
+                <span class="resource-link">Explore visualizations <i class="bi bi-arrow-right"></i></span>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </section>
