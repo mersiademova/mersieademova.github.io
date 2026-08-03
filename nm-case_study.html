@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Numerical Methods Solver for Linear Systems | Mersie Ademova</title>
-  <meta name="description" content="Case study of a Python desktop application for solving systems of linear equations using Gaussian elimination, Jacobi, and Gauss-Seidel methods.">
-  <meta name="keywords" content="Python, numerical methods, Gaussian elimination, Jacobi, Gauss-Seidel, linear algebra, convergence analysis">
+  <meta name="description" content="Case study of an interactive Python web application for solving systems of linear equations using Gaussian elimination, Jacobi, and Gauss-Seidel methods.">
+  <meta name="keywords" content="Python, Streamlit, numerical methods, Gaussian elimination, Jacobi, Gauss-Seidel, linear algebra, convergence analysis">
 
   <link href="assets/img/favicon.png?v=2" rel="icon" type="image/png" sizes="32x32">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -34,6 +34,13 @@
       text-decoration: none; transition: .3s ease;
     }
     .case-study-btn:hover { background: transparent; color: var(--accent-color); }
+    .case-study-btn.secondary { background: transparent; color: var(--accent-color); }
+    .case-study-btn.secondary:hover { background: var(--accent-color); color: var(--contrast-color); }
+
+    .project-actions {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+      margin-top: 28px;
+    }
 
     .case-study-nav {
       display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
@@ -112,6 +119,16 @@
 
     .resource-card { display: flex; align-items: flex-start; gap: 16px; }
     .resource-card i { flex-shrink: 0; color: var(--accent-color); font-size: 27px; }
+    .resource-card-link {
+      display: block; height: 100%; color: inherit; text-decoration: none;
+    }
+    .resource-card-link .resource-card { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .resource-card-link:hover .resource-card {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--accent-color), transparent 45%);
+      box-shadow: 0 12px 32px color-mix(in srgb, var(--default-color), transparent 90%);
+    }
+    .resource-card-link:hover h4 { color: var(--accent-color); }
 
     .closing-statement {
       padding: 42px; border-radius: 8px; background: var(--heading-color);
@@ -182,8 +199,33 @@
     <section id="portfolio-details" class="portfolio-details section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Numerical Methods Solver for Linear Systems</h2>
-        <p>Python · Numerical Analysis · Linear Algebra · Iterative Algorithms · Data Visualization</p>
+        <p>Python · Streamlit · Numerical Analysis · Linear Algebra · Iterative Algorithms · Data Visualization</p>
+
+        <div class="project-actions" aria-label="Project links">
+          <a class="case-study-btn"
+             href="https://linear-systems-numerical-methods.streamlit.app"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-box-arrow-up-right"></i> Live Application
+          </a>
+
+          <a class="case-study-btn secondary"
+             href="https://github.com/mersiademova/linear-systems-numerical-methods"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-github"></i> Source Code
+          </a>
+
+          <a class="case-study-btn secondary"
+             href="writings/nm.pdf"
+             target="_blank"
+             rel="noopener noreferrer">
+            <i class="bi bi-file-earmark-pdf"></i> Project Report
+          </a>
+        </div>
       </div>
+    </section>
+
     <section id="case-study" class="section case-study-block">
       <div class="container section-title" data-aos="fade-up">
         <h2>Case Study</h2>
@@ -251,11 +293,12 @@
           <div class="col-lg-7" data-aos="fade-up">
             <h2 class="study-heading">Project Objective</h2>
             <p class="study-text">
-              The objective was to develop a desktop application that implements direct and iterative methods for
-              solving linear systems while preserving the mathematical logic behind each method.
+              The objective was to develop an interactive application that implements direct and iterative methods
+              for solving linear systems while preserving the mathematical logic behind each method.
             </p>
             <p class="study-text">
-              The application supports structured input, parameter configuration, diagonal-dominance validation,
+              The original desktop implementation was later adapted into a browser-based Streamlit application.
+              The current version supports structured input, parameter configuration, diagonal-dominance validation,
               step-by-step iteration tracking, error calculation, convergence monitoring, and graphical visualization.
             </p>
             <p class="study-text">
@@ -412,7 +455,7 @@
           <div class="architecture-item">
             <i class="bi bi-window"></i>
             <h4>Presentation Layer</h4>
-            <p>Graphical interface, dynamic input fields, controls, tables, and result panels.</p>
+            <p>Browser-based Streamlit interface, dynamic input fields, controls, tables, and result panels.</p>
           </div>
           <div class="architecture-item">
             <i class="bi bi-shield-check"></i>
@@ -559,8 +602,8 @@
           <div class="col-lg-7" data-aos="fade-up">
             <h2 class="study-heading">Project Outcome</h2>
             <p class="study-text">
-              The result is a functional desktop application that solves systems of linear equations using three
-              numerical methods and presents both final and intermediate computational results.
+              The result is a functional browser-based Python application that solves systems of linear equations
+              using three numerical methods and presents both final and intermediate computational results.
             </p>
             <p class="study-text">
               The project demonstrates how mathematical theory can be translated into modular algorithms, a usable
@@ -617,8 +660,8 @@
           <div class="col-lg-5" data-aos="fade-up">
             <h2 class="study-heading">Future Development</h2>
             <p class="study-text">
-              The current application provides a stable base for extending the numerical laboratory with additional
-              methods, larger systems, and broader analytical capabilities.
+              The current web application provides a stable base for extending the numerical laboratory with
+              additional methods, larger systems, and broader analytical capabilities.
             </p>
           </div>
 
@@ -633,7 +676,7 @@
               <li>Sparse-matrix support.</li>
               <li>Additional graphs for residuals, speed, and method comparison.</li>
               <li>Automatic recommendation of a suitable method.</li>
-              <li>Web-based or browser-accessible version.</li>
+              <li>Broader cross-device testing and deployment monitoring.</li>
             </ul>
           </div>
         </div>
@@ -646,19 +689,86 @@
           <div class="col-lg-9">
             <h2 class="study-heading">Documentation and Project Materials</h2>
             <p class="study-text">
-              The project can be supported by technical, mathematical, and visual materials explaining the methods,
-              implementation, testing process, and application behavior.
+              The project is supported by a live application, source code, an academic report, and implementation
+              materials explaining the methods, testing process, and application behavior.
             </p>
           </div>
         </div>
 
         <div class="row gy-4 mt-2">
-          <div class="col-md-6 col-lg-4" data-aos="fade-up"><div class="resource-card"><i class="bi bi-file-earmark-text"></i><div><h4>Project Report</h4><p>Academic explanation of the problem, methods, testing, and results.</p></div></div></div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50"><div class="resource-card"><i class="bi bi-file-earmark-code"></i><div><h4>Technical Documentation</h4><p>Application structure, functions, validation logic, interface, and graphs.</p></div></div></div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100"><div class="resource-card"><i class="bi bi-journal-code"></i><div><h4>Source Code</h4><p>Python implementation of all methods, interface, and result analysis.</p></div></div></div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150"><div class="resource-card"><i class="bi bi-images"></i><div><h4>Application Screenshots</h4><p>Input forms, iteration tables, results, and convergence views.</p></div></div></div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200"><div class="resource-card"><i class="bi bi-play-btn"></i><div><h4>Video Demonstration</h4><p>A future walkthrough of method selection, execution, and interpretation.</p></div></div></div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250"><div class="resource-card"><i class="bi bi-github"></i><div><h4>GitHub Repository</h4><p>Add the public repository link after preparing the final README and screenshots.</p></div></div></div>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up">
+            <a class="resource-card-link" href="writings/nm.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open project report">
+              <div class="resource-card">
+                <i class="bi bi-file-earmark-pdf"></i>
+                <div><h4>Project Report</h4><p>Academic explanation of the problem, methods, testing, and results.</p></div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+            <a class="resource-card-link"
+               href="https://linear-systems-numerical-methods.streamlit.app"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Open live application">
+              <div class="resource-card">
+                <i class="bi bi-box-arrow-up-right"></i>
+                <div><h4>Live Application</h4><p>Browser-based version for entering systems, running methods, and inspecting convergence.</p></div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <a class="resource-card-link"
+               href="https://github.com/mersiademova/linear-systems-numerical-methods"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Open source code">
+              <div class="resource-card">
+                <i class="bi bi-journal-code"></i>
+                <div><h4>Source Code</h4><p>Python implementation of the numerical methods, interface, and result analysis.</p></div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+            <a class="resource-card-link"
+               href="https://github.com/mersiademova/linear-systems-numerical-methods#readme"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Open repository README">
+              <div class="resource-card">
+                <i class="bi bi-file-earmark-code"></i>
+                <div><h4>Repository README</h4><p>Project overview, setup instructions, dependencies, and application usage.</p></div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <a class="resource-card-link"
+               href="https://github.com/mersiademova/linear-systems-numerical-methods/tree/main/core"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Open numerical methods implementation">
+              <div class="resource-card">
+                <i class="bi bi-cpu"></i>
+                <div><h4>Numerical Core</h4><p>Separate modules for Gaussian elimination, Jacobi, and Gauss–Seidel methods.</p></div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+            <a class="resource-card-link"
+               href="https://linear-systems-numerical-methods.streamlit.app"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Open application interface and visualizations">
+              <div class="resource-card">
+                <i class="bi bi-graph-down"></i>
+                <div><h4>Interactive Results</h4><p>Iteration tables, final solutions, error values, and convergence graphs.</p></div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </section>
