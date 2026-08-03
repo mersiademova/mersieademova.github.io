@@ -175,7 +175,6 @@
   </a>
 
 </div>
-
              <style>html 
             .case-study-btn {
   display: inline-flex;
@@ -212,15 +211,27 @@
 .project-actions {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 14px;
-  row-gap: 14px;
-  margin-top: 24px;
   align-items: center;
+  gap: 12px;
+  margin-top: 24px;
 }
 
-.project-actions .project-action {
-  margin: 0;
+
+.project-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
 }
+
+
 .primary-action {
   background: var(--accent-color);
   color: var(--contrast-color);
