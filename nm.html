@@ -149,9 +149,28 @@
             </div>
             <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
               <p>A graphical application for solving systems of linear equations using Gaussian elimination, Jacobi, and Gauss–Seidel methods. The system supports equation input, parameter configuration, diagonal-dominance validation, iterative result tracking, error analysis, convergence monitoring, and graphical presentation of numerical results.</p>
-            <a href="nm-case_study.html" class="case-study-btn">View Case Study<i class="bi bi-arrow-right"></i></a>
-             <a href="https://github.com/mersiademova/linear-systems-numerical-methods" class="case-study-btn">View Code<i class="bi bi-arrow-right"></i></a>
-             <a href="https://linear-systems-numerical-methods.streamlit.app/" class="case-study-btn">View Demo<i class="bi bi-arrow-right"></i></a>
+            <div class="project-actions">
+  <a href="nm-case-study.html" class="project-action primary-action">
+    View Case Study
+    <i class="bi bi-arrow-right"></i>
+  </a>
+
+  <a href="https://linear-systems-numerical-methods.streamlit.app/"
+     class="project-action secondary-action"
+     target="_blank"
+     rel="noopener noreferrer">
+    <i class="bi bi-play-circle"></i>
+    Live Application
+  </a>
+
+  <a href="https://github.com/mersiademova/linear-systems-numerical-methods"
+     class="project-action secondary-action"
+     target="_blank"
+     rel="noopener noreferrer">
+    <i class="bi bi-github"></i>
+    Source Code
+  </a>
+</div>
              <style>html 
             .case-study-btn {
   display: inline-flex;
@@ -181,6 +200,62 @@
 
 .case-study-btn:hover i {
   transform: translateX(4px);
+}
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.project-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 2px solid var(--accent-color);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.primary-action {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+.primary-action:hover {
+  background: transparent;
+  color: var(--accent-color);
+}
+
+.secondary-action {
+  background: transparent;
+  color: var(--accent-color);
+}
+
+.secondary-action:hover {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+.project-action i {
+  font-size: 16px;
+}
+
+@media (max-width: 575px) {
+  .project-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .project-action {
+    width: 100%;
+  }
 }
 </style>
             </div>
