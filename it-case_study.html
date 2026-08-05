@@ -1,46 +1,29 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Information Theory Toolkit | Mersie Ademova</title>
-
-  <meta
-    name="description"
-    content="Case study of a Python desktop toolkit for entropy analysis, Shannon-Fano coding, Huffman coding, Kraft inequality validation, communication channel analysis, mutual information, and compression comparison."
-  >
-
-  <meta
-    name="keywords"
-    content="Python, information theory, entropy, Huffman coding, Shannon-Fano coding, Kraft inequality, mutual information, data compression, Tkinter"
-  >
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png?v=2" rel="icon" type="image/png" sizes="32x32">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
-
-  <!-- Custom CSS for this case study -->
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Information Theory Toolkit | Mersie Ademova</title>
+<meta content="Case study of a Python desktop and Streamlit web toolkit for entropy analysis, Huffman and Shannon-Fano coding, prefix-code validation, communication-channel analysis, compression metrics, and coding-method comparison." name="description"/>
+<meta content="Python, Streamlit, Tkinter, information theory, entropy, Huffman coding, Shannon-Fano coding, prefix-free code, Kraft inequality, mutual information, communication channel, compression analysis" name="keywords"/>
+<!-- Favicons -->
+<link href="assets/img/favicon.png?v=2" rel="icon" sizes="32x32" type="image/png"/>
+<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&amp;family=Poppins:wght@300;400;500;600;700&amp;family=Raleway:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Vendor CSS Files -->
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet"/>
+<link href="assets/vendor/aos/aos.css" rel="stylesheet"/>
+<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"/>
+<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet"/>
+<!-- Main CSS File -->
+<link href="assets/css/main.css" rel="stylesheet"/>
+<!-- Custom CSS for this case study -->
+<style>
     html {
       scroll-behavior: smooth;
     }
@@ -534,9 +517,42 @@
         font-size: 18px;
       }
     }
-  </style>
+  
 
-  <!-- =======================================================
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      column-gap: 14px;
+      row-gap: 14px;
+      margin-top: 28px;
+      align-items: center;
+    }
+
+    .project-actions .case-study-btn {
+      margin-top: 0;
+    }
+
+    .resource-card a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 12px;
+      color: var(--accent-color);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .resource-card a:hover {
+      text-decoration: underline;
+    }
+
+
+    .resource-card a i {
+      font-size: 14px;
+    }
+</style>
+<!-- =======================================================
   * Template Name: Kelly
   * Template URL:
     https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/
@@ -545,120 +561,81 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-
 <body class="portfolio-details-page">
-
-  <!-- Header -->
-  <header
-    id="header"
-    class="header d-flex align-items-center light-background sticky-top"
-  >
-    <div
-      class="container-fluid position-relative d-flex align-items-center justify-content-between"
-    >
-
-      <a
-        href="index.html"
-        class="logo d-flex align-items-center me-auto me-xl-0"
-      >
-        <!-- Optional logo -->
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="resume.html">Resume</a></li>
-          <li><a href="services.html">What I Do</a></li>
-          <li><a href="portfolio.html" class="active">Portfolio</a></li>
-          <li class="dropdown">
-            <a href="#">
-              <span>Writings</span>
-              <i class="bi bi-chevron-down toggle-dropdown"></i>
-            </a>
-
-            <ul>
-              <li><a href="writings/it.pdf">Academic Papers</a></li>
-              
-              
-            </ul>
-          </li>
-
-          <li><a href="contact.html">Contact</a></li>
-          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-        </ul>
-
-        
-      </nav>
-
-      <div class="header-social-links">
-        
-         <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
-         <a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-         <a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
-         <a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
-         <a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
-
-    </div>
-  </header>
-  <!-- /Header -->
-
-
-  <main class="main">
-
-    <!-- Portfolio Overview Section -->
-    <section id="portfolio-details" class="portfolio-details section">
-
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Information Theory Toolkit</h2>
-
-        <p>
-          Python · Tkinter · Entropy Analysis · Coding Algorithms ·
-          Communication Channels · Data Visualization
-        </p>
-      </div>
-
-    <!-- Case Study Introduction -->
-    <section id="case-study" class="section case-study-block">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Case Study</h2>
-
-        <p>
-          Transforming abstract information-theory concepts into an
-          interactive computational and visual environment.
-        </p>
-      </div>
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <nav class="case-study-nav" aria-label="Case study navigation">
-          <a href="#problem">Problem</a>
-          <a href="#objective">Objective</a>
-          <a href="#foundations">Foundations</a>
-          <a href="#modules">Modules</a>
-          <a href="#coding">Coding</a>
-          <a href="#kraft">Validation</a>
-          <a href="#channels">Channels</a>
-          <a href="#compression">Compression</a>
-          <a href="#architecture">Architecture</a>
-          <a href="#workflow">Workflow</a>
-          <a href="#testing">Testing</a>
-          <a href="#outcome">Outcome</a>
-          <a href="#documentation">Documentation</a>
-        </nav>
-      </div>
-    </section>
-    <!-- /Case Study Introduction -->
-
-
-    <!-- Problem -->
-    <section id="problem" class="study-section case-study-block">
-      <div class="container">
-        <div class="row gy-4 align-items-stretch">
-
-          <div class="col-lg-7" data-aos="fade-up">
-            <h2 class="study-heading">The Problem</h2>
-
-            <p class="study-text">
+<!-- Header -->
+<header class="header d-flex align-items-center light-background sticky-top" id="header">
+<div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+<a class="logo d-flex align-items-center me-auto me-xl-0" href="index.html">
+<!-- Optional logo -->
+</a>
+<nav class="navmenu" id="navmenu">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="resume.html">Resume</a></li>
+<li><a href="services.html">What I Do</a></li>
+<li><a class="active" href="portfolio.html">Portfolio</a></li>
+<li class="dropdown">
+<a href="#">
+<span>Writings</span>
+<i class="bi bi-chevron-down toggle-dropdown"></i>
+</a>
+<ul>
+<li><a href="writings/it.pdf">Academic Paper</a></li>
+</ul>
+</li>
+<li><a href="contact.html">Contact</a></li>
+<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</ul>
+</nav>
+<div class="header-social-links">
+<a aria-label="GitHub" class="github" href="https://github.com/mersiademova" rel="noopener noreferrer" target="_blank"><i class="bi bi-github"></i></a>
+<a aria-label="LinkedIn" class="linkedin" href="https://www.linkedin.com/in/mersie-ademova-752634277/" rel="noopener noreferrer" target="_blank"><i class="bi bi-linkedin"></i></a>
+<a aria-label="Email" class="email" href="mailto:ademovamersie@gmail.com"><i class="bi bi-envelope"></i></a>
+<a class="facebook" href="https://www.facebook.com/mersi.luciana"><i class="bi bi-facebook"></i></a>
+<a class="instagram" href="https://www.instagram.com/mersiademova/"><i class="bi bi-instagram"></i></a>
+</div>
+</div></header>
+<!-- /Header -->
+<main class="main">
+<!-- Portfolio Overview Section -->
+<section class="portfolio-details section" id="portfolio-details">
+<div class="container section-title" data-aos="fade-up">
+<h2>Information Theory Toolkit</h2>
+<p>Python · Tkinter · Streamlit · Entropy Analysis · Coding Algorithms · Communication Channels · Compression Metrics</p>
+</div>
+<!-- Case Study Introduction -->
+<section class="section case-study-block" id="case-study">
+<div class="container section-title" data-aos="fade-up">
+<h2>Case Study</h2>
+<p>Transforming abstract information-theory concepts into a desktop and browser-accessible computational environment.</p>
+</div>
+<div class="container" data-aos="fade-up" data-aos-delay="100">
+<nav aria-label="Case study navigation" class="case-study-nav">
+<a href="#problem">Problem</a>
+<a href="#objective">Objective</a>
+<a href="#foundations">Foundations</a>
+<a href="#modules">Modules</a>
+<a href="#coding">Coding</a>
+<a href="#kraft">Validation</a>
+<a href="#channels">Channels</a>
+<a href="#compression">Compression</a>
+<a href="#architecture">Architecture</a>
+<a href="#workflow">Workflow</a>
+<a href="#testing">Testing</a>
+<a href="#outcome">Outcome</a>
+<a href="#documentation">Documentation</a>
+</nav>
+<div class="project-actions"><a class="case-study-btn" href="https://information-theory-toolkit.streamlit.app/" rel="noopener noreferrer" target="_blank">Live Web Application<i class="bi bi-box-arrow-up-right"></i></a><a class="case-study-btn" href="https://github.com/mersiademova/information-theory-toolkit" rel="noopener noreferrer" target="_blank">Source Code<i class="bi bi-github"></i></a><a class="case-study-btn" href="writings/it.pdf" rel="noopener noreferrer" target="_blank">View Academic Paper<i class="bi bi-file-earmark-text"></i></a></div></div>
+</section>
+<!-- /Case Study Introduction -->
+<!-- Problem -->
+<section class="study-section case-study-block" id="problem">
+<div class="container">
+<div class="row gy-4 align-items-stretch">
+<div class="col-lg-7" data-aos="fade-up">
+<h2 class="study-heading">The Problem</h2>
+<p class="study-text">
               Information theory introduces abstract concepts such as
               entropy, redundancy, coding efficiency, prefix codes,
               conditional entropy, mutual information, and communication
@@ -666,29 +643,24 @@
               mathematically, their relationships are often difficult to
               understand when they are presented only as isolated formulas.
             </p>
-
-            <p class="study-text">
+<p class="study-text">
               Coding algorithms such as Shannon–Fano and Huffman also involve
               structured procedures whose behavior depends on symbol
               probabilities, tree construction, codeword lengths, and the
               resulting average code length.
             </p>
-
-            <p class="study-text">
+<p class="study-text">
               The challenge was therefore to create one environment that
               connects theoretical definitions, algorithm execution,
               numerical results, code validation, channel analysis, and
               visual interpretation.
             </p>
-          </div>
-
-          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <div class="highlight-box">
-              <i class="bi bi-lightbulb"></i>
-
-              <h4>Project Motivation</h4>
-
-              <p>
+</div>
+<div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+<div class="highlight-box">
+<i class="bi bi-lightbulb"></i>
+<h4>Project Motivation</h4>
+<p>
                 The toolkit was developed to make information-theory
                 processes observable. Instead of presenting only the final
                 entropy value or generated code, the application reveals the
@@ -696,1063 +668,706 @@
                 relationships, and compression result behind each
                 calculation.
               </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <!-- /Problem -->
-
-
-    <!-- Objective -->
-    <section id="objective" class="study-section case-study-block">
-      <div class="container">
-        <div class="row gy-4">
-
-          <div class="col-lg-7" data-aos="fade-up">
-            <h2 class="study-heading">Project Objective</h2>
-
-            <p class="study-text">
-              The objective was to develop a modular desktop toolkit that
-              supports the analysis of information sources, coding methods,
-              code validity, communication channels, and compression
-              performance within one graphical interface.
-            </p>
-
-            <p class="study-text">
-              The application was designed not only to calculate theoretical
-              quantities, but also to expose the internal logic of the
-              algorithms, compare methods, visualize structures, and present
-              results in a form that can be inspected and interpreted.
-            </p>
-
-            <p class="study-text">
-              The project combines mathematical modeling, recursive
-              algorithms, tree structures, probability analysis, interface
-              design, data visualization, and technical explanation.
-            </p>
-          </div>
-
-          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <div class="highlight-box">
-              <i class="bi bi-bullseye"></i>
-
-              <h4>Core Design Principle</h4>
-
-              <p>
-                Every result should remain explainable. The toolkit therefore
-                connects each numerical output to the probability
-                distribution, algorithm, tree, matrix, or code structure
-                from which it was derived.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <!-- /Objective -->
-
-
-    <!-- Foundations -->
-    <section id="foundations" class="study-section case-study-block">
-      <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Information-Theory Foundations</h2>
-
-            <p class="study-text">
-              The toolkit is built around several fundamental measures used
-              to describe information sources and communication channels.
-            </p>
-          </div>
-        </div>
-
-        <div class="row gy-4 mt-2">
-          <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <div class="formula-card">
-              <h4>Entropy</h4>
-              <div class="formula">H(X) = −Σ p(x) log₂ p(x)</div>
-              <p>
-                Measures the average uncertainty or information produced by
-                a discrete source.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
-            <div class="formula-card">
-              <h4>Maximum Entropy</h4>
-              <div class="formula">H<sub>max</sub> = log₂ n</div>
-              <p>
-                Represents the maximum uncertainty for a source with
-                <em>n</em> equally probable symbols.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="formula-card">
-              <h4>Redundancy</h4>
-              <div class="formula">R = 1 − H(X) / H<sub>max</sub></div>
-              <p>
-                Describes how far the source distribution is from maximum
-                uncertainty.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
-            <div class="formula-card">
-              <h4>Joint Entropy</h4>
-              <div class="formula">H(X,Y)</div>
-              <p>
-                Measures the uncertainty associated with two variables
-                considered together.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="formula-card">
-              <h4>Conditional Entropy</h4>
-              <div class="formula">H(Y|X) = H(X,Y) − H(X)</div>
-              <p>
-                Measures the remaining uncertainty in one variable when the
-                other is known.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
-            <div class="formula-card">
-              <h4>Mutual Information</h4>
-              <div class="formula">I(X;Y) = H(X) + H(Y) − H(X,Y)</div>
-              <p>
-                Measures how much information one variable provides about
-                another.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /Foundations -->
-
-
-    <!-- Modules -->
-    <section id="modules" class="study-section case-study-block">
-      <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Core Application Modules</h2>
-
-            <p class="study-text">
-              The toolkit is organized into independent but connected
-              modules, each responsible for a specific information-theory
-              problem.
-            </p>
-          </div>
-        </div>
-
-        <div class="row gy-4 mt-2">
-          <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <div class="module-card">
-              <i class="bi bi-pie-chart"></i>
-              <h4>Entropy and Redundancy</h4>
-              <p>
-                Calculates entropy, maximum entropy, redundancy, symbol
-                frequencies, and probability distributions, with tabular and
-                graphical presentation.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
-            <div class="module-card">
-              <i class="bi bi-diagram-2"></i>
-              <h4>Shannon–Fano Coding</h4>
-              <p>
-                Sorts symbols by probability, recursively divides them into
-                approximately balanced groups, and generates binary
-                codewords.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="module-card">
-              <i class="bi bi-bezier2"></i>
-              <h4>Huffman Coding</h4>
-              <p>
-                Builds a binary coding tree by repeatedly combining the least
-                probable nodes and generates an efficient prefix code.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
-            <div class="module-card">
-              <i class="bi bi-shield-check"></i>
-              <h4>Code Validation</h4>
-              <p>
-                Evaluates codeword lengths through Kraft’s inequality and
-                determines whether a prefix-code structure is theoretically
-                possible.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="module-card">
-              <i class="bi bi-broadcast"></i>
-              <h4>Channel Analysis</h4>
-              <p>
-                Processes input and output distributions, joint
-                probabilities, conditional behavior, entropy measures,
-                mutual information, and transmission error.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
-            <div class="module-card">
-              <i class="bi bi-file-earmark-zip"></i>
-              <h4>Compression Comparison</h4>
-              <p>
-                Compares original representation size with Shannon–Fano and
-                Huffman encoded sizes, average code lengths, and compression
-                efficiency.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /Modules -->
-
-
-    <!-- Coding Algorithms -->
-    <section id="coding" class="study-section case-study-block">
-      <div class="container">
-        <div class="row gy-4 align-items-stretch">
-
-          <div class="col-lg-6" data-aos="fade-up">
-            <h2 class="study-heading">Shannon–Fano Coding</h2>
-
-            <p class="study-text">
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- /Problem -->
+<!-- Objective -->
+<section class="study-section case-study-block" id="objective">
+<div class="container">
+<div class="row gy-4">
+<div class="col-lg-7" data-aos="fade-up">
+<h2 class="study-heading">Project Objective</h2>
+<p class="study-text">
+        The objective was to develop a modular information-theory toolkit that
+        supports source analysis, coding methods, prefix-code validation,
+        communication-channel analysis, compression measurement, and direct
+        method comparison.
+      </p>
+<p class="study-text">
+        The project was originally implemented as a Tkinter desktop application.
+        A Streamlit web interface was later added so the same reusable algorithms
+        can be accessed directly through a browser without duplicating the
+        computational logic.
+      </p>
+<p class="study-text">
+        The project combines probability analysis, recursive algorithms, binary
+        trees, channel models, interface design, data visualization, automated
+        validation, and technical explanation.
+      </p>
+</div>
+<div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+<div class="highlight-box">
+<i class="bi bi-bullseye"></i>
+<h4>Core Design Principle</h4>
+<p>
+          Every result should remain explainable. Both interfaces connect each
+          numerical output to the probability distribution, coding structure,
+          transition matrix, or comparison from which it was derived.
+        </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- /Objective -->
+<!-- Foundations -->
+<section class="study-section case-study-block" id="foundations">
+<div class="container">
+<div class="row" data-aos="fade-up">
+<div class="col-lg-9">
+<h2 class="study-heading">Information-Theory Foundations</h2>
+<p class="study-text">
+        The toolkit is built around measures used to describe discrete
+        information sources, source codes, and communication channels.
+      </p>
+</div>
+</div>
+<div class="row gy-4 mt-2">
+<div class="col-md-6 col-lg-4" data-aos="fade-up">
+<div class="formula-card">
+<h4>Source Entropy</h4>
+<div class="formula">H(X) = −Σ p(x) log₂ p(x)</div>
+<p>Measures the average uncertainty produced by a discrete source.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+<div class="formula-card">
+<h4>Maximum Entropy</h4>
+<div class="formula">H<sub>max</sub> = log₂ n</div>
+<p>Represents maximum uncertainty for <em>n</em> equally probable symbols.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+<div class="formula-card">
+<h4>Redundancy</h4>
+<div class="formula">R = 1 − H(X) / H<sub>max</sub></div>
+<p>Measures how far the source is from its maximum possible entropy.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+<div class="formula-card">
+<h4>Output Entropy</h4>
+<div class="formula">H(Y) = −Σ p(y) log₂ p(y)</div>
+<p>Measures uncertainty in the channel output distribution.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+<div class="formula-card">
+<h4>Conditional Entropy</h4>
+<div class="formula">H(Y|X) = Σ p(x)H(Y|X=x)</div>
+<p>Measures output uncertainty that remains when the input is known.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+<div class="formula-card">
+<h4>Mutual Information</h4>
+<div class="formula">I(X;Y) = H(Y) − H(Y|X)</div>
+<p>Measures how much information about the input is retained at the output.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- /Foundations -->
+<!-- Modules -->
+<section class="study-section case-study-block" id="modules">
+<div class="container">
+<div class="row" data-aos="fade-up">
+<div class="col-lg-9">
+<h2 class="study-heading">Core Application Modules</h2>
+<p class="study-text">
+        The desktop and web interfaces expose the same seven reusable analytical modules.
+      </p>
+</div>
+</div>
+<div class="row gy-4 mt-2">
+<div class="col-md-6 col-lg-4" data-aos="fade-up">
+<div class="module-card">
+<i class="bi bi-pie-chart"></i>
+<h4>Entropy Analysis</h4>
+<p>Calculates Shannon entropy, maximum entropy, source redundancy, and validates probability distributions.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+<div class="module-card">
+<i class="bi bi-bezier2"></i>
+<h4>Huffman Coding</h4>
+<p>Builds a binary Huffman tree, generates codewords, calculates encoded length and compression ratio, and visualizes frequencies and the tree.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+<div class="module-card">
+<i class="bi bi-diagram-2"></i>
+<h4>Shannon–Fano Coding</h4>
+<p>Orders symbols by frequency, applies recursive probability partitioning, generates binary codes, and reports encoded size.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+<div class="module-card">
+<i class="bi bi-shield-check"></i>
+<h4>Prefix-Code Analysis</h4>
+<p>Validates binary codewords, checks the prefix-free property, calculates the Kraft sum, and evaluates Kraft’s inequality.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+<div class="module-card">
+<i class="bi bi-broadcast"></i>
+<h4>Channel Analysis</h4>
+<p>Processes P(X) and P(Y|X), derives P(Y), and calculates H(X), H(Y), H(Y|X), and I(X;Y).</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+<div class="module-card">
+<i class="bi bi-file-earmark-zip"></i>
+<h4>Compression Analysis</h4>
+<p>Calculates original and compressed size, compression ratio, entropy, average code length, and coding efficiency.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+<div class="module-card">
+<i class="bi bi-bar-chart-steps"></i>
+<h4>Method Comparison</h4>
+<p>Compares Huffman and Shannon–Fano encoded lengths, compression ratios, generated codes, and identifies the better result for the selected text.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- /Modules -->
+<!-- Coding Algorithms -->
+<section class="study-section case-study-block" id="coding">
+<div class="container">
+<div class="row gy-4 align-items-stretch">
+<div class="col-lg-6" data-aos="fade-up">
+<h2 class="study-heading">Shannon–Fano Coding</h2>
+<p class="study-text">
               The Shannon–Fano module begins by sorting symbols according to
               descending probability. It then recursively divides the
               distribution into two groups whose total probabilities are as
               close as possible.
             </p>
-
-            <p class="study-text">
+<p class="study-text">
               One branch receives the binary value 0 and the other receives
               1. The process continues until every symbol has a unique
               codeword.
             </p>
-
-            <p class="study-text">
+<p class="study-text">
               The application presents the resulting code, codeword length,
               average length, coding efficiency, and relation to source
               entropy.
             </p>
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h2 class="study-heading">Huffman Coding</h2>
-
-            <p class="study-text">
+</div>
+<div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+<h2 class="study-heading">Huffman Coding</h2>
+<p class="study-text">
               The Huffman module uses a priority-based tree construction
               process. Symbols with the lowest probabilities are repeatedly
               combined into parent nodes until a complete binary tree is
               formed.
             </p>
-
-            <p class="study-text">
+<p class="study-text">
               Traversing the left and right branches generates the final
               prefix code. More probable symbols generally receive shorter
               codewords, while less probable symbols receive longer ones.
             </p>
-
-            <p class="study-text">
+<p class="study-text">
               The toolkit also visualizes the Huffman tree so that the
               relationship between probabilities, merged nodes, and final
               codewords can be inspected directly.
             </p>
-          </div>
-
-        </div>
-
-        <div class="comparison-table mt-5" data-aos="fade-up">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Method</th>
-                <th>Main Principle</th>
-                <th>Structure</th>
-                <th>Strength</th>
-                <th>Limitation</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td><strong>Shannon–Fano</strong></td>
-                <td>
+</div>
+</div>
+<div class="comparison-table mt-5" data-aos="fade-up">
+<table class="table">
+<thead>
+<tr>
+<th>Method</th>
+<th>Main Principle</th>
+<th>Structure</th>
+<th>Strength</th>
+<th>Limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Shannon–Fano</strong></td>
+<td>
                   Recursive division of sorted symbols into approximately
                   equal-probability groups.
                 </td>
-                <td>Top-down code construction.</td>
-                <td>
+<td>Top-down code construction.</td>
+<td>
                   Clear recursive logic and useful for demonstrating the
                   relation between probability and code length.
                 </td>
-                <td>
+<td>
                   Does not always produce the optimal minimum average code
                   length.
                 </td>
-              </tr>
-
-              <tr>
-                <td><strong>Huffman</strong></td>
-                <td>
+</tr>
+<tr>
+<td><strong>Huffman</strong></td>
+<td>
                   Repeated combination of the least probable nodes.
                 </td>
-                <td>Bottom-up binary tree construction.</td>
-                <td>
+<td>Bottom-up binary tree construction.</td>
+<td>
                   Produces an optimal binary prefix code for the given symbol
                   probabilities.
                 </td>
-                <td>
+<td>
                   Requires tree construction and does not preserve the
                   original symbol order.
                 </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-    <!-- /Coding Algorithms -->
-
-
-    <!-- Kraft Validation -->
-    <section id="kraft" class="study-section case-study-block">
-      <div class="container">
-        <div class="row gy-4 align-items-center">
-
-          <div class="col-lg-7" data-aos="fade-up">
-            <h2 class="study-heading">Kraft Inequality and Code Validation</h2>
-
-            <p class="study-text">
-              The code-validation module evaluates whether a given set of
-              codeword lengths can represent a valid binary prefix code.
-            </p>
-
-            <p class="study-text">
-              For binary codes, Kraft’s inequality requires the sum of
-              2 raised to the negative codeword lengths to be less than or
-              equal to one.
-            </p>
-
-            <p class="study-text">
-              The application calculates the sum, interprets the result, and
-              presents whether the provided length structure is admissible.
-              This separates theoretical code feasibility from the actual
-              generation of a particular code.
-            </p>
-          </div>
-
-          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <div class="formula-card">
-              <h4>Kraft Inequality</h4>
-              <div class="formula">Σ 2<sup>−lᵢ</sup> ≤ 1</div>
-              <p>
-                When the inequality is satisfied, a binary prefix code with
-                the specified codeword lengths can exist.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <!-- /Kraft Validation -->
-
-
-    <!-- Channel Analysis -->
-    <section id="channels" class="study-section case-study-block">
-      <div class="container">
-        <div class="row gy-4 align-items-stretch">
-
-          <div class="col-lg-7" data-aos="fade-up">
-            <h2 class="study-heading">Communication Channel Analysis</h2>
-
-            <p class="study-text">
-              The channel module extends the toolkit beyond source coding by
-              analyzing the relationship between transmitted and received
-              symbols.
-            </p>
-
-            <p class="study-text">
-              The user defines source probabilities and channel behavior.
-              From these values, the application derives input entropy,
-              output entropy, joint entropy, conditional entropy, mutual
-              information, and the probability of transmission error.
-            </p>
-
-            <p class="study-text">
-              This makes it possible to observe how uncertainty changes
-              during transmission and how much information about the input
-              remains available at the output.
-            </p>
-          </div>
-
-          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <div class="highlight-box">
-              <i class="bi bi-broadcast-pin"></i>
-              <h4>Analytical Value</h4>
-              <p>
-                Mutual information is not treated as an isolated formula.
-                The toolkit derives it from the complete probabilistic
-                relationship between source and destination, allowing the
-                user to inspect the uncertainty removed by observation.
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <!-- /Channel Analysis -->
-
-
-    <!-- Compression -->
-    <section id="compression" class="study-section case-study-block">
-      <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Compression Comparison</h2>
-
-            <p class="study-text">
-              The compression module compares three representations of the
-              same input: the original fixed-length form, Shannon–Fano
-              coding, and Huffman coding.
-            </p>
-
-            <p class="study-text">
-              The application calculates encoded size, average codeword
-              length, compression ratio, and relative efficiency, then
-              presents the results in tables and charts.
-            </p>
-          </div>
-        </div>
-
-        <div class="row gy-4 mt-2">
-          <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <div class="module-card">
-              <i class="bi bi-file-binary"></i>
-              <h4>Original Representation</h4>
-              <p>
-                Establishes the baseline size using a fixed-length
-                representation for the source alphabet.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="module-card">
-              <i class="bi bi-diagram-2"></i>
-              <h4>Shannon–Fano Result</h4>
-              <p>
-                Measures the encoded size and efficiency produced by
-                recursive probability partitioning.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="module-card">
-              <i class="bi bi-bezier2"></i>
-              <h4>Huffman Result</h4>
-              <p>
-                Measures the encoded size and efficiency of the optimal
-                binary prefix code for the given distribution.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /Compression -->
-
-
-    <!-- Architecture -->
-    <section id="architecture" class="study-section case-study-block">
-      <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Application Architecture</h2>
-
-            <p class="study-text">
-              The toolkit separates user interaction, probability
-              processing, coding algorithms, channel analysis, and visual
-              presentation into distinct logical layers.
-            </p>
-          </div>
-        </div>
-
-        <div class="architecture-layers" data-aos="fade-up" data-aos-delay="100">
-          <div class="architecture-layer">
-            <i class="bi bi-window"></i>
-            <h4>Presentation Layer</h4>
-            <p>
-              Tkinter tabs, forms, controls, tables, result panels, and user
-              interaction.
-            </p>
-          </div>
-
-          <div class="architecture-layer">
-            <i class="bi bi-percent"></i>
-            <h4>Probability Layer</h4>
-            <p>
-              Frequency conversion, probability validation, entropy, and
-              redundancy calculations.
-            </p>
-          </div>
-
-          <div class="architecture-layer">
-            <i class="bi bi-diagram-3"></i>
-            <h4>Coding Layer</h4>
-            <p>
-              Shannon–Fano recursion, Huffman tree construction, and code
-              generation.
-            </p>
-          </div>
-
-          <div class="architecture-layer">
-            <i class="bi bi-broadcast"></i>
-            <h4>Channel Layer</h4>
-            <p>
-              Joint distributions, conditional values, mutual information,
-              and error analysis.
-            </p>
-          </div>
-
-          <div class="architecture-layer">
-            <i class="bi bi-bar-chart-line"></i>
-            <h4>Visualization Layer</h4>
-            <p>
-              Frequency charts, coding trees, comparison tables, and
-              graphical compression results.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /Architecture -->
-
-
-    <!-- Workflow -->
-    <section id="workflow" class="study-section case-study-block">
-      <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Application Workflow</h2>
-
-            <p class="study-text">
-              The user can move from raw input to theoretical and visual
-              analysis through a structured sequence.
-            </p>
-          </div>
-        </div>
-
-        <div class="workflow-grid" data-aos="fade-up" data-aos-delay="100">
-          <div class="workflow-step">
-            <span class="workflow-number">1</span>
-            <h4>Select a Module</h4>
-            <p>
-              The user chooses entropy, coding, validation, channel analysis,
-              or compression comparison.
-            </p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">2</span>
-            <h4>Enter Data</h4>
-            <p>
-              Symbols, frequencies, probabilities, code lengths, or channel
-              matrices are entered.
-            </p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">3</span>
-            <h4>Validate Input</h4>
-            <p>
-              The application checks numerical format, probability sums,
-              dimensions, and missing values.
-            </p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">4</span>
-            <h4>Execute Analysis</h4>
-            <p>
-              The selected formula, coding algorithm, or channel procedure is
-              applied.
-            </p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">5</span>
-            <h4>Inspect Numerical Results</h4>
-            <p>
-              Entropy, codewords, average lengths, efficiencies, or channel
-              quantities are displayed.
-            </p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">6</span>
-            <h4>Inspect Structures</h4>
-            <p>
-              The user examines the Huffman tree, probability distribution,
-              or matrix relationships.
-            </p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">7</span>
-            <h4>Compare Methods</h4>
-            <p>
-              Shannon–Fano, Huffman, and original representation results are
-              compared.
-            </p>
-          </div>
-
-          <div class="workflow-step">
-            <span class="workflow-number">8</span>
-            <h4>Interpret the Result</h4>
-            <p>
-              The output is connected to uncertainty, efficiency,
-              redundancy, and transmitted information.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /Workflow -->
-
-
-    <!-- Testing -->
-    <section id="testing" class="study-section case-study-block">
-      <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Testing and Validation</h2>
-
-            <p class="study-text">
-              The application was tested through source distributions, code
-              structures, and channel scenarios selected to verify numerical
-              correctness, algorithm behavior, and input robustness.
-            </p>
-          </div>
-        </div>
-
-        <div class="row gy-4 mt-2">
-          <div class="col-md-6" data-aos="fade-up">
-            <div class="test-card">
-              <h4>Uniform and Non-Uniform Sources</h4>
-              <p>
-                Equal-probability and highly uneven distributions were used
-                to verify entropy, maximum entropy, redundancy, and coding
-                behavior.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
-            <div class="test-card">
-              <h4>Coding Algorithm Validation</h4>
-              <p>
-                Known symbol distributions were used to compare generated
-                Shannon–Fano and Huffman codes, average lengths, and prefix
-                properties.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="test-card">
-              <h4>Kraft Inequality Scenarios</h4>
-              <p>
-                Valid, complete, incomplete, and impossible codeword-length
-                combinations were used to test code feasibility checks.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="150">
-            <div class="test-card">
-              <h4>Communication Channel Cases</h4>
-              <p>
-                Noiseless and noisy channels were used to verify joint
-                probabilities, conditional entropy, mutual information, and
-                transmission error.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="test-card">
-              <h4>Compression Comparison</h4>
-              <p>
-                Multiple text and symbol distributions were used to compare
-                original, Shannon–Fano, and Huffman encoded sizes.
-              </p>
-            </div>
-          </div>
-
-          <div class="col-md-6" data-aos="fade-up" data-aos-delay="250">
-            <div class="test-card">
-              <h4>Invalid and Edge Input</h4>
-              <p>
-                Empty values, negative probabilities, probability sums
-                different from one, duplicated symbols, and inconsistent
-                channel dimensions were used to verify error handling.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /Testing -->
-
-
-    <!-- Outcome -->
-    <section id="outcome" class="study-section case-study-block">
-      <div class="container">
-        <div class="row gy-4">
-
-          <div class="col-lg-7" data-aos="fade-up">
-            <h2 class="study-heading">Project Outcome</h2>
-
-            <p class="study-text">
-              The result is a functional desktop toolkit that integrates
-              source analysis, coding algorithms, code validation,
-              communication-channel analysis, mutual information, and
-              compression comparison.
-            </p>
-
-            <p class="study-text">
-              The project demonstrates how theoretical information measures
-              can be translated into modular algorithms, interactive
-              interfaces, visual structures, and comparable computational
-              results.
-            </p>
-
-            <p class="study-text">
-              Instead of presenting entropy, coding, and channel analysis as
-              disconnected topics, the toolkit reveals how they belong to
-              one system for measuring, representing, transmitting, and
-              compressing information.
-            </p>
-          </div>
-
-          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
-            <div class="highlight-box">
-              <i class="bi bi-stars"></i>
-              <h4>Why This Project Matters</h4>
-              <p>
-                The project combines probability, recursive algorithms,
-                binary trees, channel models, visualization, and software
-                design in one coherent analytical environment.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="row gy-4 mt-4">
-          <div class="col-lg-6" data-aos="fade-up">
-            <h3 class="study-subheading">Project Strengths</h3>
-            <ul class="strength-list">
-              <li>Integrates multiple information-theory topics in one system.</li>
-              <li>Implements both Shannon–Fano and Huffman coding.</li>
-              <li>Visualizes Huffman tree structure and symbol frequencies.</li>
-              <li>Validates codeword lengths through Kraft’s inequality.</li>
-              <li>Connects source coding with communication-channel analysis.</li>
-              <li>
-                Compares theoretical entropy with practical code length and
-                compression results.
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="study-subheading">Current Limitations</h3>
-            <ul class="limitations-list">
-              <li>
-                The current version focuses primarily on discrete,
-                memoryless sources.
-              </li>
-              <li>Huffman coding is implemented for binary codes.</li>
-              <li>
-                The application is intended for educational and analytical
-                datasets rather than large production files.
-              </li>
-              <li>
-                Channel analysis depends on correctly defined probability
-                matrices.
-              </li>
-              <li>
-                Compression results do not yet include complete file-format
-                overhead or binary file export.
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /Outcome -->
-
-
-    <!-- Future Development -->
-    <section id="future-development" class="study-section case-study-block">
-      <div class="container">
-        <div class="row gy-4">
-
-          <div class="col-lg-5" data-aos="fade-up">
-            <h2 class="study-heading">Future Development</h2>
-            <p class="study-text">
-              The current toolkit provides a stable base for extending the
-              project into a broader information-theory laboratory.
-            </p>
-          </div>
-
-          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
-            <ul class="future-list">
-              <li>Arithmetic coding and run-length encoding modules.</li>
-              <li>Lempel–Ziv compression algorithms.</li>
-              <li>D-ary Huffman coding.</li>
-              <li>Automatic encoding and decoding of complete text files.</li>
-              <li>Binary output generation and compressed file export.</li>
-              <li>Channel capacity calculations.</li>
-              <li>Error-correcting code demonstrations.</li>
-              <li>Larger matrix support and improved channel visualization.</li>
-              <li>Interactive step-by-step algorithm animation.</li>
-              <li>Web-based version for broader educational use.</li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </section>
-    <!-- /Future Development -->
-
-
-    <!-- Documentation -->
-    <section id="documentation" class="study-section case-study-block">
-      <div class="container">
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-9">
-            <h2 class="study-heading">Documentation and Project Materials</h2>
-            <p class="study-text">
-              The project can be supported by mathematical, technical, and
-              visual materials that explain the algorithms, interface,
-              validation logic, testing, and results.
-            </p>
-          </div>
-        </div>
-
-        <div class="row gy-4 mt-2">
-          <div class="col-md-6 col-lg-4" data-aos="fade-up">
-            <div class="resource-card">
-              <i class="bi bi-file-earmark-text"></i>
-              <div>
-                <h4>Project Report</h4>
-                <p>
-                  Academic explanation of information theory, coding
-                  algorithms, channel analysis, and compression results.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
-            <div class="resource-card">
-              <i class="bi bi-file-earmark-code"></i>
-              <div>
-                <h4>Technical Documentation</h4>
-                <p>
-                  Application modules, recursive functions, tree
-                  construction, probability processing, and visualization
-                  logic.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="resource-card">
-              <i class="bi bi-journal-code"></i>
-              <div>
-                <h4>Source Code</h4>
-                <p>
-                  Python implementation of entropy, Shannon–Fano, Huffman,
-                  Kraft validation, channel analysis, and the graphical
-                  interface.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
-            <div class="resource-card">
-              <i class="bi bi-images"></i>
-              <div>
-                <h4>Application Screenshots</h4>
-                <p>
-                  Module interfaces, coding tables, Huffman trees,
-                  distributions, channel analysis, and comparison charts.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="resource-card">
-              <i class="bi bi-play-btn"></i>
-              <div>
-                <h4>Video Demonstration</h4>
-                <p>
-                  A future walkthrough of entropy analysis, code generation,
-                  tree visualization, and compression comparison.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
-            <div class="resource-card">
-              <i class="bi bi-github"></i>
-              <div>
-                <h4>GitHub Repository</h4>
-                <p>
-                  Repository link can be added when the final README,
-                  screenshots, dependencies, and usage instructions are
-                  prepared.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- /Documentation -->
-
-
-    <!-- Closing Statement -->
-    <section class="study-section">
-      <div class="container" data-aos="fade-up">
-        <div class="closing-statement">
-          <i class="bi bi-quote"></i>
-          <p>
-            This project transforms information theory from a collection of
-            formulas into an interactive system where uncertainty, coding,
-            transmission, and compression can be calculated, visualized,
-            compared, and understood.
-          </p>
-        </div>
-      </div>
-    </section>
-    <!-- /Closing Statement -->
-
-  </main>
-
-
-  <!-- Footer -->
-  <footer id="footer" class="footer light-background">
-    <div class="container">
-      <div class="copyright text-center">
-        <p>
-          © <span id="current-year"></span>
-          <strong class="px-1 sitename">Mersie Ademova</strong>
-          <span>All Rights Reserved.</span>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- /Coding Algorithms -->
+<!-- Kraft Validation -->
+<section class="study-section case-study-block" id="kraft">
+<div class="container">
+<div class="row gy-4 align-items-center">
+<div class="col-lg-7" data-aos="fade-up">
+<h2 class="study-heading">Prefix-Free Validation and Kraft Inequality</h2>
+<p class="study-text">
+        The code-analysis module performs two related but distinct checks.
+        It first verifies whether any codeword is a prefix of another
+        codeword. It then calculates the Kraft sum for the supplied binary codes.
+      </p>
+<p class="study-text">
+        The prefix-free check evaluates the actual codewords, while Kraft’s
+        inequality evaluates whether their lengths satisfy the necessary
+        condition for a binary prefix code.
+      </p>
+<p class="study-text">
+        The application validates binary input, reports the prefix-free result,
+        displays the calculated Kraft sum, and classifies the Kraft condition as valid or invalid.
+      </p>
+</div>
+<div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+<div class="formula-card">
+<h4>Kraft Inequality</h4>
+<div class="formula">Σ 2<sup>−lᵢ</sup> ≤ 1</div>
+<p>For binary codeword lengths, a sum not greater than one satisfies the Kraft condition.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- /Kraft Validation -->
+<!-- Channel Analysis -->
+<section class="study-section case-study-block" id="channels">
+<div class="container">
+<div class="row gy-4 align-items-stretch">
+<div class="col-lg-7" data-aos="fade-up">
+<h2 class="study-heading">Communication-Channel Analysis</h2>
+<p class="study-text">
+        The channel module analyzes a discrete memoryless channel from an input
+        distribution P(X) and a transition matrix P(Y|X).
+      </p>
+<p class="study-text">
+        After validating the probability distribution, matrix dimensions, and
+        row sums, the toolkit derives the output distribution P(Y) and calculates
+        input entropy H(X), output entropy H(Y), conditional entropy H(Y|X), and
+        mutual information I(X;Y).
+      </p>
+<p class="study-text">
+        The Streamlit interface also presents the transition matrix, the derived
+        output distribution, and a directed channel graph so the probabilistic
+        relationships can be inspected alongside the numerical results.
+      </p>
+</div>
+<div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+<div class="highlight-box">
+<i class="bi bi-broadcast-pin"></i>
+<h4>Analytical Value</h4>
+<p>
+          Mutual information is derived from the complete channel model rather
+          than entered as an isolated value. This shows how uncertainty changes
+          between the input and output distributions.
         </p>
-      </div>
-
-      <div class="social-links d-flex justify-content-center">
-       <a href="https://github.com/mersiademova"class="github"target="_blank"rel="noopener noreferrer"aria-label="GitHub"><i class="bi bi-github"></i></a>
-<a href="https://www.linkedin.com/in/mersie-ademova-752634277/"class="linkedin"target="_blank"rel="noopener noreferrer"aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-<a href="mailto:ademovamersie@gmail.com"class="email"aria-label="Email"><i class="bi bi-envelope"></i></a>
-<a href="https://www.facebook.com/mersi.luciana" class="facebook"><i class="bi bi-facebook"></i></a>
-<a href="https://www.instagram.com/mersiademova/" class="instagram"><i class="bi bi-instagram"></i></a>
-      </div>
-
-      <div class="credits text-center">
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- /Channel Analysis -->
+<!-- Compression -->
+<section class="study-section case-study-block" id="compression">
+<div class="container">
+<div class="row" data-aos="fade-up">
+<div class="col-lg-9">
+<h2 class="study-heading">Compression Analysis and Method Comparison</h2>
+<p class="study-text">
+        The compression module evaluates Huffman coding for a selected text by
+        calculating the original UTF-8 size, compressed bit length, compression
+        ratio, source entropy, average code length, and coding efficiency.
+      </p>
+<p class="study-text">
+        A separate comparison module generates both Huffman and Shannon–Fano
+        codes for the same input, compares their encoded lengths and ratios, and
+        identifies which method performs better for that particular distribution.
+      </p>
+</div>
+</div>
+<div class="row gy-4 mt-2">
+<div class="col-md-6 col-lg-4" data-aos="fade-up">
+<div class="module-card">
+<i class="bi bi-file-binary"></i>
+<h4>Original Representation</h4>
+<p>Establishes the baseline size from the UTF-8 representation of the selected text.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+<div class="module-card">
+<i class="bi bi-speedometer2"></i>
+<h4>Compression Metrics</h4>
+<p>Reports compressed size, ratio, entropy, average code length, and efficiency.</p>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+<div class="module-card">
+<i class="bi bi-bar-chart-line"></i>
+<h4>Direct Method Comparison</h4>
+<p>Compares Huffman and Shannon–Fano results using the same source text and distribution.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- /Compression -->
+<!-- Architecture -->
+<section class="study-section case-study-block" id="architecture">
+<div class="container">
+<div class="row" data-aos="fade-up">
+<div class="col-lg-9">
+<h2 class="study-heading">Application Architecture</h2>
+<p class="study-text">
+        The toolkit separates interface code from reusable information-theory
+        algorithms. The Tkinter desktop application and Streamlit web application
+        call the same modules for calculations, coding, validation, and comparison.
+      </p>
+</div>
+</div>
+<div class="architecture-layers" data-aos="fade-up" data-aos-delay="100">
+<div class="architecture-layer">
+<i class="bi bi-window"></i>
+<h4>Interface Layer</h4>
+<p>Tkinter desktop tabs and Streamlit browser pages, forms, tables, and controls.</p>
+</div>
+<div class="architecture-layer">
+<i class="bi bi-percent"></i>
+<h4>Probability Layer</h4>
+<p>Distribution validation, entropy, maximum entropy, and redundancy calculations.</p>
+</div>
+<div class="architecture-layer">
+<i class="bi bi-diagram-3"></i>
+<h4>Coding Layer</h4>
+<p>Huffman tree construction, Shannon–Fano recursion, encoding, and code generation.</p>
+</div>
+<div class="architecture-layer">
+<i class="bi bi-broadcast"></i>
+<h4>Analysis Layer</h4>
+<p>Prefix checks, Kraft evaluation, channel analysis, compression metrics, and method comparison.</p>
+</div>
+<div class="architecture-layer">
+<i class="bi bi-bar-chart-line"></i>
+<h4>Visualization Layer</h4>
+<p>Frequency charts, Huffman trees, channel graphs, tables, and comparison charts.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- /Architecture -->
+<!-- Workflow -->
+<section class="study-section case-study-block" id="workflow">
+<div class="container">
+<div class="row" data-aos="fade-up">
+<div class="col-lg-9">
+<h2 class="study-heading">Application Workflow</h2>
+<p class="study-text">
+        The user can perform the same analytical workflow through the desktop
+        interface or the browser-accessible Streamlit application.
+      </p>
+</div>
+</div>
+<div class="workflow-grid" data-aos="fade-up" data-aos-delay="100">
+<div class="workflow-step"><span class="workflow-number">1</span><h4>Open an Interface</h4><p>Use the Tkinter desktop application or the Streamlit web application.</p></div>
+<div class="workflow-step"><span class="workflow-number">2</span><h4>Select a Module</h4><p>Choose entropy, coding, prefix analysis, channel analysis, compression, or comparison.</p></div>
+<div class="workflow-step"><span class="workflow-number">3</span><h4>Enter Data</h4><p>Provide probabilities, source text, binary codewords, or a transition matrix.</p></div>
+<div class="workflow-step"><span class="workflow-number">4</span><h4>Validate Input</h4><p>The toolkit checks probability ranges, sums, matrix dimensions, binary codes, and missing input.</p></div>
+<div class="workflow-step"><span class="workflow-number">5</span><h4>Execute Analysis</h4><p>The selected formula, coding algorithm, or comparison procedure is applied.</p></div>
+<div class="workflow-step"><span class="workflow-number">6</span><h4>Inspect Metrics</h4><p>Review entropy, code lengths, ratios, efficiency, or channel quantities.</p></div>
+<div class="workflow-step"><span class="workflow-number">7</span><h4>Inspect Structures</h4><p>Examine generated code tables, frequency charts, the Huffman tree, or the channel graph.</p></div>
+<div class="workflow-step"><span class="workflow-number">8</span><h4>Compare and Interpret</h4><p>Relate the numerical result to uncertainty, representation, transmission, and compression.</p></div>
+</div>
+</div>
+</section>
+<!-- /Workflow -->
+<!-- Testing -->
+<section class="study-section case-study-block" id="testing">
+<div class="container">
+<div class="row" data-aos="fade-up">
+<div class="col-lg-9">
+<h2 class="study-heading">Testing and Validation</h2>
+<p class="study-text">
+        The reusable algorithmic layer is covered by seven automated tests.
+        They verify representative calculations, coding behavior, edge cases,
+        validation rules, compression metrics, and direct method comparison.
+      </p>
+</div>
+</div>
+<div class="row gy-4 mt-2">
+<div class="col-md-6" data-aos="fade-up"><div class="test-card"><h4>Entropy Metrics</h4><p>Verifies entropy, maximum entropy, and redundancy for a balanced binary source.</p></div></div>
+<div class="col-md-6" data-aos="fade-up" data-aos-delay="50"><div class="test-card"><h4>Single-Symbol Huffman Edge Case</h4><p>Confirms that a one-symbol source receives a valid one-bit code instead of an empty codeword.</p></div></div>
+<div class="col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="test-card"><h4>Shannon–Fano Generation</h4><p>Checks that every symbol in the selected source receives a non-empty codeword.</p></div></div>
+<div class="col-md-6" data-aos="fade-up" data-aos-delay="150"><div class="test-card"><h4>Prefix and Kraft Analysis</h4><p>Verifies a known prefix-free code and confirms a Kraft sum equal to one.</p></div></div>
+<div class="col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="test-card"><h4>Channel Analysis</h4><p>Checks that the derived output distribution sums to one and that mutual information is non-negative.</p></div></div>
+<div class="col-md-6" data-aos="fade-up" data-aos-delay="250"><div class="test-card"><h4>Compression Metrics</h4><p>Validates compressed length, compression ratio, and efficiency bounds for sample text.</p></div></div>
+<div class="col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="test-card"><h4>Method Comparison</h4><p>Confirms valid Huffman and Shannon–Fano results and the reported comparison outcome.</p></div></div>
+</div>
+</div>
+</section>
+<!-- /Testing -->
+<!-- Outcome -->
+<section class="study-section case-study-block" id="outcome">
+<div class="container">
+<div class="row gy-4">
+<div class="col-lg-7" data-aos="fade-up">
+<h2 class="study-heading">Project Outcome</h2>
+<p class="study-text">
+        The result is a completed Python toolkit with two interfaces: a Tkinter
+        desktop application and a Streamlit web application. Both provide access
+        to the same reusable modules for source analysis, coding, prefix-code
+        validation, channel analysis, compression metrics, and method comparison.
+      </p>
+<p class="study-text">
+        The project demonstrates how theoretical information measures can be
+        translated into modular algorithms, interactive interfaces, visual
+        structures, and comparable computational results.
+      </p>
+<p class="study-text">
+        The public repository includes the source code, dependency files,
+        application entry points, documentation, and automated tests.
+      </p>
+</div>
+<div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+<div class="highlight-box">
+<i class="bi bi-stars"></i>
+<h4>Why This Project Matters</h4>
+<p>
+          The toolkit connects probability, recursive algorithms, binary trees,
+          channel models, visualization, software design, and browser deployment
+          in one coherent analytical environment.
+        </p>
+</div>
+</div>
+</div>
+<div class="row gy-4 mt-4">
+<div class="col-lg-6" data-aos="fade-up">
+<h3 class="study-subheading">Project Strengths</h3>
+<ul class="strength-list">
+<li>Provides both desktop and browser-accessible interfaces.</li>
+<li>Uses one reusable algorithmic layer across both interfaces.</li>
+<li>Implements Huffman and Shannon–Fano coding.</li>
+<li>Performs both direct prefix-free checking and Kraft evaluation.</li>
+<li>Connects source coding with discrete communication-channel analysis.</li>
+<li>Compares theoretical entropy with practical code length and compression results.</li>
+<li>Includes automated tests for the core algorithms.</li>
+</ul>
+</div>
+<div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+<h3 class="study-subheading">Current Limitations</h3>
+<ul class="limitations-list">
+<li>The current version focuses on discrete, memoryless source and channel models.</li>
+<li>Huffman and Shannon–Fano implementations generate binary codes.</li>
+<li>The toolkit analyzes entered text rather than complete production file formats.</li>
+<li>Channel analysis depends on correctly defined probability distributions and transition matrices.</li>
+<li>Compression results do not include file-format headers, metadata overhead, or binary file export.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- /Outcome -->
+<!-- Future Development -->
+<section class="study-section case-study-block" id="future-development">
+<div class="container">
+<div class="row gy-4">
+<div class="col-lg-5" data-aos="fade-up">
+<h2 class="study-heading">Future Development</h2>
+<p class="study-text">
+        The current desktop and web toolkit provides a stable base for a broader
+        information-theory laboratory.
+      </p>
+</div>
+<div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+<ul class="future-list">
+<li>Arithmetic coding, run-length encoding, and Lempel–Ziv modules.</li>
+<li>D-ary Huffman coding.</li>
+<li>Encoding and decoding of complete text files.</li>
+<li>Binary output generation and compressed-file export.</li>
+<li>Channel-capacity calculations.</li>
+<li>Error-correcting code demonstrations.</li>
+<li>Larger matrix support and richer channel visualization.</li>
+<li>Interactive step-by-step algorithm animation.</li>
+<li>Expanded automated tests and benchmark datasets.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- /Future Development -->
+<!-- Documentation -->
+<section class="study-section case-study-block" id="documentation">
+<div class="container">
+<div class="row" data-aos="fade-up">
+<div class="col-lg-9">
+<h2 class="study-heading">Documentation and Project Materials</h2>
+<p class="study-text">
+        The public project materials connect the academic explanation,
+        executable applications, reusable source code, setup instructions,
+        and implementation entry points.
+      </p>
+</div>
+</div>
+<div class="row gy-4 mt-2">
+<div class="col-md-6 col-lg-4" data-aos="fade-up">
+<div class="resource-card">
+<i class="bi bi-file-earmark-text"></i>
+<div>
+<h4>Academic Paper</h4>
+<p>Written explanation of information theory, coding methods, channel analysis, and compression concepts.</p>
+<a href="writings/it.pdf" rel="noopener noreferrer" target="_blank">View Document <i class="bi bi-box-arrow-up-right"></i></a>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+<div class="resource-card">
+<i class="bi bi-window-stack"></i>
+<div>
+<h4>Live Web Application</h4>
+<p>Browser-accessible Streamlit interface for all seven analytical modules.</p>
+<a href="https://information-theory-toolkit.streamlit.app/" rel="noopener noreferrer" target="_blank">Open Application <i class="bi bi-box-arrow-up-right"></i></a>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+<div class="resource-card">
+<i class="bi bi-github"></i>
+<div>
+<h4>GitHub Repository</h4>
+<p>Complete public source code, dependencies, configuration, documentation, and tests.</p>
+<a href="https://github.com/mersiademova/information-theory-toolkit" rel="noopener noreferrer" target="_blank">View Repository <i class="bi bi-box-arrow-up-right"></i></a>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+<div class="resource-card">
+<i class="bi bi-book"></i>
+<div>
+<h4>README and Setup</h4>
+<p>Project overview, features, installation, execution commands, technologies, and structure.</p>
+<a href="https://github.com/mersiademova/information-theory-toolkit#readme" rel="noopener noreferrer" target="_blank">Read Documentation <i class="bi bi-box-arrow-up-right"></i></a>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+<div class="resource-card">
+<i class="bi bi-display"></i>
+<div>
+<h4>Desktop Entry Point</h4>
+<p>Tkinter application entry point that assembles the desktop module tabs.</p>
+<a href="https://github.com/mersiademova/information-theory-toolkit/blob/main/main.py" rel="noopener noreferrer" target="_blank">View main.py <i class="bi bi-box-arrow-up-right"></i></a>
+</div>
+</div>
+</div>
+<div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="250">
+<div class="resource-card">
+<i class="bi bi-browser-chrome"></i>
+<div>
+<h4>Streamlit Entry Point</h4>
+<p>Browser interface that exposes the reusable analytical modules through interactive pages.</p>
+<a href="https://github.com/mersiademova/information-theory-toolkit/blob/main/app.py" rel="noopener noreferrer" target="_blank">View app.py <i class="bi bi-box-arrow-up-right"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- /Documentation -->
+<!-- Closing Statement -->
+<section class="study-section">
+<div class="container" data-aos="fade-up">
+<div class="closing-statement">
+<i class="bi bi-quote"></i>
+<p>This project transforms information theory from a collection of formulas into a desktop and browser-accessible system where uncertainty, coding, validation, transmission, compression, and method performance can be calculated, visualized, compared, and interpreted.</p>
+</div>
+</div>
+</section>
+<!-- /Closing Statement -->
+</section></main>
+<!-- Footer -->
+<footer class="footer light-background" id="footer">
+<div class="container">
+<div class="copyright text-center">
+<p>
+          © <span id="current-year"></span>
+<strong class="px-1 sitename">Mersie Ademova</strong>
+<span>All Rights Reserved.</span>
+</p>
+</div>
+<div class="social-links d-flex justify-content-center">
+<a aria-label="GitHub" class="github" href="https://github.com/mersiademova" rel="noopener noreferrer" target="_blank"><i class="bi bi-github"></i></a>
+<a aria-label="LinkedIn" class="linkedin" href="https://www.linkedin.com/in/mersie-ademova-752634277/" rel="noopener noreferrer" target="_blank"><i class="bi bi-linkedin"></i></a>
+<a aria-label="Email" class="email" href="mailto:ademovamersie@gmail.com"><i class="bi bi-envelope"></i></a>
+<a class="facebook" href="https://www.facebook.com/mersi.luciana"><i class="bi bi-facebook"></i></a>
+<a class="instagram" href="https://www.instagram.com/mersiademova/"><i class="bi bi-instagram"></i></a>
+</div>
+<div class="credits text-center">
         Designed by
-        <a
-          href="https://bootstrapmade.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://bootstrapmade.com/" rel="noopener noreferrer" target="_blank">
           BootstrapMade
         </a>
         · Distributed by
-        <a
-          href="https://themewagon.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://themewagon.com/" rel="noopener noreferrer" target="_blank">
           ThemeWagon
         </a>
-      </div>
-    </div>
-  </footer>
-  <!-- /Footer -->
-
-
-  <!-- Scroll Top -->
-  <a
-    href="#"
-    id="scroll-top"
-    class="scroll-top d-flex align-items-center justify-content-center"
-    aria-label="Scroll to top"
-  >
-    <i class="bi bi-arrow-up-short"></i>
-  </a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-  <!-- Automatically displays the current year -->
-  <script>
+</div>
+</div>
+</footer>
+<!-- /Footer -->
+<!-- Scroll Top -->
+<a aria-label="Scroll to top" class="scroll-top d-flex align-items-center justify-content-center" href="#" id="scroll-top">
+<i class="bi bi-arrow-up-short"></i>
+</a>
+<!-- Preloader -->
+<div id="preloader"></div>
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<!-- Main JS File -->
+<script src="assets/js/main.js"></script>
+<!-- Automatically displays the current year -->
+<script>
     const yearElement = document.getElementById("current-year");
 
     if (yearElement) {
       yearElement.textContent = new Date().getFullYear();
     }
   </script>
-
 </body>
-
 </html>
