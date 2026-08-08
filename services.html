@@ -66,6 +66,71 @@
       font-size: 14px;
     }
 
+    .approach-block {
+      max-width: 980px;
+      margin: 0 auto 54px;
+      padding: 34px 36px;
+      border-top: 2px solid var(--accent-color);
+      border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 84%);
+      background: color-mix(in srgb, var(--surface-color), var(--accent-color) 2%);
+    }
+
+    .approach-heading {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .approach-heading span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent-color);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .approach-heading h3 {
+      margin: 0;
+      color: var(--heading-color);
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .approach-questions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 34px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: approach;
+    }
+
+    .approach-questions li {
+      position: relative;
+      padding: 15px 0 15px 38px;
+      border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+      color: var(--heading-color);
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.55;
+      counter-increment: approach;
+    }
+
+    .approach-questions li::before {
+      content: counter(approach, decimal-leading-zero);
+      position: absolute;
+      top: 16px;
+      left: 0;
+      color: var(--accent-color);
+      font-family: var(--heading-font);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
     .capabilities-grid {
       border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 84%);
     }
@@ -234,6 +299,19 @@
     }
 
     @media (max-width: 575px) {
+      .approach-block {
+        margin-bottom: 42px;
+        padding: 28px 22px;
+      }
+
+      .approach-heading h3 {
+        font-size: 21px;
+      }
+
+      .approach-questions {
+        grid-template-columns: 1fr;
+      }
+
       .capability-item {
         grid-template-columns: 56px minmax(0, 1fr);
         gap: 16px;
@@ -348,6 +426,22 @@
       </div>
 
       <div class="container">
+        <div class="approach-block" data-aos="fade-up" aria-labelledby="approach-title">
+          <div class="approach-heading">
+            <span>Approach</span>
+            <h3 id="approach-title">How I approach complex problems</h3>
+          </div>
+
+          <ol class="approach-questions">
+            <li>How does the system work?</li>
+            <li>How can it be modeled mathematically?</li>
+            <li>How can its behavior be measured?</li>
+            <li>How can it be optimized?</li>
+            <li>What changes when the conditions change?</li>
+            <li>What can the data reveal about what is happening?</li>
+          </ol>
+        </div>
+
         <div class="row g-0 capabilities-grid">
 
           <div class="col-lg-6 capability-column" data-aos="fade-up">
